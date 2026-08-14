@@ -39,7 +39,7 @@ const defaultProps: Hero115Props = {
     "Não é só automação, é a classificação da carcaça saindo do campo da percepção e entrando no campo do dado registrado, auditável e integrado ao Frigosoft.",
   buttons: {
     primary: {
-      text: "Quero conhecer o módulo",
+      text: "Conheça o módulo",
       url: "https://atak.com.br",
     },
     secondary: {
@@ -73,17 +73,13 @@ const Hero115 = (props: Props) => {
 </GeistBadge>
 
             {/* Título */}
-            <h1 className="w-full text-center text-4xl font-semibold tracking-tight md:text-5xl lg:text-left lg:text-[46px] lg:leading-[1.08] xl:text-[50px]">
+            <h1 className="w-full text-center text-4xl font-medium tracking-tight md:text-5xl lg:text-left lg:text-[46px] lg:leading-[1.08] xl:text-[50px]">
               <span className="block lg:whitespace-nowrap">
                 Mais precisão na carcaça.
               </span>
 
               <span className="block">
-                Mais segurança na
-              </span>
-
-              <span className="block">
-                precificação.
+                Mais segurança na precificação.
               </span>
             </h1>
 

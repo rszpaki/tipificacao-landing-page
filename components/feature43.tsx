@@ -60,7 +60,7 @@ const defaultProps: Feature43Props = {
 ],
   buttons: {
     primary: {
-      text: "Fale com um especialista",
+      text: "Veja como funciona",
       url: "https://www.atak.com.br",
     },
   },
@@ -82,7 +82,7 @@ const Feature43 = (props: Props) => {
         {/* Título */}
         {heading && (
           <div className="mx-auto mb-16 max-w-3xl text-center">
-            <h2 className="text-4xl font-semibold tracking-tight text-pretty lg:text-5xl">
+            <h2 className="text-4xl font-medium tracking-tight text-pretty lg:text-5xl">
               {heading}
             </h2>
           </div>

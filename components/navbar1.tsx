@@ -36,17 +36,15 @@ const Navbar1 = ({
   className,
 }: Navbar1Props) => {
   return (
-    <section className={cn("py-4", className)}>
+    <section className={cn("border-b border-muted py-4", className)}>
       <div className="container mx-auto">
         <nav className="flex items-center justify-between">
           {/* Logo */}
-          <a href={logo.url} className="flex items-center">
             <img
               src={logo.src}
               alt={logo.alt}
               className="h-8 w-auto dark:invert"
             />
-          </a>
 
           {/* Botão */}
           <Button

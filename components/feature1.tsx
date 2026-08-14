@@ -7,14 +7,16 @@ interface Image {
   alt: string;
   srcDark?: string;
 }
-interface Button {
+
+interface ButtonProps {
   text: string;
   url: string;
   icon?: React.ReactNode;
 }
+
 interface Buttons {
-  primary?: Button;
-  secondary?: Button;
+  primary?: ButtonProps;
+  secondary?: ButtonProps;
 }
 
 interface FeatureSingleFocusProps {
@@ -28,18 +30,18 @@ interface FeatureSingleFocusProps {
 type Props = Partial<FeatureSingleFocusProps>;
 
 const defaultProps: FeatureSingleFocusProps = {
-  heading: "Feature blocks ready to ship with shadcn/ui",
+  heading: "Menos variação na avaliação. Mais confiança no acerto.",
   description:
-    "Shadcnblocks ships production-ready React sections built with Tailwind CSS and shadcn/ui. Pick a block, preview it with your theme, then paste it in or install with the shadcn CLI.",
+    "A avaliação manual pode variar entre operadores, turnos e animais. Com a Tipificação de Animais com IA, o frigorífico ganha um novo ponto de referência para avaliar cada carcaça com mais consistência.",
   buttons: {
-    secondary: {
-      text: "View feature",
-      url: "https://www.shadcnblocks.com",
+    primary: {
+      text: "Conheça a solução",
+      url: "https://www.atak.com.br",
     },
   },
   image: {
-    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/saas-details/saas-detail-1-1x1.png",
-    alt: "Shadcnblocks section preview in the explorer",
+    src: "/images/hero/tipificação-atak-sistemas.png",
+    alt: "Tipificação de animais com inteligência artificial",
   },
 };
 
@@ -50,29 +52,51 @@ const Feature1 = (props: Props) => {
   };
 
   return (
-    <section className={cn("py-32", className)}>
-      <div className="container">
-        <div className="grid items-center gap-16 lg:grid-cols-2">
-          <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-            <h2 className="mb-6 text-4xl font-semibold tracking-tight text-balance lg:text-5xl">
+    <section className={cn("overflow-hidden py-20 lg:py-24", className)}>
+      <div className="container mx-auto">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-24 xl:gap-32">
+
+          {/* Imagem */}
+          <div className="flex w-full items-center justify-center lg:justify-start">
+            <img
+              src={image.src}
+              alt={image.alt}
+              className="h-auto max-h-[420px] w-auto max-w-full object-contain sm:max-h-[480px] lg:max-h-[650px]"
+            />
+          </div>
+
+          {/* Conteúdo */}
+          <div className="flex min-w-0 flex-col items-center text-center lg:items-start lg:text-left">
+            <h2 className="mb-6 text-4xl font-medium tracking-tight text-balance lg:text-5xl">
               {heading}
             </h2>
+
             {description && (
               <p className="mb-8 max-w-xl text-muted-foreground lg:text-lg">
                 {description}
               </p>
             )}
-            <div className="flex w-full flex-col justify-center gap-2 sm:flex-row lg:justify-start">
-              {buttons?.secondary ? (
-                <Button variant="outline" render={<a href={buttons.secondary.url} target="_blank" rel="noreferrer" />} nativeButton={false}>{buttons.secondary.text}</Button>
-              ) : null}
-            </div>
+
+            {buttons?.primary && (
+              <div className="flex w-full flex-col justify-center gap-2 sm:flex-row lg:justify-start">
+                <Button
+                  variant="default"
+                  size="lg"
+                  render={
+                    <a
+                      href={buttons.primary.url}
+                      target="_blank"
+                      rel="noreferrer"
+                    />
+                  }
+                  nativeButton={false}
+                >
+                  {buttons.primary.text}
+                </Button>
+              </div>
+            )}
           </div>
-          <img
-            src={image.src}
-            alt={image.alt}
-            className="aspect-square w-full rounded-lg border border-border object-cover"
-          />
+
         </div>
       </div>
     </section>
