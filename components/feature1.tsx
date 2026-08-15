@@ -1,4 +1,4 @@
-import { Badge } from "@/components/ui/badge";
+import { GeistBadge } from "@/components/ui/geist-badge";
 import { Button } from "@/components/ui/button";
 
 import { cn } from "@/lib/utils";
@@ -37,7 +37,7 @@ const defaultProps: FeatureSingleFocusProps = {
   buttons: {
     primary: {
       text: "Conheça a solução",
-      url: "https://www.atak.com.br",
+      url: "#demonstracao",
     },
   },
   image: {
@@ -67,15 +67,16 @@ const Feature1 = (props: Props) => {
 
           {/* Conteúdo */}
           <div className="flex min-w-0 flex-col items-center text-center lg:items-start lg:text-left">
-            {/* Badge */}
-            <Badge variant="outline" className="mb-4">
-              IA para avaliar melhor
-            </Badge>
+            {/* Badge + Título */}
+            <div className="mb-6 flex flex-col items-center gap-6 lg:items-start">
+              <GeistBadge variant="turbo" contrast="low">
+                IA para avaliar melhor
+              </GeistBadge>
 
-            {/* Título */}
-            <h2 className="mb-6 text-4xl font-medium tracking-tight text-balance lg:text-5xl">
-              {heading}
-            </h2>
+              <h2 className="text-4xl font-medium tracking-tight text-balance lg:text-5xl">
+                {heading}
+              </h2>
+            </div>
 
             {/* Descrição */}
             {description && (
@@ -90,13 +91,7 @@ const Feature1 = (props: Props) => {
                 <Button
                   variant="default"
                   size="lg"
-                  render={
-                    <a
-                      href={buttons.primary.url}
-                      target="_blank"
-                      rel="noreferrer"
-                    />
-                  }
+                  render={<a href={buttons.primary.url} />}
                   nativeButton={false}
                 >
                   {buttons.primary.text}

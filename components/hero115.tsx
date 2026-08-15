@@ -40,11 +40,11 @@ const defaultProps: Hero115Props = {
   buttons: {
     primary: {
       text: "Conheça o módulo",
-      url: "https://atak.com.br",
+      url: "#demonstracao",
     },
     secondary: {
       text: "Visitar o site da Atak",
-      url: "https://atak.com.br",
+      url: "#demonstracao",
     },
   },
   image: {

@@ -5,7 +5,7 @@ import {
   ScanEye,
 } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
+import { GeistBadge } from "@/components/ui/geist-badge";
 import { cn } from "@/lib/utils";
 
 interface FeatureIconListItem {
@@ -29,31 +29,31 @@ const defaultProps: Feature17Props = {
   description:
     "A Tipificação de Animais com IA transforma a avaliação da carcaça em informação para uma operação mais precisa.",
   features: [
-  {
-    icon: <ScanEye className="size-5" />,
-    title: "Precisão na avaliação",
-    description:
-      "A IA aplica os mesmos critérios em cada carcaça, trazendo mais objetividade para a avaliação.",
-  },
-  {
-    icon: <RefreshCw className="size-5" />,
-    title: "Consistência na classificação",
-    description:
-      "Mais uniformidade entre operadores e turnos, com correções que ajudam a aprimorar o modelo.",
-  },
-  {
-    icon: <BadgeDollarSign className="size-5" />,
-    title: "Segurança na precificação",
-    description:
-      "Mais informação sobre a carcaça para apoiar uma precificação mais criteriosa da matéria-prima.",
-  },
-  {
-    icon: <History className="size-5" />,
-    title: "Histórico para análise",
-    description:
-      "Dados registrados por lote, período e produtor para apoiar compras, comparações e decisões da operação.",
-  },
-],
+    {
+      icon: <ScanEye className="size-5" />,
+      title: "Precisão na avaliação",
+      description:
+        "A IA aplica os mesmos critérios em cada carcaça, trazendo mais objetividade para a avaliação.",
+    },
+    {
+      icon: <RefreshCw className="size-5" />,
+      title: "Consistência na classificação",
+      description:
+        "Mais uniformidade entre operadores e turnos, com correções que ajudam a aprimorar o modelo.",
+    },
+    {
+      icon: <BadgeDollarSign className="size-5" />,
+      title: "Segurança na precificação",
+      description:
+        "Mais informação sobre a carcaça para apoiar uma precificação mais criteriosa da matéria-prima.",
+    },
+    {
+      icon: <History className="size-5" />,
+      title: "Histórico para análise",
+      description:
+        "Dados registrados por lote, período e produtor para apoiar compras, comparações e decisões da operação.",
+    },
+  ],
   footer: "Tudo conectado à operação do frigorífico.",
 };
 
@@ -70,16 +70,16 @@ const Feature17 = (props: Props) => {
       <div className="container mx-auto">
         {/* Cabeçalho */}
         <div className="mx-auto mb-14 flex max-w-3xl flex-col items-center text-center">
+          {/* Badge + Título */}
+          <div className="flex flex-col items-center gap-6">
+            <GeistBadge variant="turbo" contrast="low">
+              Inteligência para decidir melhor
+            </GeistBadge>
 
-          {/* Badge */}
-          <Badge variant="outline" className="mb-4">
-            Inteligência para decidir melhor
-          </Badge>
-
-          {/* Título */}
-          <h2 className="text-3xl font-medium tracking-tight text-pretty md:text-4xl lg:text-5xl">
-            {heading}
-          </h2>
+            <h2 className="text-3xl font-medium tracking-tight text-pretty md:text-4xl lg:text-5xl">
+              {heading}
+            </h2>
+          </div>
 
           {/* Descrição */}
           {description && (

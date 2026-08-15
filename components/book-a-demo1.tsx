@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import React, { useEffect, useRef, useState } from "react";
 
-import { Badge } from "@/components/ui/badge";
+import { GeistBadge } from "@/components/ui/geist-badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -132,10 +132,6 @@ const BookADemo1 = ({
     message: "",
   });
 
-  /*
-   * Carrega o formulário original do Supabase em segundo plano.
-   * Não usamos <script> diretamente no JSX.
-   */
   useEffect(() => {
     const container = embedContainerRef.current;
 
@@ -281,18 +277,27 @@ const BookADemo1 = ({
   };
 
   return (
-    <section className={cn("py-32", className)}>
+    <section
+      id="demonstracao"
+      className={cn("scroll-mt-20 py-32", className)}
+    >
       <div className="container mx-auto">
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-16">
           {/* Conteúdo da esquerda */}
-          <div className="flex flex-col items-center gap-4 lg:items-start lg:gap-8">
-            <Badge variant="outline">{badge}</Badge>
+          <div className="flex flex-col items-center lg:items-start">
+            {/* Badge + Título */}
+            <div className="flex flex-col items-center gap-6 lg:items-start">
+              <GeistBadge variant="turbo" contrast="low">
+                {badge}
+              </GeistBadge>
 
-            <h2 className="mt-2 max-w-md text-center text-3xl font-medium tracking-tight lg:mt-0 lg:max-w-xl lg:text-left lg:text-5xl">
-              {heading}
-            </h2>
+              <h2 className="max-w-md text-center text-3xl font-medium tracking-tight lg:max-w-xl lg:text-left lg:text-5xl">
+                {heading}
+              </h2>
+            </div>
 
-            <ul className="flex flex-col">
+            {/* Benefícios */}
+            <ul className="mt-8 flex flex-col">
               {benefits.map((benefit, index) => (
                 <li
                   key={`bookademo1-benefit-${index}`}
@@ -343,7 +348,10 @@ const BookADemo1 = ({
                 </Button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+              <form
+                onSubmit={handleSubmit}
+                className="flex flex-col gap-6"
+              >
                 {/* Nome */}
                 <FormGroup>
                   <Label htmlFor="name">Nome</Label>
@@ -461,7 +469,9 @@ const BookADemo1 = ({
 
                 {/* Colaboradores */}
                 <FormGroup>
-                  <Label>Número de colaboradores da empresa</Label>
+                  <Label>
+                    Número de colaboradores da empresa
+                  </Label>
 
                   <Select
                     value={formData.employeeRange}
@@ -503,7 +513,9 @@ const BookADemo1 = ({
 
                 {/* Mensagem */}
                 <FormGroup>
-                  <Label htmlFor="message">Como podemos ajudar?</Label>
+                  <Label htmlFor="message">
+                    Como podemos ajudar?
+                  </Label>
 
                   <Textarea
                     id="message"

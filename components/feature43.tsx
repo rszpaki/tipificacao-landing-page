@@ -4,7 +4,7 @@ import {
   Check,
 } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
+import { GeistBadge } from "@/components/ui/geist-badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -62,7 +62,7 @@ const defaultProps: Feature43Props = {
   buttons: {
     primary: {
       text: "Veja como funciona",
-      url: "https://www.atak.com.br",
+      url: "#demonstracao",
     },
   },
 };
@@ -82,10 +82,10 @@ const Feature43 = (props: Props) => {
       <div className="container mx-auto">
         {/* Cabeçalho */}
         {heading && (
-          <div className="mx-auto mb-16 flex max-w-3xl flex-col items-center gap-4 text-center">
-            <Badge variant="outline">
+          <div className="mx-auto mb-16 flex max-w-3xl flex-col items-center gap-6 text-center">
+            <GeistBadge variant="turbo" contrast="low">
               IA aplicada à tipificação
-            </Badge>
+            </GeistBadge>
 
             <h2 className="text-4xl font-medium tracking-tight text-pretty lg:text-5xl">
               {heading}

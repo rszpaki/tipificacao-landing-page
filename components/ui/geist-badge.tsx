@@ -1,4 +1,5 @@
 import type { HTMLAttributes } from "react";
+import { Sparkles } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -114,19 +115,34 @@ const GeistBadge = ({
   children,
   ...props
 }: GeistBadgeProps) => {
+  const isTurbo = variant === "turbo";
+
   return (
     <span
       className={cn(
-        "inline-flex w-fit items-center justify-center rounded-full px-2.5 py-1 text-xs font-medium leading-none whitespace-nowrap",
+        "inline-flex w-fit items-center justify-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium leading-none whitespace-nowrap",
         variants[variant][contrast],
         className
       )}
       {...props}
     >
+      {isTurbo && (
+        <Sparkles
+          className="size-3 shrink-0 fill-current"
+          strokeWidth={1.5}
+          aria-hidden="true"
+        />
+      )}
+
       {children}
     </span>
   );
 };
 
 export { GeistBadge };
-export type { GeistBadgeProps, GeistBadgeVariant, GeistBadgeContrast };
+
+export type {
+  GeistBadgeProps,
+  GeistBadgeVariant,
+  GeistBadgeContrast,
+};
