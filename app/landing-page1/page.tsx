@@ -8,6 +8,7 @@ import { Cta10 } from "@/components/cta10";
 import { Footer2 } from "@/components/footer2";
 import { BookADemo1 } from "@/components/book-a-demo1";
 import { Feature1 } from "@/components/feature1";
+import { Feature17 } from "@/components/feature17";
 
 export default function LandingPage1() {
   return (
@@ -16,6 +17,7 @@ export default function LandingPage1() {
       <Hero115 />
       <Feature43 />
       <Feature1 />
+      <Feature17 />
       <BookADemo1 />
       <Footer2 />
     </main>
