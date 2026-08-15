@@ -56,8 +56,9 @@ const Feature1 = (props: Props) => {
     <section className={cn("overflow-hidden py-20 lg:py-24", className)}>
       <div className="container mx-auto">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-24 xl:gap-32">
+          
           {/* Imagem */}
-          <div className="flex w-full items-center justify-center lg:justify-start">
+          <div className="order-2 flex w-full items-center justify-center lg:order-1 lg:justify-start">
             <img
               src={image.src}
               alt={image.alt}
@@ -66,7 +67,8 @@ const Feature1 = (props: Props) => {
           </div>
 
           {/* Conteúdo */}
-          <div className="flex min-w-0 flex-col items-center text-center lg:items-start lg:text-left">
+          <div className="order-1 flex min-w-0 flex-col items-center text-center lg:order-2 lg:items-start lg:text-left">
+            
             {/* Badge + Título */}
             <div className="mb-6 flex flex-col items-center gap-6 lg:items-start">
               <GeistBadge variant="turbo" contrast="low">
@@ -99,6 +101,7 @@ const Feature1 = (props: Props) => {
               </div>
             )}
           </div>
+
         </div>
       </div>
     </section>

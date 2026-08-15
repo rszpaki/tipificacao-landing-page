@@ -286,33 +286,33 @@ const BookADemo1 = ({
     >
       <div className="container mx-auto">
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-16">
-          {/* Conteúdo da esquerda */}
-          <div className="flex flex-col items-center lg:items-start">
-            {/* Badge + Título */}
-            <div className="flex flex-col items-center gap-6 lg:items-start">
+          {/* Conteúdo */}
+          <div className="mx-auto flex w-full max-w-md flex-col lg:mx-0 lg:max-w-none">
+            {/* Badge + título */}
+            <div className="flex w-full flex-col items-center gap-6 lg:items-start">
               <GeistBadge variant="turbo" contrast="low">
                 {badge}
               </GeistBadge>
 
-              <h2 className="max-w-md text-center text-3xl font-medium tracking-tight lg:max-w-xl lg:text-left lg:text-5xl">
+              <h2 className="w-full text-center text-3xl font-medium tracking-tight lg:max-w-xl lg:text-left lg:text-5xl">
                 {heading}
               </h2>
             </div>
 
             {/* Benefícios */}
-            <ul className="mt-8 flex flex-col">
+            <ul className="mt-8 flex w-full flex-col">
               {benefits.map((benefit, index) => (
                 <li
                   key={`bookademo1-benefit-${index}`}
-                  className="flex max-w-md items-start gap-3 border-b py-6 last:border-b-0"
+                  className="flex w-full items-start gap-3 border-b py-6 last:border-b-0"
                 >
                   <Check
-                    className="mt-0.5 hidden size-5 shrink-0 text-green-500 lg:block"
+                    className="mt-0.5 size-5 shrink-0 text-green-500"
                     strokeWidth={2}
                     aria-hidden="true"
                   />
 
-                  <p className="text-center font-medium lg:text-left">
+                  <p className="min-w-0 flex-1 text-left font-medium leading-relaxed">
                     {benefit}
                   </p>
                 </li>
@@ -352,10 +352,7 @@ const BookADemo1 = ({
                 </Button>
               </div>
             ) : (
-              <form
-                onSubmit={handleSubmit}
-                className="flex flex-col gap-6"
-              >
+              <form onSubmit={handleSubmit} className="flex flex-col gap-6">
                 {/* Nome */}
                 <FormGroup>
                   <Label htmlFor="name">Nome</Label>
@@ -473,9 +470,7 @@ const BookADemo1 = ({
 
                 {/* Colaboradores */}
                 <FormGroup>
-                  <Label>
-                    Número de colaboradores da empresa
-                  </Label>
+                  <Label>Número de colaboradores da empresa</Label>
 
                   <Select
                     value={formData.employeeRange}
@@ -540,7 +535,7 @@ const BookADemo1 = ({
                   </p>
                 )}
 
-                {/* Enviar */}
+                {/* Botão */}
                 <Button
                   type="submit"
                   size="lg"
@@ -559,6 +554,7 @@ const BookADemo1 = ({
             )}
           </Card>
 
+          {/* Carousel mobile */}
           {companies.length > 0 && (
             <div className="mt-10 block w-full overflow-hidden lg:hidden">
               <InfiniteMovingCarousel images={companies} />
