@@ -27,15 +27,18 @@ const Navbar1 = ({
   className,
 }: Navbar1Props) => {
   const { resolvedTheme, setTheme } = useTheme();
+
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const isDark = resolvedTheme === "dark";
+  const isDark = mounted && resolvedTheme === "dark";
 
   const toggleTheme = () => {
+    if (!mounted) return;
+
     setTheme(isDark ? "light" : "dark");
   };
 
@@ -69,16 +72,8 @@ const Navbar1 = ({
             type="button"
             onClick={toggleTheme}
             disabled={!mounted}
-            aria-label={
-              isDark
-                ? "Ativar modo claro"
-                : "Ativar modo escuro"
-            }
-            title={
-              isDark
-                ? "Ativar modo claro"
-                : "Ativar modo escuro"
-            }
+            aria-label="Alternar tema"
+            title="Alternar tema"
             className="
               relative
               h-10
@@ -96,7 +91,7 @@ const Navbar1 = ({
             <span
               className={cn(
                 "absolute left-[3px] top-[3px] size-8 rounded-full bg-background shadow-sm",
-                mounted && isDark && "translate-x-9"
+                isDark && "translate-x-9"
               )}
             />
 
@@ -104,24 +99,34 @@ const Navbar1 = ({
             <span
               className={cn(
                 "absolute left-[3px] top-[3px] z-10 grid size-8 place-items-center",
-                !isDark
-                  ? "text-foreground"
+                mounted
+                  ? isDark
+                    ? "text-muted-foreground"
+                    : "text-foreground"
                   : "text-muted-foreground"
               )}
             >
-              <Sun className="size-4" />
+              <Sun
+                className="size-4"
+                aria-hidden="true"
+              />
             </span>
 
             {/* Dark */}
             <span
               className={cn(
                 "absolute right-[3px] top-[3px] z-10 grid size-8 place-items-center",
-                isDark
-                  ? "text-foreground"
+                mounted
+                  ? isDark
+                    ? "text-foreground"
+                    : "text-muted-foreground"
                   : "text-muted-foreground"
               )}
             >
-              <MoonStar className="size-4" />
+              <MoonStar
+                className="size-4"
+                aria-hidden="true"
+              />
             </span>
           </button>
         </nav>
