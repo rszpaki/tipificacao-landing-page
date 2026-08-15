@@ -5,6 +5,7 @@ import {
   ScanEye,
 } from "lucide-react";
 
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 interface FeatureIconListItem {
@@ -28,31 +29,31 @@ const defaultProps: Feature17Props = {
   description:
     "A Tipificação de Animais com IA transforma a avaliação da carcaça em informação para uma operação mais precisa.",
   features: [
-    {
-      icon: <ScanEye className="size-5" />,
-      title: "Precisão na avaliação",
-      description:
-        "A IA aplica os mesmos critérios em cada carcaça.",
-    },
-    {
-      icon: <RefreshCw className="size-5" />,
-      title: "Consistência na classificação",
-      description:
-        "As correções do operador contribuem para o aprimoramento do modelo.",
-    },
-    {
-      icon: <BadgeDollarSign className="size-5" />,
-      title: "Segurança na precificação",
-      description:
-        "Mais informação para precificar a matéria-prima de acordo com as características da carcaça.",
-    },
-    {
-      icon: <History className="size-5" />,
-      title: "Histórico para análise",
-      description:
-        "Dados estruturados por lote, período e produtor para apoiar decisões de compra e operação.",
-    },
-  ],
+  {
+    icon: <ScanEye className="size-5" />,
+    title: "Precisão na avaliação",
+    description:
+      "A IA aplica os mesmos critérios em cada carcaça, trazendo mais objetividade para a avaliação.",
+  },
+  {
+    icon: <RefreshCw className="size-5" />,
+    title: "Consistência na classificação",
+    description:
+      "Mais uniformidade entre operadores e turnos, com correções que ajudam a aprimorar o modelo.",
+  },
+  {
+    icon: <BadgeDollarSign className="size-5" />,
+    title: "Segurança na precificação",
+    description:
+      "Mais informação sobre a carcaça para apoiar uma precificação mais criteriosa da matéria-prima.",
+  },
+  {
+    icon: <History className="size-5" />,
+    title: "Histórico para análise",
+    description:
+      "Dados registrados por lote, período e produtor para apoiar compras, comparações e decisões da operação.",
+  },
+],
   footer: "Tudo conectado à operação do frigorífico.",
 };
 
@@ -69,10 +70,18 @@ const Feature17 = (props: Props) => {
       <div className="container mx-auto">
         {/* Cabeçalho */}
         <div className="mx-auto mb-14 flex max-w-3xl flex-col items-center text-center">
+
+          {/* Badge */}
+          <Badge variant="outline" className="mb-4">
+            Inteligência para decidir melhor
+          </Badge>
+
+          {/* Título */}
           <h2 className="text-3xl font-medium tracking-tight text-pretty md:text-4xl lg:text-5xl">
             {heading}
           </h2>
 
+          {/* Descrição */}
           {description && (
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
               {description}

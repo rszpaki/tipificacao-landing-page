@@ -92,7 +92,7 @@ const Hero115 = (props: Props) => {
             {buttons?.primary && (
   <Button
     size="lg"
-    className="w-full lg:w-auto"
+    className="w-auto lg:w-auto"
     render={<a href={buttons.primary.url} />}
     nativeButton={false}
   >

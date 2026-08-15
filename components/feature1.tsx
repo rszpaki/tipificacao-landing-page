@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 import { cn } from "@/lib/utils";
@@ -55,7 +56,6 @@ const Feature1 = (props: Props) => {
     <section className={cn("overflow-hidden py-20 lg:py-24", className)}>
       <div className="container mx-auto">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-24 xl:gap-32">
-
           {/* Imagem */}
           <div className="flex w-full items-center justify-center lg:justify-start">
             <img
@@ -67,18 +67,26 @@ const Feature1 = (props: Props) => {
 
           {/* Conteúdo */}
           <div className="flex min-w-0 flex-col items-center text-center lg:items-start lg:text-left">
+            {/* Badge */}
+            <Badge variant="outline" className="mb-4">
+              IA para avaliar melhor
+            </Badge>
+
+            {/* Título */}
             <h2 className="mb-6 text-4xl font-medium tracking-tight text-balance lg:text-5xl">
               {heading}
             </h2>
 
+            {/* Descrição */}
             {description && (
               <p className="mb-8 max-w-xl text-muted-foreground lg:text-lg">
                 {description}
               </p>
             )}
 
+            {/* CTA */}
             {buttons?.primary && (
-              <div className="flex w-full flex-col justify-center gap-2 sm:flex-row lg:justify-start">
+              <div className="flex w-auto flex-col justify-center gap-2 sm:flex-row lg:justify-start">
                 <Button
                   variant="default"
                   size="lg"
@@ -96,7 +104,6 @@ const Feature1 = (props: Props) => {
               </div>
             )}
           </div>
-
         </div>
       </div>
     </section>

@@ -4,6 +4,7 @@ import {
   Check,
 } from "lucide-react";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -39,25 +40,25 @@ type Props = Partial<Feature43Props>;
 const defaultProps: Feature43Props = {
   heading: "Faça a classificação da carcaça em segundos",
   features: [
-  {
-    icon: <Smartphone className="size-5" />,
-    title: "Fotografe",
-    description:
-      "Com o smartphone, o operador registra a carcaça diretamente na linha de abate, com flexibilidade e sem depender de equipamento fixo.",
-  },
-  {
-    icon: <ScanLine className="size-5" />,
-    title: "Analise",
-    description:
-      "A IA avalia cobertura de gordura e conformação muscular para sugerir a classificação em segundos, trazendo mais padronização ao processo.",
-  },
-  {
-    icon: <Check className="size-5" />,
-    title: "Confirme",
-    description:
-      "O operador confirma ou ajusta a classificação, enquanto imagem, sugestão da IA e avaliação final ficam registradas no Frigosoft.",
-  },
-],
+    {
+      icon: <Smartphone className="size-5" />,
+      title: "Fotografe",
+      description:
+        "Com o smartphone, o operador registra a carcaça diretamente na linha de abate, com flexibilidade e sem depender de equipamento fixo.",
+    },
+    {
+      icon: <ScanLine className="size-5" />,
+      title: "Analise",
+      description:
+        "A IA avalia cobertura de gordura e conformação muscular para sugerir a classificação em segundos, trazendo mais padronização ao processo.",
+    },
+    {
+      icon: <Check className="size-5" />,
+      title: "Confirme",
+      description:
+        "O operador confirma ou ajusta a classificação, enquanto imagem, sugestão da IA e avaliação final ficam registradas no Frigosoft.",
+    },
+  ],
   buttons: {
     primary: {
       text: "Veja como funciona",
@@ -79,9 +80,13 @@ const Feature43 = (props: Props) => {
   return (
     <section className={cn("bg-muted/40 py-32", className)}>
       <div className="container mx-auto">
-        {/* Título */}
+        {/* Cabeçalho */}
         {heading && (
-          <div className="mx-auto mb-16 max-w-3xl text-center">
+          <div className="mx-auto mb-16 flex max-w-3xl flex-col items-center gap-4 text-center">
+            <Badge variant="outline">
+              IA aplicada à tipificação
+            </Badge>
+
             <h2 className="text-4xl font-medium tracking-tight text-pretty lg:text-5xl">
               {heading}
             </h2>
@@ -142,18 +147,18 @@ const Feature43 = (props: Props) => {
         </div>
 
         {/* CTA */}
-{buttons?.primary?.url && (
-  <div className="mt-16 flex justify-center">
-    <Button
-      size="lg"
-      className="w-full justify-center lg:w-auto"
-      render={<a href={buttons.primary.url} />}
-      nativeButton={false}
-    >
-      {buttons.primary.text}
-    </Button>
-  </div>
-)}
+        {buttons?.primary?.url && (
+          <div className="mt-16 flex justify-center">
+            <Button
+              size="lg"
+              className="w-auto justify-center"
+              render={<a href={buttons.primary.url} />}
+              nativeButton={false}
+            >
+              {buttons.primary.text}
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );
