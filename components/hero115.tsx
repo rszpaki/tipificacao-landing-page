@@ -90,15 +90,16 @@ const Hero115 = (props: Props) => {
 
             {/* Botão */}
             {buttons?.primary && (
-              <Button
-                size="lg"
-                render={<a href={buttons.primary.url} />}
-                nativeButton={false}
-              >
-                {buttons.primary.text}
-                <ArrowRight className="size-4" />
-              </Button>
-            )}
+  <Button
+    size="lg"
+    className="w-full lg:w-auto"
+    render={<a href={buttons.primary.url} />}
+    nativeButton={false}
+  >
+    {buttons.primary.text}
+    <ArrowRight className="size-4" />
+  </Button>
+)}
           </div>
 
           {/* Imagem */}

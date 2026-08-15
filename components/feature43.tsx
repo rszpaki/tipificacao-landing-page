@@ -142,17 +142,18 @@ const Feature43 = (props: Props) => {
         </div>
 
         {/* CTA */}
-        {buttons?.primary?.url && (
-          <div className="mt-16 flex justify-center">
-            <Button
-              size="lg"
-              render={<a href={buttons.primary.url} />}
-              nativeButton={false}
-            >
-              {buttons.primary.text}
-            </Button>
-          </div>
-        )}
+{buttons?.primary?.url && (
+  <div className="mt-16 flex justify-center">
+    <Button
+      size="lg"
+      className="w-full justify-center lg:w-auto"
+      render={<a href={buttons.primary.url} />}
+      nativeButton={false}
+    >
+      {buttons.primary.text}
+    </Button>
+  </div>
+)}
       </div>
     </section>
   );
