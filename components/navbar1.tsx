@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Moon, Sun } from "lucide-react";
+import { MoonStar, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { cn } from "@/lib/utils";
@@ -40,22 +40,31 @@ const Navbar1 = ({
   };
 
   return (
-    <section className={cn("border-b border-muted py-4", className)}>
+    <section
+      className={cn(
+        "border-b border-muted py-6",
+        className
+      )}
+    >
       <div className="container mx-auto">
-        <nav className="flex items-center justify-between">
+        <nav className="flex min-h-10 items-center justify-between">
           {/* Logo */}
-          <a href={logo.url} aria-label={logo.title}>
+          <a
+            href={logo.url}
+            aria-label={logo.title}
+            className="flex h-10 items-center"
+          >
             <img
               src={logo.src}
               alt={logo.alt}
               className={cn(
-                "h-8 w-auto dark:invert",
+                "block h-8 w-auto dark:invert",
                 logo.className
               )}
             />
           </a>
 
-          {/* Toggle Light / Dark */}
+          {/* Light / Dark toggle */}
           <button
             type="button"
             onClick={toggleTheme}
@@ -72,26 +81,21 @@ const Navbar1 = ({
             }
             className="
               relative
-              grid
               h-10
               w-[76px]
+              shrink-0
               cursor-pointer
-              grid-cols-2
-              items-center
               rounded-full
               border
               border-border
               bg-muted
-              p-1
-              transition-colors
-              duration-300
               disabled:cursor-default
             "
           >
-            {/* Indicador animado */}
+            {/* Indicador */}
             <span
               className={cn(
-                "absolute left-1 top-1 size-8 rounded-full bg-background shadow-sm transition-transform duration-300 ease-out",
+                "absolute left-[3px] top-[3px] size-8 rounded-full bg-background shadow-sm",
                 mounted && isDark && "translate-x-9"
               )}
             />
@@ -99,37 +103,25 @@ const Navbar1 = ({
             {/* Light */}
             <span
               className={cn(
-                "relative z-10 flex items-center justify-center transition-all duration-300",
+                "absolute left-[3px] top-[3px] z-10 grid size-8 place-items-center",
                 !isDark
                   ? "text-foreground"
                   : "text-muted-foreground"
               )}
             >
-              <Sun
-                className={cn(
-                  "size-4 transition-transform duration-300",
-                  !isDark && "rotate-0 scale-100",
-                  isDark && "-rotate-45 scale-90"
-                )}
-              />
+              <Sun className="size-4" />
             </span>
 
             {/* Dark */}
             <span
               className={cn(
-                "relative z-10 flex items-center justify-center transition-all duration-300",
+                "absolute right-[3px] top-[3px] z-10 grid size-8 place-items-center",
                 isDark
                   ? "text-foreground"
                   : "text-muted-foreground"
               )}
             >
-              <Moon
-                className={cn(
-                  "size-4 transition-transform duration-300",
-                  isDark && "rotate-0 scale-100",
-                  !isDark && "rotate-45 scale-90"
-                )}
-              />
+              <MoonStar className="size-4" />
             </span>
           </button>
         </nav>

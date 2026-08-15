@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from "react";
-import { Sparkles } from "lucide-react";
+import { Sparkle } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -120,14 +120,28 @@ const GeistBadge = ({
   return (
     <span
       className={cn(
-        "inline-flex w-fit items-center justify-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium leading-none whitespace-nowrap",
+        [
+          "inline-flex",
+          "h-6",
+          "w-fit",
+          "shrink-0",
+          "items-center",
+          "justify-center",
+          "gap-1.5",
+          "rounded-full",
+          "px-3",
+          "text-xs",
+          "font-medium",
+          "leading-none",
+          "whitespace-nowrap",
+        ],
         variants[variant][contrast],
         className
       )}
       {...props}
     >
       {isTurbo && (
-        <Sparkles
+        <Sparkle
           className="size-3 shrink-0 fill-current"
           strokeWidth={1.5}
           aria-hidden="true"

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { motion } from "motion/react";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -23,7 +23,7 @@ const FORM_EMBED_URL =
   "https://njnudpfwtjapekqtahpu.supabase.co/functions/v1/form-embed?type=script&form_name=Edge%20Forms&fields=name,email,phone,company,message&success_message=Parab%C3%A9ns%20pela%20decis%C3%A3o!%20Entraremos%20em%20contato%20logo%20mais";
 
 const SUCCESS_MESSAGE =
-  "Parabéns pela decisão! Entraremos em contato logo mais.";
+  "Parabéns pela decisão! Entraremos em contato em breve.";
 
 const InfiniteMovingCarousel = ({ images }: { images: string[] }) => {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -108,8 +108,11 @@ const BookADemo1 = ({
   badge = "Agende uma demonstração",
   heading = "Veja a tipificação inteligente na prática",
   benefits = [
-    "Conheça como a inteligência artificial apoia a classificação de carcaças.",
-    "Veja como os dados ficam registrados e integrados ao Frigosoft.",
+    "Converse com especialistas que entendem a rotina de frigoríficos.",
+    "Entenda como a solução pode ser aplicada à sua linha de produção.",
+    "Conheça na prática a integração dos dados com o Frigosoft.",
+    "Tire dúvidas técnicas, operacionais e comerciais diretamente com nosso time.",
+    "Veja a tipificação com IA funcionando em uma demonstração prática.",
   ],
   companies = [],
   className,
@@ -303,9 +306,10 @@ const BookADemo1 = ({
                   key={`bookademo1-benefit-${index}`}
                   className="flex max-w-md items-start gap-3 border-b py-6 last:border-b-0"
                 >
-                  <ArrowRight
-                    className="mt-0.5 hidden size-5 shrink-0 lg:block"
-                    strokeWidth={1.5}
+                  <Check
+                    className="mt-0.5 hidden size-5 shrink-0 text-green-500 lg:block"
+                    strokeWidth={2}
+                    aria-hidden="true"
                   />
 
                   <p className="text-center font-medium lg:text-left">

@@ -16,7 +16,7 @@ type Props = Partial<Footer2Props>;
 
 const defaultProps: Footer2Props = {
   logo: {
-    src: "/images/logo/atak-sistemas-logo.svg",
+    src: "/images/logo/atak-sistemas-symbol.svg",
     alt: "Atak Sistemas",
     title: "Atak Sistemas",
   },
@@ -39,7 +39,7 @@ const Footer2 = (props: Props) => {
               src={logo.src}
               alt={logo.alt}
               title={logo.title}
-              className="h-7 w-auto dark:invert"
+              className="h-6 w-auto dark:invert"
             />
           )}
 
