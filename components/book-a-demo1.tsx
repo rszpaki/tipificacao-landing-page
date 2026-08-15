@@ -20,7 +20,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 
 const FORM_EMBED_URL =
-  "https://njnudpfwtjapekqtahpu.supabase.co/functions/v1/form-embed?type=script&form_name=Edge%20Forms&fields=name,email,phone,company,message&success_message=Parab%C3%A9ns%20pela%20decis%C3%A3o!%20Entraremos%20em%20contato%20logo%20mais.";
+  "https://njnudpfwtjapekqtahpu.supabase.co/functions/v1/form-embed?type=script&form_name=Edge%20Forms&fields=name,email,phone,company,message&success_message=Parab%C3%A9ns%20pela%20decis%C3%A3o!%20Entraremos%20em%20contato%20logo%20mais";
 
 const SUCCESS_MESSAGE =
   "Parabéns pela decisão! Entraremos em contato logo mais.";
@@ -85,12 +85,6 @@ const InfiniteMovingCarousel = ({ images }: { images: string[] }) => {
 const FormGroup = ({ children }: { children: React.ReactNode }) => {
   return <div className="flex w-full flex-col gap-2">{children}</div>;
 };
-
-interface ButtonConfig {
-  text: string;
-  url: string;
-  icon?: React.ReactNode;
-}
 
 interface BookADemo1Props {
   badge?: string;
@@ -196,10 +190,7 @@ const BookADemo1 = ({
     };
   }, []);
 
-  const updateField = (
-    field: keyof FormData,
-    value: string
-  ) => {
+  const updateField = (field: keyof FormData, value: string) => {
     setFormData((previous) => ({
       ...previous,
       [field]: value,
@@ -237,9 +228,7 @@ const BookADemo1 = ({
     return true;
   };
 
-  const handleSubmit = (
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     setError("");
@@ -274,37 +263,15 @@ const BookADemo1 = ({
       : qualificationData;
 
     const fieldsFound = [
-      setEmbeddedFieldValue(
-        embeddedForm,
-        "name",
-        formData.name
-      ),
-      setEmbeddedFieldValue(
-        embeddedForm,
-        "email",
-        formData.email
-      ),
-      setEmbeddedFieldValue(
-        embeddedForm,
-        "phone",
-        formData.phone
-      ),
-      setEmbeddedFieldValue(
-        embeddedForm,
-        "company",
-        formData.company
-      ),
-      setEmbeddedFieldValue(
-        embeddedForm,
-        "message",
-        completeMessage
-      ),
+      setEmbeddedFieldValue(embeddedForm, "name", formData.name),
+      setEmbeddedFieldValue(embeddedForm, "email", formData.email),
+      setEmbeddedFieldValue(embeddedForm, "phone", formData.phone),
+      setEmbeddedFieldValue(embeddedForm, "company", formData.company),
+      setEmbeddedFieldValue(embeddedForm, "message", completeMessage),
     ];
 
     if (fieldsFound.some((found) => !found)) {
-      setError(
-        "Não foi possível preparar o formulário para envio."
-      );
+      setError("Não foi possível preparar o formulário para envio.");
       return;
     }
 
@@ -370,20 +337,16 @@ const BookADemo1 = ({
                   variant="outline"
                   type="button"
                   onClick={() => setSuccess(false)}
+                  className="cursor-pointer"
                 >
                   Enviar outra solicitação
                 </Button>
               </div>
             ) : (
-              <form
-                onSubmit={handleSubmit}
-                className="flex flex-col gap-6"
-              >
+              <form onSubmit={handleSubmit} className="flex flex-col gap-6">
                 {/* Nome */}
                 <FormGroup>
-                  <Label htmlFor="name">
-                    Nome
-                  </Label>
+                  <Label htmlFor="name">Nome</Label>
 
                   <Input
                     id="name"
@@ -393,10 +356,7 @@ const BookADemo1 = ({
                     placeholder="Seu nome"
                     value={formData.name}
                     onChange={(event) =>
-                      updateField(
-                        "name",
-                        event.target.value
-                      )
+                      updateField("name", event.target.value)
                     }
                     className="bg-background"
                   />
@@ -405,9 +365,7 @@ const BookADemo1 = ({
                 {/* Email + telefone */}
                 <div className="grid gap-6 sm:grid-cols-2">
                   <FormGroup>
-                    <Label htmlFor="email">
-                      E-mail
-                    </Label>
+                    <Label htmlFor="email">E-mail</Label>
 
                     <Input
                       id="email"
@@ -417,19 +375,14 @@ const BookADemo1 = ({
                       placeholder="voce@empresa.com.br"
                       value={formData.email}
                       onChange={(event) =>
-                        updateField(
-                          "email",
-                          event.target.value
-                        )
+                        updateField("email", event.target.value)
                       }
                       className="bg-background"
                     />
                   </FormGroup>
 
                   <FormGroup>
-                    <Label htmlFor="phone">
-                      Telefone
-                    </Label>
+                    <Label htmlFor="phone">Telefone</Label>
 
                     <Input
                       id="phone"
@@ -439,10 +392,7 @@ const BookADemo1 = ({
                       placeholder="(00) 00000-0000"
                       value={formData.phone}
                       onChange={(event) =>
-                        updateField(
-                          "phone",
-                          event.target.value
-                        )
+                        updateField("phone", event.target.value)
                       }
                       className="bg-background"
                     />
@@ -451,9 +401,7 @@ const BookADemo1 = ({
 
                 {/* Empresa */}
                 <FormGroup>
-                  <Label htmlFor="company">
-                    Empresa
-                  </Label>
+                  <Label htmlFor="company">Empresa</Label>
 
                   <Input
                     id="company"
@@ -463,10 +411,7 @@ const BookADemo1 = ({
                     placeholder="Nome da empresa"
                     value={formData.company}
                     onChange={(event) =>
-                      updateField(
-                        "company",
-                        event.target.value
-                      )
+                      updateField("company", event.target.value)
                     }
                     className="bg-background"
                   />
@@ -474,17 +419,12 @@ const BookADemo1 = ({
 
                 {/* Segmento */}
                 <FormGroup>
-                  <Label>
-                    Segmento da empresa
-                  </Label>
+                  <Label>Segmento da empresa</Label>
 
                   <Select
                     value={formData.companySegment}
                     onValueChange={(value) =>
-                      updateField(
-                        "companySegment",
-                        value ?? ""
-                      )
+                      updateField("companySegment", value ?? "")
                     }
                   >
                     <SelectTrigger className="w-full bg-background">
@@ -521,17 +461,12 @@ const BookADemo1 = ({
 
                 {/* Colaboradores */}
                 <FormGroup>
-                  <Label>
-                    Número de colaboradores da empresa
-                  </Label>
+                  <Label>Número de colaboradores da empresa</Label>
 
                   <Select
                     value={formData.employeeRange}
                     onValueChange={(value) =>
-                      updateField(
-                        "employeeRange",
-                        value ?? ""
-                      )
+                      updateField("employeeRange", value ?? "")
                     }
                   >
                     <SelectTrigger className="w-full bg-background">
@@ -568,9 +503,7 @@ const BookADemo1 = ({
 
                 {/* Mensagem */}
                 <FormGroup>
-                  <Label htmlFor="message">
-                    Como podemos ajudar?
-                  </Label>
+                  <Label htmlFor="message">Como podemos ajudar?</Label>
 
                   <Textarea
                     id="message"
@@ -578,10 +511,7 @@ const BookADemo1 = ({
                     placeholder="Conte um pouco sobre o que você busca para sua operação"
                     value={formData.message}
                     onChange={(event) =>
-                      updateField(
-                        "message",
-                        event.target.value
-                      )
+                      updateField("message", event.target.value)
                     }
                     className="min-h-28 bg-background"
                   />
@@ -599,7 +529,7 @@ const BookADemo1 = ({
                   type="submit"
                   size="lg"
                   disabled={isSubmitting}
-                  className="w-full sm:w-fit sm:self-end"
+                  className="w-full cursor-pointer sm:w-fit sm:self-end disabled:cursor-not-allowed"
                 >
                   {isSubmitting
                     ? "Enviando..."
