@@ -78,7 +78,12 @@ const Feature17 = (props: Props) => {
   const items = (features ?? []).slice(0, 4);
 
   return (
-    <section className={cn("bg-muted py-20 lg:py-24", className)}>
+    <section
+      className={cn(
+        "bg-muted py-20 dark:bg-zinc-900 lg:py-24",
+        className
+      )}
+    >
       <div className="container mx-auto">
         {/* Cabeçalho */}
         <div className="mx-auto mb-14 flex max-w-3xl flex-col items-center text-center">
@@ -93,7 +98,7 @@ const Feature17 = (props: Props) => {
           </div>
 
           {description && (
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground dark:text-zinc-300">
               {description}
             </p>
           )}
@@ -117,10 +122,17 @@ const Feature17 = (props: Props) => {
                 shadow-sm
                 transition-all
                 duration-300
+
                 hover:-translate-y-2
                 hover:shadow-xl
+
+                dark:border-white/10
+                dark:bg-zinc-800
+                dark:text-white
+                dark:hover:bg-zinc-700
               "
             >
+              {/* Ícone */}
               <div
                 className="
                   mb-6
@@ -131,19 +143,26 @@ const Feature17 = (props: Props) => {
                   rounded-xl
                   bg-accent
                   text-foreground
-                  transition-transform
+                  transition-all
                   duration-300
+
                   group-hover:scale-110
+
+                  dark:bg-white/10
+                  dark:text-white
+                  dark:group-hover:bg-white/15
                 "
               >
                 {feature.icon}
               </div>
 
+              {/* Título */}
               <h3 className="mb-3 text-xl font-semibold tracking-tight">
                 {feature.title}
               </h3>
 
-              <p className="leading-relaxed text-muted-foreground">
+              {/* Descrição */}
+              <p className="leading-relaxed text-muted-foreground dark:text-zinc-300">
                 {feature.description}
               </p>
             </div>
@@ -159,7 +178,7 @@ const Feature17 = (props: Props) => {
                 Tudo conectado à operação do frigorífico
               </h3>
 
-              <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground lg:text-lg">
+              <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground dark:text-zinc-300 lg:text-lg">
                 A tipificação gera dados que acompanham a carcaça e apoiam
                 diferentes etapas da operação.
               </p>

@@ -1,9 +1,12 @@
 import { Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
+
+import { Analytics } from "@vercel/analytics/next";
+
+import { DynamicFavicon } from "@/components/dynamic-favicon";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
-import { Analytics } from "@vercel/analytics/next";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -37,6 +40,8 @@ export default function RootLayout({
           defaultTheme="light"
           enableSystem={false}
         >
+          <DynamicFavicon />
+
           {children}
         </ThemeProvider>
 

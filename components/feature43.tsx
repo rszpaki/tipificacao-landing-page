@@ -93,7 +93,7 @@ const Feature43 = (props: Props) => {
           </div>
         )}
 
-        {/* Floating Cards */}
+        {/* Cards */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {items.map((feature, i) => (
             <div
@@ -111,8 +111,14 @@ const Feature43 = (props: Props) => {
                 shadow-sm
                 transition-all
                 duration-300
+
                 hover:-translate-y-2
                 hover:shadow-xl
+
+                dark:border-white/10
+                dark:bg-zinc-900
+                dark:text-white
+                dark:hover:bg-zinc-800
               "
             >
               {/* Ícone */}
@@ -125,21 +131,26 @@ const Feature43 = (props: Props) => {
                   justify-center
                   rounded-xl
                   bg-accent
-                  transition-transform
+                  transition-all
                   duration-300
+
                   group-hover:scale-110
+
+                  dark:bg-white/10
+                  dark:text-white
+                  dark:group-hover:bg-white/15
                 "
               >
                 {feature.icon}
               </div>
 
-              {/* Título do card */}
+              {/* Título */}
               <h3 className="mb-3 text-xl font-semibold">
                 {feature.title}
               </h3>
 
               {/* Descrição */}
-              <p className="leading-relaxed text-muted-foreground">
+              <p className="leading-relaxed text-muted-foreground dark:text-zinc-300">
                 {feature.description}
               </p>
             </div>

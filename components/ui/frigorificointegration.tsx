@@ -6,7 +6,7 @@ import {
   Beef,
   Server,
   PackageOpen,
-  ScanEye,
+  Smartphone,
   Truck,
 } from "lucide-react";
 
@@ -31,12 +31,28 @@ const Circle = forwardRef<
           "items-center",
           "justify-center",
           "rounded-full",
-          "border-2",
+          "border-1",
+
+          // Light mode
           "border-border/70",
           "bg-card",
-          "p-3",
           "text-foreground",
+
+          // Dark mode
+          "dark:border-zinc-700",
+          "dark:bg-zinc-800",
+          "dark:text-zinc-100",
+
+          // Sombra
           "shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)]",
+          "dark:shadow-[0_0_24px_-10px_rgba(0,0,0,0.9)]",
+
+          // Espaçamento
+          "p-3",
+
+          // Transição
+          "transition-colors",
+          "duration-300",
         ],
         className
       )}
@@ -86,9 +102,15 @@ export function FrigorificoIntegration({
         <div className="flex flex-col justify-center">
           <Circle
             ref={div6Ref}
-            className="size-20"
+            className="
+              size-20
+
+              dark:border-zinc-700
+              dark:bg-zinc-800
+              dark:text-white
+            "
           >
-            <ScanEye
+            <Smartphone
               className="size-8"
               strokeWidth={1.5}
             />

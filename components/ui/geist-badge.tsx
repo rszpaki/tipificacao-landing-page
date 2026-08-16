@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from "react";
-import { Sparkle } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -141,7 +141,7 @@ const GeistBadge = ({
       {...props}
     >
       {isTurbo && (
-        <Sparkle
+        <Sparkles
           className="size-3 shrink-0 fill-current"
           strokeWidth={1.5}
           aria-hidden="true"
