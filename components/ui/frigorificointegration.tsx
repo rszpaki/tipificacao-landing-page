@@ -1,11 +1,17 @@
 "use client";
 
-import React, { forwardRef, useRef } from "react";
+import React, {
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
 import {
   BadgeDollarSign,
   Beef,
-  Server,
   PackageOpen,
+  Server,
   Smartphone,
   Truck,
 } from "lucide-react";
@@ -31,7 +37,7 @@ const Circle = forwardRef<
           "items-center",
           "justify-center",
           "rounded-full",
-          "border-1",
+          "border",
 
           // Light mode
           "border-border/70",
@@ -43,12 +49,12 @@ const Circle = forwardRef<
           "dark:bg-zinc-800",
           "dark:text-zinc-100",
 
+          // Espaçamento
+          "p-3",
+
           // Sombra
           "shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)]",
           "dark:shadow-[0_0_24px_-10px_rgba(0,0,0,0.9)]",
-
-          // Espaçamento
-          "p-3",
 
           // Transição
           "transition-colors",
@@ -71,26 +77,75 @@ export function FrigorificoIntegration({
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const div1Ref = useRef<HTMLDivElement>(null);
-  const div2Ref = useRef<HTMLDivElement>(null);
-  const div3Ref = useRef<HTMLDivElement>(null);
-  const div4Ref = useRef<HTMLDivElement>(null);
+  // Áreas da operação
+  const serverRef = useRef<HTMLDivElement>(null);
+  const priceRef = useRef<HTMLDivElement>(null);
+  const packageRef = useRef<HTMLDivElement>(null);
+  const truckRef = useRef<HTMLDivElement>(null);
 
-  const div6Ref = useRef<HTMLDivElement>(null);
-  const div7Ref = useRef<HTMLDivElement>(null);
+  // Tipificação
+  const smartphoneRef = useRef<HTMLDivElement>(null);
+
+  // Carcaça
+  const beefRef = useRef<HTMLDivElement>(null);
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 1023px)");
+
+    const updateLayout = () => {
+      setIsMobile(mediaQuery.matches);
+    };
+
+    updateLayout();
+
+    mediaQuery.addEventListener("change", updateLayout);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateLayout);
+    };
+  }, []);
+
+  const orientation: "horizontal" | "vertical" = isMobile
+    ? "vertical"
+    : "horizontal";
 
   return (
     <div
       ref={containerRef}
       className={cn(
-        "relative flex h-[320px] w-full items-center justify-center overflow-hidden",
+        // Mobile
+        "relative flex h-[460px] w-full items-center justify-center overflow-hidden",
+
+        // Desktop
+        "lg:h-[320px]",
+
         className
       )}
     >
-      <div className="flex size-full w-full flex-row items-stretch justify-between gap-10 px-4">
+      <div
+        className="
+          flex
+          size-full
+          w-full
+
+          flex-col
+          items-center
+          justify-between
+          px-4
+          py-8
+
+          lg:flex-row
+          lg:items-stretch
+          lg:gap-10
+          lg:px-4
+          lg:py-0
+        "
+      >
         {/* Carcaça */}
-        <div className="flex flex-col justify-center">
-          <Circle ref={div7Ref}>
+        <div className="flex flex-col items-center justify-center">
+          <Circle ref={beefRef}>
             <Beef
               className="size-6"
               strokeWidth={1.5}
@@ -99,9 +154,9 @@ export function FrigorificoIntegration({
         </div>
 
         {/* Tipificação com IA */}
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col items-center justify-center">
           <Circle
-            ref={div6Ref}
+            ref={smartphoneRef}
             className="
               size-20
 
@@ -118,29 +173,46 @@ export function FrigorificoIntegration({
         </div>
 
         {/* Áreas conectadas */}
-        <div className="flex flex-col justify-center gap-3">
-          <Circle ref={div1Ref}>
+        <div
+          className="
+            flex
+            w-full
+            flex-row
+            items-center
+            justify-center
+            gap-3
+
+            lg:w-auto
+            lg:flex-col
+            lg:justify-center
+          "
+        >
+          {/* Servidor */}
+          <Circle ref={serverRef}>
             <Server
               className="size-6"
               strokeWidth={1.5}
             />
           </Circle>
 
-          <Circle ref={div2Ref}>
+          {/* Precificação */}
+          <Circle ref={priceRef}>
             <BadgeDollarSign
               className="size-6"
               strokeWidth={1.5}
             />
           </Circle>
 
-          <Circle ref={div3Ref}>
+          {/* Estoque / produto */}
+          <Circle ref={packageRef}>
             <PackageOpen
               className="size-6"
               strokeWidth={1.5}
             />
           </Circle>
 
-          <Circle ref={div4Ref}>
+          {/* Logística */}
+          <Circle ref={truckRef}>
             <Truck
               className="size-6"
               strokeWidth={1.5}
@@ -149,40 +221,49 @@ export function FrigorificoIntegration({
         </div>
       </div>
 
-      {/* Animated Beams */}
+      {/* Carcaça → Tipificação */}
       <AnimatedBeam
         containerRef={containerRef}
-        fromRef={div1Ref}
-        toRef={div6Ref}
+        fromRef={beefRef}
+        toRef={smartphoneRef}
         duration={3}
+        orientation={orientation}
       />
 
+      {/* Tipificação → Servidor */}
       <AnimatedBeam
         containerRef={containerRef}
-        fromRef={div2Ref}
-        toRef={div6Ref}
+        fromRef={smartphoneRef}
+        toRef={serverRef}
         duration={3}
+        orientation={orientation}
       />
 
+      {/* Tipificação → Precificação */}
       <AnimatedBeam
         containerRef={containerRef}
-        fromRef={div3Ref}
-        toRef={div6Ref}
+        fromRef={smartphoneRef}
+        toRef={priceRef}
         duration={3}
+        orientation={orientation}
       />
 
+      {/* Tipificação → Estoque */}
       <AnimatedBeam
         containerRef={containerRef}
-        fromRef={div4Ref}
-        toRef={div6Ref}
+        fromRef={smartphoneRef}
+        toRef={packageRef}
         duration={3}
+        orientation={orientation}
       />
 
+      {/* Tipificação → Logística */}
       <AnimatedBeam
         containerRef={containerRef}
-        fromRef={div6Ref}
-        toRef={div7Ref}
+        fromRef={smartphoneRef}
+        toRef={truckRef}
         duration={3}
+        orientation={orientation}
       />
     </div>
   );
