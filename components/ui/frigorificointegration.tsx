@@ -11,7 +11,6 @@ import {
   Beef,
   MonitorCog,
   PackageOpen,
-  Server,
   Smartphone,
   ThermometerSnowflake,
   Truck,
@@ -78,17 +77,17 @@ export function FrigorificoIntegration({
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Áreas da operação
-  const serverRef = useRef<HTMLDivElement>(null);
+  // Entrada
+  const smartphoneRef = useRef<HTMLDivElement>(null);
+
+  // Nó central — Frigosoft
+  const frigosoftRef = useRef<HTMLDivElement>(null);
+
+  // Saídas / áreas conectadas
+  const beefRef = useRef<HTMLDivElement>(null);
   const priceRef = useRef<HTMLDivElement>(null);
   const packageRef = useRef<HTMLDivElement>(null);
   const truckRef = useRef<HTMLDivElement>(null);
-
-  // Tipificação
-  const smartphoneRef = useRef<HTMLDivElement>(null);
-
-  // Carcaça
-  const beefRef = useRef<HTMLDivElement>(null);
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -116,29 +115,54 @@ export function FrigorificoIntegration({
     <div
       ref={containerRef}
       className={cn(
-        "relative flex h-[460px] w-full items-center justify-center overflow-hidden",
-        "lg:h-[320px]",
+        [
+          "relative",
+          "flex",
+          "h-[460px]",
+          "w-full",
+          "items-center",
+          "justify-center",
+          "overflow-hidden",
+
+          // Desktop
+          "lg:h-[320px]",
+        ],
         className
       )}
     >
+      {/*
+        Estrutura:
+        
+        MOBILE
+              Smartphone
+                  ↓
+              Frigosoft
+             ↙ ↓ ↓ ↘
+          áreas conectadas
+
+        DESKTOP
+        Smartphone → Frigosoft → áreas conectadas
+      */}
       <div
         className="
           flex
           size-full
           w-full
+          max-w-lg
           flex-col
           items-center
           justify-between
           px-4
           py-8
+
           lg:flex-row
           lg:items-stretch
           lg:gap-10
-          lg:px-4
+          lg:px-0
           lg:py-0
         "
       >
-        {/* Smartphone */}
+        {/* Entrada — Smartphone */}
         <div className="flex flex-col items-center justify-center">
           <Circle ref={smartphoneRef}>
             <Smartphone
@@ -148,10 +172,10 @@ export function FrigorificoIntegration({
           </Circle>
         </div>
 
-        {/* Frigosoft */}
+        {/* Nó central — Frigosoft */}
         <div className="flex flex-col items-center justify-center">
           <Circle
-            ref={smartphoneRef}
+            ref={frigosoftRef}
             className="
               size-20
               dark:border-zinc-700
@@ -175,6 +199,7 @@ export function FrigorificoIntegration({
             items-center
             justify-center
             gap-3
+
             lg:w-auto
             lg:flex-col
             lg:justify-center
@@ -214,41 +239,46 @@ export function FrigorificoIntegration({
         </div>
       </div>
 
+      {/* Smartphone → Frigosoft */}
       <AnimatedBeam
         containerRef={containerRef}
-        fromRef={beefRef}
-        toRef={smartphoneRef}
+        fromRef={smartphoneRef}
+        toRef={frigosoftRef}
         duration={3}
         orientation={orientation}
       />
 
+      {/* Frigosoft → Carcaça */}
       <AnimatedBeam
         containerRef={containerRef}
-        fromRef={smartphoneRef}
-        toRef={serverRef}
+        fromRef={frigosoftRef}
+        toRef={beefRef}
         duration={3}
         orientation={orientation}
       />
 
+      {/* Frigosoft → Temperatura */}
       <AnimatedBeam
         containerRef={containerRef}
-        fromRef={smartphoneRef}
+        fromRef={frigosoftRef}
         toRef={priceRef}
         duration={3}
         orientation={orientation}
       />
 
+      {/* Frigosoft → Estoque */}
       <AnimatedBeam
         containerRef={containerRef}
-        fromRef={smartphoneRef}
+        fromRef={frigosoftRef}
         toRef={packageRef}
         duration={3}
         orientation={orientation}
       />
 
+      {/* Frigosoft → Logística */}
       <AnimatedBeam
         containerRef={containerRef}
-        fromRef={smartphoneRef}
+        fromRef={frigosoftRef}
         toRef={truckRef}
         duration={3}
         orientation={orientation}
