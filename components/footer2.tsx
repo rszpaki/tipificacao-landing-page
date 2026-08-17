@@ -39,7 +39,7 @@ const Footer2 = (props: Props) => {
               src={logo.src}
               alt={logo.alt}
               title={logo.title}
-              className="h-6 w-auto dark:invert"
+              className="h-5 w-auto dark:invert"
             />
           )}
 

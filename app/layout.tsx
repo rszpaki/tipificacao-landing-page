@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import { Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
@@ -18,6 +20,34 @@ const fontMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
 });
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://tipificacao.atak.com.br"),
+
+  title: "Tipificação de Carcaças com IA para Frigoríficos | Atak",
+
+  description:
+    "Use inteligência artificial para apoiar a tipificação de carcaças, analisar cobertura de gordura e conformação e integrar os dados ao Frigosoft.",
+
+  alternates: {
+    canonical: "/",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    url: "https://tipificacao.atak.com.br",
+    siteName: "Atak Sistemas",
+    title: "Tipificação de Carcaças com IA para Frigoríficos | Atak",
+    description:
+      "Use inteligência artificial para apoiar a tipificação de carcaças, analisar cobertura de gordura e conformação e integrar os dados ao Frigosoft.",
+  },
+};
 
 export default function RootLayout({
   children,

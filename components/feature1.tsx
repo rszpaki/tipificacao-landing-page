@@ -41,7 +41,7 @@ const defaultProps: FeatureSingleFocusProps = {
     },
   },
   image: {
-    src: "/images/hero/tipificação-atak-sistemas.png",
+    src: "/images/atak-tipificacao-img.png",
     alt: "Tipificação de animais com inteligência artificial",
   },
 };
