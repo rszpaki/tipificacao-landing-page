@@ -61,7 +61,7 @@ const Navbar1 = ({
               src={logo.src}
               alt={logo.alt}
               className={cn(
-                "block h-8 w-auto dark:invert",
+                "block h-4 w-auto dark:invert",
                 logo.className
               )}
             />
