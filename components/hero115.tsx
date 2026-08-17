@@ -3,7 +3,6 @@ import { ArrowRight } from "lucide-react";
 import { GeistBadge } from "@/components/ui/geist-badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern"
 
 interface Image {
   src: string;
