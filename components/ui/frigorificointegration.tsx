@@ -8,11 +8,12 @@ import React, {
 } from "react";
 
 import {
-  BadgeDollarSign,
   Beef,
+  MonitorCog,
   PackageOpen,
   Server,
   Smartphone,
+  ThermometerSnowflake,
   Truck,
 } from "lucide-react";
 
@@ -115,12 +116,8 @@ export function FrigorificoIntegration({
     <div
       ref={containerRef}
       className={cn(
-        // Mobile
         "relative flex h-[460px] w-full items-center justify-center overflow-hidden",
-
-        // Desktop
         "lg:h-[320px]",
-
         className
       )}
     >
@@ -129,13 +126,11 @@ export function FrigorificoIntegration({
           flex
           size-full
           w-full
-
           flex-col
           items-center
           justify-between
           px-4
           py-8
-
           lg:flex-row
           lg:items-stretch
           lg:gap-10
@@ -143,29 +138,28 @@ export function FrigorificoIntegration({
           lg:py-0
         "
       >
-        {/* Carcaça */}
+        {/* Smartphone */}
         <div className="flex flex-col items-center justify-center">
-          <Circle ref={beefRef}>
-            <Beef
+          <Circle ref={smartphoneRef}>
+            <Smartphone
               className="size-6"
               strokeWidth={1.5}
             />
           </Circle>
         </div>
 
-        {/* Tipificação com IA */}
+        {/* Frigosoft */}
         <div className="flex flex-col items-center justify-center">
           <Circle
             ref={smartphoneRef}
             className="
               size-20
-
               dark:border-zinc-700
               dark:bg-zinc-800
               dark:text-white
             "
           >
-            <Smartphone
+            <MonitorCog
               className="size-8"
               strokeWidth={1.5}
             />
@@ -181,23 +175,22 @@ export function FrigorificoIntegration({
             items-center
             justify-center
             gap-3
-
             lg:w-auto
             lg:flex-col
             lg:justify-center
           "
         >
-          {/* Servidor */}
-          <Circle ref={serverRef}>
-            <Server
+          {/* Carcaça */}
+          <Circle ref={beefRef}>
+            <Beef
               className="size-6"
               strokeWidth={1.5}
             />
           </Circle>
 
-          {/* Precificação */}
+          {/* Armazenagem / temperatura */}
           <Circle ref={priceRef}>
-            <BadgeDollarSign
+            <ThermometerSnowflake
               className="size-6"
               strokeWidth={1.5}
             />
@@ -221,7 +214,6 @@ export function FrigorificoIntegration({
         </div>
       </div>
 
-      {/* Carcaça → Tipificação */}
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={beefRef}
@@ -230,7 +222,6 @@ export function FrigorificoIntegration({
         orientation={orientation}
       />
 
-      {/* Tipificação → Servidor */}
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={smartphoneRef}
@@ -239,7 +230,6 @@ export function FrigorificoIntegration({
         orientation={orientation}
       />
 
-      {/* Tipificação → Precificação */}
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={smartphoneRef}
@@ -248,7 +238,6 @@ export function FrigorificoIntegration({
         orientation={orientation}
       />
 
-      {/* Tipificação → Estoque */}
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={smartphoneRef}
@@ -257,7 +246,6 @@ export function FrigorificoIntegration({
         orientation={orientation}
       />
 
-      {/* Tipificação → Logística */}
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={smartphoneRef}
