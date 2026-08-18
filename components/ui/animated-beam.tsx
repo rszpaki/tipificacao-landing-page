@@ -10,24 +10,29 @@ export interface AnimatedBeamProps {
   containerRef: RefObject<HTMLElement | null>;
   fromRef: RefObject<HTMLElement | null>;
   toRef: RefObject<HTMLElement | null>;
+
   curvature?: number;
+
   reverse?: boolean;
   pathColor?: string;
   pathWidth?: number;
   pathOpacity?: number;
+
   gradientStartColor?: string;
   gradientStopColor?: string;
+
   delay?: number;
   duration?: number;
+
   repeat?: number;
   repeatDelay?: number;
+
   startXOffset?: number;
   startYOffset?: number;
+
   endXOffset?: number;
   endYOffset?: number;
 
-  // horizontal = esquerda → direita
-  // vertical = cima → baixo
   orientation?: "horizontal" | "vertical";
 }
 
@@ -36,40 +41,41 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
   containerRef,
   fromRef,
   toRef,
-  curvature = 0,
+
+  curvature,
+
   reverse = false,
+
   duration = 5,
   delay = 0,
+
   pathColor = "gray",
   pathWidth = 2,
   pathOpacity = 0.2,
+
   gradientStartColor = "#ffaa40",
   gradientStopColor = "#9c40ff",
+
   repeat = Infinity,
   repeatDelay = 0,
+
   startXOffset = 0,
   startYOffset = 0,
+
   endXOffset = 0,
   endYOffset = 0,
+
   orientation = "horizontal",
 }) => {
   const id = useId();
 
   const [pathD, setPathD] = useState("");
+
   const [svgDimensions, setSvgDimensions] = useState({
     width: 0,
     height: 0,
   });
 
-  /*
-   * Movimento do gradiente
-   *
-   * horizontal:
-   * esquerda → direita
-   *
-   * vertical:
-   * cima → baixo
-   */
   const gradientCoordinates =
     orientation === "vertical"
       ? reverse
@@ -112,83 +118,141 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
       const containerRect =
         containerRef.current.getBoundingClientRect();
 
-      const rectA =
+      const fromRect =
         fromRef.current.getBoundingClientRect();
 
-      const rectB =
+      const toRect =
         toRef.current.getBoundingClientRect();
 
-      const svgWidth = containerRect.width;
-      const svgHeight = containerRect.height;
+      const width = containerRect.width;
+      const height = containerRect.height;
 
       setSvgDimensions({
-        width: svgWidth,
-        height: svgHeight,
+        width,
+        height,
       });
 
+      /*
+       * Centro do elemento de origem
+       */
       const startX =
-        rectA.left -
+        fromRect.left -
         containerRect.left +
-        rectA.width / 2 +
+        fromRect.width / 2 +
         startXOffset;
 
       const startY =
-        rectA.top -
+        fromRect.top -
         containerRect.top +
-        rectA.height / 2 +
+        fromRect.height / 2 +
         startYOffset;
 
+      /*
+       * Centro do elemento de destino
+       */
       const endX =
-        rectB.left -
+        toRect.left -
         containerRect.left +
-        rectB.width / 2 +
+        toRect.width / 2 +
         endXOffset;
 
       const endY =
-        rectB.top -
+        toRect.top -
         containerRect.top +
-        rectB.height / 2 +
+        toRect.height / 2 +
         endYOffset;
 
-      let d: string;
+      let d = "";
 
-      /*
-       * Desktop / horizontal
-       *
-       * Mantém a geometria original:
-       *
-       * ○ ───────── ○
-       *              ╲
-       *               ○
-       */
       if (orientation === "horizontal") {
-        const controlX = (startX + endX) / 2;
-        const controlY = startY - curvature;
+        /*
+         * Distância horizontal entre os elementos.
+         *
+         * Aproximadamente 45% da distância produz
+         * a geometria do componente original.
+         */
+        const distanceX = Math.abs(endX - startX);
+
+        const curve =
+          curvature ??
+          Math.min(distanceX * 0.45, 220);
+
+        /*
+         * Identifica a direção.
+         *
+         * 1  = esquerda → direita
+         * -1 = direita → esquerda
+         */
+        const direction =
+          endX >= startX ? 1 : -1;
+
+        /*
+         * Bézier cúbica:
+         *
+         * M = início
+         *
+         * C =
+         * ponto de controle 1
+         * ponto de controle 2
+         * destino
+         *
+         * Os dois pontos mantêm o mesmo Y
+         * dos seus respectivos círculos.
+         *
+         * Isso faz a linha:
+         *
+         * - sair horizontalmente
+         * - fazer a curva no meio
+         * - chegar horizontalmente
+         */
+        const control1X =
+          startX + curve * direction;
+
+        const control1Y = startY;
+
+        const control2X =
+          endX - curve * direction;
+
+        const control2Y = endY;
 
         d = `
           M ${startX},${startY}
-          Q ${controlX},${controlY}
+          C
+          ${control1X},${control1Y}
+          ${control2X},${control2Y}
           ${endX},${endY}
         `;
       } else {
         /*
-         * Mobile / vertical
+         * MOBILE
          *
-         * É basicamente a geometria horizontal
-         * rotacionada 90 graus:
-         *
-         *       ○
-         *       │
-         *       ○
-         *      ╱ ╲
-         *     ○   ○
+         * Mesma geometria do desktop,
+         * rotacionada 90 graus.
          */
-        const controlX = startX - curvature;
-        const controlY = (startY + endY) / 2;
+        const distanceY = Math.abs(endY - startY);
+
+        const curve =
+          curvature ??
+          Math.min(distanceY * 0.45, 220);
+
+        const direction =
+          endY >= startY ? 1 : -1;
+
+        const control1X = startX;
+
+        const control1Y =
+          startY + curve * direction;
+
+        const control2X = endX;
+
+        const control2Y =
+          endY - curve * direction;
 
         d = `
           M ${startX},${startY}
-          Q ${controlX},${controlY}
+          C
+          ${control1X},${control1Y}
+          ${control2X},${control2Y}
           ${endX},${endY}
         `;
       }
@@ -196,12 +260,18 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
       setPathD(d);
     };
 
-    const resizeObserver = new ResizeObserver(() => {
-      updatePath();
-    });
+    const resizeObserver = new ResizeObserver(updatePath);
 
     if (containerRef.current) {
       resizeObserver.observe(containerRef.current);
+    }
+
+    if (fromRef.current) {
+      resizeObserver.observe(fromRef.current);
+    }
+
+    if (toRef.current) {
+      resizeObserver.observe(toRef.current);
     }
 
     updatePath();
@@ -228,7 +298,7 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
       height={svgDimensions.height}
       xmlns="http://www.w3.org/2000/svg"
       className={cn(
-        "pointer-events-none absolute top-0 left-0 transform-gpu stroke-2",
+        "pointer-events-none absolute left-0 top-0 transform-gpu",
         className
       )}
       viewBox={`0 0 ${svgDimensions.width} ${svgDimensions.height}`}
@@ -240,20 +310,21 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
         strokeWidth={pathWidth}
         strokeOpacity={pathOpacity}
         strokeLinecap="round"
+        fill="none"
       />
 
       {/* Linha animada */}
       <path
         d={pathD}
-        strokeWidth={pathWidth}
         stroke={`url(#${id})`}
+        strokeWidth={pathWidth}
         strokeOpacity="1"
         strokeLinecap="round"
+        fill="none"
       />
 
       <defs>
         <motion.linearGradient
-          className="transform-gpu"
           id={id}
           gradientUnits="userSpaceOnUse"
           initial={{
@@ -281,10 +352,13 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
             stopOpacity="0"
           />
 
-          <stop stopColor={gradientStartColor} />
+          <stop
+            offset="10%"
+            stopColor={gradientStartColor}
+          />
 
           <stop
-            offset="32.5%"
+            offset="45%"
             stopColor={gradientStopColor}
           />
 
@@ -297,4 +371,4 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
       </defs>
     </svg>
   );
-};  
+};

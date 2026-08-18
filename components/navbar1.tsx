@@ -53,7 +53,6 @@ const Navbar1 = ({
         <nav className="flex min-h-10 items-center justify-between">
           {/* Logo */}
           <a
-            href={logo.url}
             aria-label={logo.title}
             className="flex h-10 items-center"
           >
