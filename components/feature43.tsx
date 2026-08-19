@@ -56,7 +56,7 @@ const defaultProps: Feature43Props = {
       icon: <Check className="size-5" />,
       title: "Confirme",
       description:
-        "O operador confirma ou ajusta a classificação, enquanto imagem, sugestão da IA e avaliação final ficam registradas no Frigosoft.",
+        "O operador valida ou ajusta a sugestão da IA, mantendo a decisão final sob seu controle e todo o processo registrado no Frigosoft.",
     },
   ],
   buttons: {
