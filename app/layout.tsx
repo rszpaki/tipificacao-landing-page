@@ -46,6 +46,22 @@ export const metadata: Metadata = {
     title: "Tipificação de Carcaças com IA para Frigoríficos | Atak",
     description:
       "Use inteligência artificial para apoiar a tipificação de carcaças, analisar cobertura de gordura e conformação e integrar os dados ao Frigosoft.",
+    images: [
+      {
+        url: "/images/social/tipificacao-og.png",
+        width: 5000,
+        height: 2625,
+        alt: "Tipificação de carcaças com inteligência artificial integrada ao Frigosoft",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Tipificação de Carcaças com IA para Frigoríficos | Atak",
+    description:
+      "Use inteligência artificial para apoiar a tipificação de carcaças, analisar cobertura de gordura e conformação e integrar os dados ao Frigosoft.",
+    images: ["/images/social/tipificacao-og.png"],
   },
 };
 
