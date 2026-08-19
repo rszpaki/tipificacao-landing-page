@@ -31,18 +31,18 @@ interface FeatureSingleFocusProps {
 type Props = Partial<FeatureSingleFocusProps>;
 
 const defaultProps: FeatureSingleFocusProps = {
-  heading: "Menos variação na avaliação. Mais confiança no acerto.",
+  heading: "Análise da IA. Decisão final do operador.",
   description:
-    "A avaliação manual pode variar entre operadores, turnos e animais. Com a Tipificação de Animais com IA, o frigorífico ganha um novo ponto de referência para avaliar cada carcaça com mais consistência.",
+    "A solução registra a sugestão gerada pela IA e a classificação validada ou ajustada pelo operador, mantendo as informações disponíveis no fluxo do Frigosoft.",
   buttons: {
     primary: {
-      text: "Conheça a solução",
+      text: "Agendar uma demonstração",
       url: "#demonstracao",
     },
   },
   image: {
     src: "/images/atak-tipificacao-img.png",
-    alt: "Tipificação de animais com inteligência artificial",
+    alt: "Tipificação de carcaças com IA",
   },
 };
 
@@ -72,7 +72,7 @@ const ClassificationConsistency = (props: Props) => {
             {/* Badge + Título */}
             <div className="mb-6 flex flex-col items-center gap-6 lg:items-start">
               <GeistBadge variant="turbo" contrast="low">
-                IA para avaliar melhor
+                IA aplicada à avaliação
               </GeistBadge>
 
               <h2 className="text-balance text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">

@@ -18,11 +18,11 @@ const defaultProps = {
   heading: "Tipificação de carcaças com inteligência artificial",
   description:
     "A IA analisa cobertura de gordura e conformação, sugere a classificação e conecta o resultado ao Frigosoft para uma operação mais orientada por dados.",
-  buttonText: "Agende uma demonstração",
+  buttonText: "Agendar uma demonstração",
   buttonUrl: "#demonstracao",
   imageSrc: "/images/hero/atak-hero-img.png",
   imageAlt:
-    "Tipificação de carcaça bovina com inteligência artificial integrada ao Frigosoft",
+    "Tipificação de carcaças com IA integrada ao Frigosoft",
 };
 
 const TipificationHero = ({
