@@ -7,7 +7,7 @@ import {
   ScanEye,
 } from "lucide-react";
 
-import { FrigorificoIntegration } from "@/components/ui/frigorificointegration";
+import { FrigosoftIntegrationDiagram } from "@/components/diagrams/frigosoft-integration-diagram";
 import { GeistBadge } from "@/components/ui/geist-badge";
 import { cn } from "@/lib/utils";
 
@@ -17,7 +17,7 @@ interface FeatureIconListItem {
   icon?: ReactNode;
 }
 
-interface Feature17Props {
+interface OperationalBenefitsProps {
   heading: string;
   description?: string;
   features?: FeatureIconListItem[];
@@ -25,9 +25,9 @@ interface Feature17Props {
   className?: string;
 }
 
-type Props = Partial<Feature17Props>;
+type Props = Partial<OperationalBenefitsProps>;
 
-const defaultProps: Feature17Props = {
+const defaultProps: OperationalBenefitsProps = {
   heading: "Do olho ao dado",
 
   description:
@@ -60,10 +60,10 @@ const defaultProps: Feature17Props = {
     },
   ],
 
-  footer: <FrigorificoIntegration />,
+  footer: <FrigosoftIntegrationDiagram />,
 };
 
-const Feature17 = (props: Props) => {
+const OperationalBenefits = (props: Props) => {
   const {
     heading,
     description,
@@ -195,4 +195,4 @@ const Feature17 = (props: Props) => {
   );
 };
 
-export { Feature17 };
+export { OperationalBenefits };

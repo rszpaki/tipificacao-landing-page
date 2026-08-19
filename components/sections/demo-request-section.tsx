@@ -86,7 +86,7 @@ const FormGroup = ({ children }: { children: React.ReactNode }) => {
   return <div className="flex w-full flex-col gap-2">{children}</div>;
 };
 
-interface BookADemo1Props {
+interface DemoRequestSectionProps {
   badge?: string;
   heading?: string;
   benefits?: string[];
@@ -104,7 +104,7 @@ interface FormData {
   message: string;
 }
 
-const BookADemo1 = ({
+const DemoRequestSection = ({
   badge = "Agende uma demonstração",
   heading = "Veja a tipificação inteligente na prática",
   benefits = [
@@ -116,7 +116,7 @@ const BookADemo1 = ({
   ],
   companies = [],
   className,
-}: BookADemo1Props) => {
+}: DemoRequestSectionProps) => {
   const embedContainerRef = useRef<HTMLDivElement>(null);
   const embedFormRef = useRef<HTMLFormElement | null>(null);
 
@@ -573,4 +573,4 @@ const BookADemo1 = ({
   );
 };
 
-export { BookADemo1 };
+export { DemoRequestSection };

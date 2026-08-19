@@ -70,7 +70,7 @@ const Circle = forwardRef<
 
 Circle.displayName = "Circle";
 
-export function FrigorificoIntegration({
+export function FrigosoftIntegrationDiagram({
   className,
 }: {
   className?: string;

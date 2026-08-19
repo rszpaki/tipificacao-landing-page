@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { MoonStar, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { cn } from "@/lib/utils";
 
-interface Navbar1Props {
+interface SiteHeaderProps {
   className?: string;
   logo?: {
     url: string;
@@ -17,7 +17,9 @@ interface Navbar1Props {
   };
 }
 
-const Navbar1 = ({
+const subscribeToClientEnvironment = () => () => {};
+
+const SiteHeader = ({
   logo = {
     url: "/",
     src: "/images/logo/atak-sistemas-logo.svg",
@@ -25,14 +27,14 @@ const Navbar1 = ({
     title: "Atak Sistemas",
   },
   className,
-}: Navbar1Props) => {
+}: SiteHeaderProps) => {
   const { resolvedTheme, setTheme } = useTheme();
 
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useSyncExternalStore(
+    subscribeToClientEnvironment,
+    () => true,
+    () => false
+  );
 
   const isDark = mounted && resolvedTheme === "dark";
 
@@ -134,4 +136,4 @@ const Navbar1 = ({
   );
 };
 
-export { Navbar1 };
+export { SiteHeader };
