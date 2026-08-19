@@ -6,15 +6,15 @@ interface FooterLogo {
   title?: string;
 }
 
-interface Footer2Props {
+interface SiteFooterProps {
   logo?: FooterLogo;
   copyright?: string;
   className?: string;
 }
 
-type Props = Partial<Footer2Props>;
+type Props = Partial<SiteFooterProps>;
 
-const defaultProps: Footer2Props = {
+const defaultProps: SiteFooterProps = {
   logo: {
     src: "/images/logo/atak-sistemas-symbol.svg",
     alt: "Atak Sistemas",
@@ -23,7 +23,7 @@ const defaultProps: Footer2Props = {
   copyright: "© 2026 Atak Sistemas. Todos os direitos reservados.",
 };
 
-const Footer2 = (props: Props) => {
+const SiteFooter = (props: Props) => {
   const { logo, copyright, className } = {
     ...defaultProps,
     ...props,
@@ -53,4 +53,4 @@ const Footer2 = (props: Props) => {
   );
 };
 
-export { Footer2 };
+export { SiteFooter };

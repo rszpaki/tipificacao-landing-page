@@ -25,7 +25,7 @@ const defaultProps = {
     "Tipificação de carcaça bovina com inteligência artificial integrada ao Frigosoft",
 };
 
-const Hero115 = ({
+const TipificationHero = ({
   heading = defaultProps.heading,
   description = defaultProps.description,
   buttonText = defaultProps.buttonText,
@@ -77,4 +77,4 @@ const Hero115 = ({
   );
 };
 
-export { Hero115 };
+export { TipificationHero };

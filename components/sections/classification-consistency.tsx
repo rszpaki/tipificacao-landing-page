@@ -46,7 +46,7 @@ const defaultProps: FeatureSingleFocusProps = {
   },
 };
 
-const Feature1 = (props: Props) => {
+const ClassificationConsistency = (props: Props) => {
   const { heading, description, image, buttons, className } = {
     ...defaultProps,
     ...props,
@@ -108,4 +108,4 @@ const Feature1 = (props: Props) => {
   );
 };
 
-export { Feature1 };
+export { ClassificationConsistency };

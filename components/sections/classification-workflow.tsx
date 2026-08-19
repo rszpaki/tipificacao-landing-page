@@ -33,11 +33,11 @@ interface FeatureIconListProps {
   className?: string;
 }
 
-interface Feature43Props extends FeatureIconListProps {}
+type ClassificationWorkflowProps = FeatureIconListProps;
 
-type Props = Partial<Feature43Props>;
+type Props = Partial<ClassificationWorkflowProps>;
 
-const defaultProps: Feature43Props = {
+const defaultProps: ClassificationWorkflowProps = {
   heading: "Faça a classificação da carcaça em segundos",
   features: [
     {
@@ -69,7 +69,7 @@ const defaultProps: Feature43Props = {
 
 const MAX_FEATURES = 6;
 
-const Feature43 = (props: Props) => {
+const ClassificationWorkflow = (props: Props) => {
   const { heading, buttons, features, className } = {
     ...defaultProps,
     ...props,
@@ -175,4 +175,4 @@ const Feature43 = (props: Props) => {
   );
 };
 
-export { Feature43 };
+export { ClassificationWorkflow };
