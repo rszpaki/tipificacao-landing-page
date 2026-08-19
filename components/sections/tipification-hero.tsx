@@ -43,7 +43,7 @@ const TipificationHero = ({
               IA integrada à operação
             </GeistBadge>
 
-            <h1 className="max-w-2xl text-5xl font-medium leading-[1.05] tracking-tight md:text-6xl lg:text-[58px] xl:text-[72px]">
+            <h1 className="max-w-2xl text-balance text-4xl font-medium leading-[1.08] tracking-tight md:text-6xl md:leading-[1.05] lg:text-wrap lg:text-[58px] xl:text-[72px]">
               {heading}
             </h1>
 

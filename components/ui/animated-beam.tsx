@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useState, type RefObject } from "react";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
@@ -49,12 +49,12 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
   duration = 5,
   delay = 0,
 
-  pathColor = "gray",
+  pathColor = "var(--integration-line)",
   pathWidth = 2,
   pathOpacity = 0.2,
 
-  gradientStartColor = "#ffaa40",
-  gradientStopColor = "#9c40ff",
+  gradientStartColor = "var(--integration-gradient-start)",
+  gradientStopColor = "var(--integration-gradient-end)",
 
   repeat = Infinity,
   repeatDelay = 0,
@@ -68,6 +68,7 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
   orientation = "horizontal",
 }) => {
   const id = useId();
+  const shouldReduceMotion = useReducedMotion();
 
   const [pathD, setPathD] = useState("");
 
@@ -293,6 +294,8 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
 
   return (
     <svg
+      aria-hidden="true"
+      focusable="false"
       fill="none"
       width={svgDimensions.width}
       height={svgDimensions.height}
@@ -313,62 +316,66 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
         fill="none"
       />
 
-      {/* Linha animada */}
-      <path
-        d={pathD}
-        stroke={`url(#${id})`}
-        strokeWidth={pathWidth}
-        strokeOpacity="1"
-        strokeLinecap="round"
-        fill="none"
-      />
-
-      <defs>
-        <motion.linearGradient
-          id={id}
-          gradientUnits="userSpaceOnUse"
-          initial={{
-            x1: "0%",
-            x2: "0%",
-            y1: "0%",
-            y2: "0%",
-          }}
-          animate={{
-            x1: gradientCoordinates.x1,
-            x2: gradientCoordinates.x2,
-            y1: gradientCoordinates.y1,
-            y2: gradientCoordinates.y2,
-          }}
-          transition={{
-            delay,
-            duration,
-            ease: [0.16, 1, 0.3, 1],
-            repeat,
-            repeatDelay,
-          }}
-        >
-          <stop
-            stopColor={gradientStartColor}
-            stopOpacity="0"
+      {!shouldReduceMotion && (
+        <>
+          {/* Linha animada */}
+          <path
+            d={pathD}
+            stroke={`url(#${id})`}
+            strokeWidth={pathWidth}
+            strokeOpacity="1"
+            strokeLinecap="round"
+            fill="none"
           />
 
-          <stop
-            offset="10%"
-            stopColor={gradientStartColor}
-          />
+          <defs>
+            <motion.linearGradient
+              id={id}
+              gradientUnits="userSpaceOnUse"
+              initial={{
+                x1: "0%",
+                x2: "0%",
+                y1: "0%",
+                y2: "0%",
+              }}
+              animate={{
+                x1: gradientCoordinates.x1,
+                x2: gradientCoordinates.x2,
+                y1: gradientCoordinates.y1,
+                y2: gradientCoordinates.y2,
+              }}
+              transition={{
+                delay,
+                duration,
+                ease: [0.16, 1, 0.3, 1],
+                repeat,
+                repeatDelay,
+              }}
+            >
+              <stop
+                stopColor={gradientStartColor}
+                stopOpacity="0"
+              />
 
-          <stop
-            offset="45%"
-            stopColor={gradientStopColor}
-          />
+              <stop
+                offset="10%"
+                stopColor={gradientStartColor}
+              />
 
-          <stop
-            offset="100%"
-            stopColor={gradientStopColor}
-            stopOpacity="0"
-          />
-        </motion.linearGradient>
-      </defs>
+              <stop
+                offset="45%"
+                stopColor={gradientStopColor}
+              />
+
+              <stop
+                offset="100%"
+                stopColor={gradientStopColor}
+                stopOpacity="0"
+              />
+            </motion.linearGradient>
+          </defs>
+        </>
+      )}
     </svg>
   );
 };

@@ -102,9 +102,9 @@ const variants: Record<
 
   turbo: {
     default:
-      "bg-gradient-to-r from-red-500 via-pink-500 to-purple-600 text-white",
+      "bg-gradient-to-r from-red-600 via-pink-700 to-purple-600 text-white",
     low:
-      "bg-gradient-to-r from-red-500 via-pink-500 to-purple-600 text-white",
+      "bg-gradient-to-r from-red-600 via-pink-700 to-purple-600 text-white",
   },
 };
 
