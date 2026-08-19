@@ -1,8 +1,8 @@
 "use client";
 
 import { ArrowRight, Check } from "lucide-react";
-import { motion } from "motion/react";
-import React, { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import React, { useEffect, useId, useRef, useState } from "react";
 
 import { GeistBadge } from "@/components/ui/geist-badge";
 import { Button } from "@/components/ui/button";
@@ -19,14 +19,19 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 
-const FORM_EMBED_URL =
-  "https://njnudpfwtjapekqtahpu.supabase.co/functions/v1/form-embed?type=script&form_name=Edge%20Forms&fields=name,email,phone,company,message&success_message=Parab%C3%A9ns%20pela%20decis%C3%A3o!%20Entraremos%20em%20contato%20logo%20mais";
+const EMBED_SUCCESS_MESSAGE =
+  "Parabéns pela decisão! Entraremos em contato logo mais";
 
-const SUCCESS_MESSAGE =
-  "Parabéns pela decisão! Entraremos em contato em breve.";
+const SUBMISSION_CONFIRMATION_TIMEOUT_MS = 30_000;
+const SUBMISSION_CONFIRMATION_ERROR =
+  "Não foi possível confirmar o envio. Verifique sua conexão e tente novamente.";
+
+const FORM_EMBED_URL =
+  `https://njnudpfwtjapekqtahpu.supabase.co/functions/v1/form-embed?type=script&form_name=Edge%20Forms&fields=name,email,phone,company,message&success_message=${encodeURIComponent(EMBED_SUCCESS_MESSAGE)}`;
 
 const InfiniteMovingCarousel = ({ images }: { images: string[] }) => {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
   const [width, setWidth] = useState(0);
 
   useEffect(() => {
@@ -58,18 +63,25 @@ const InfiniteMovingCarousel = ({ images }: { images: string[] }) => {
       className="w-full overflow-hidden"
     >
       <motion.div
-        initial={{ x: -width }}
-        animate={{ x: -(width / 2 + 24) }}
-        transition={{
-          duration: 3 * images.length,
-          repeat: Infinity,
-          repeatType: "loop",
-          ease: "linear",
-        }}
+        initial={shouldReduceMotion ? false : { x: -width }}
+        animate={
+          shouldReduceMotion ? undefined : { x: -(width / 2 + 24) }
+        }
+        transition={
+          shouldReduceMotion
+            ? undefined
+            : {
+                duration: 3 * images.length,
+                repeat: Infinity,
+                repeatType: "loop",
+                ease: "linear",
+              }
+        }
         ref={carouselRef}
         className="flex w-max items-center gap-12"
       >
         {[...images, ...images].map((image, index) => (
+          // eslint-disable-next-line @next/next/no-img-element -- companies accepts arbitrary external image URLs
           <img
             key={`bookademo1-company-${index}`}
             src={image}
@@ -104,26 +116,82 @@ interface FormData {
   message: string;
 }
 
+type ValidatedField = Exclude<keyof FormData, "message">;
+type FieldErrors = Partial<Record<ValidatedField, string>>;
+
+type EmbedSubmissionOutcome = "success" | "error" | null;
+
+const getEmbedSubmissionOutcome = (
+  dataLayerStartIndex: number
+): EmbedSubmissionOutcome => {
+  const dataLayer = (
+    window as Window & {
+      dataLayer?: unknown[];
+    }
+  ).dataLayer;
+
+  if (!Array.isArray(dataLayer)) return null;
+
+  const submissionEvents = dataLayer.slice(dataLayerStartIndex);
+
+  for (let index = submissionEvents.length - 1; index >= 0; index -= 1) {
+    const entry = submissionEvents[index];
+
+    if (!entry || typeof entry !== "object") continue;
+
+    const event = entry as {
+      event?: string;
+      form_name?: string;
+      success?: boolean;
+    };
+
+    if (event.form_name !== "Edge Forms") continue;
+
+    if (event.event === "edge_forms_error") return "error";
+
+    if (event.event === "edge_forms") {
+      return event.success === true ? "success" : "error";
+    }
+  }
+
+  return null;
+};
+
 const DemoRequestSection = ({
   badge = "Agende uma demonstração",
-  heading = "Veja a tipificação inteligente na prática",
+  heading = "Veja a Tipificação de carcaças com IA na prática",
   benefits = [
-    "Converse com especialistas que entendem a rotina de frigoríficos.",
-    "Entenda como a solução pode ser aplicada à sua linha de produção.",
-    "Conheça na prática a integração dos dados com o Frigosoft.",
-    "Tire dúvidas técnicas, operacionais e comerciais com nosso time.",
-    "Veja a tipificação com IA funcionando em uma demonstração.",
+    "Converse com especialistas sobre a aplicação da solução no seu cenário.",
+    "Veja como a Tipificação de carcaças com IA pode se encaixar na rotina do seu frigorífico.",
+    "Entenda como os dados da tipificação se conectam ao Frigosoft e ao fluxo operacional.",
+    "Entenda os próximos passos para avaliar o módulo na sua operação.",
+    "Veja na prática como a IA analisa a carcaça e apoia a classificação durante a operação.",
   ],
   companies = [],
   className,
 }: DemoRequestSectionProps) => {
   const embedContainerRef = useRef<HTMLDivElement>(null);
   const embedFormRef = useRef<HTMLFormElement | null>(null);
+  const successHeadingRef = useRef<HTMLHeadingElement>(null);
+  const confirmationWatchdogRef = useRef<ReturnType<
+    typeof setTimeout
+  > | null>(null);
+  const dataLayerStartIndexRef = useRef(0);
+
+  const nameErrorId = useId();
+  const emailErrorId = useId();
+  const phoneErrorId = useId();
+  const companyErrorId = useId();
+  const companySegmentId = useId();
+  const companySegmentErrorId = useId();
+  const employeeRangeId = useId();
+  const employeeRangeErrorId = useId();
 
   const [isEmbedReady, setIsEmbedReady] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
 
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -157,10 +225,26 @@ const DemoRequestSection = ({
 
       const content = container.textContent || "";
 
-      if (content.includes(SUCCESS_MESSAGE)) {
+      if (content.includes(EMBED_SUCCESS_MESSAGE)) {
+        const outcome = getEmbedSubmissionOutcome(
+          dataLayerStartIndexRef.current
+        );
+
+        if (confirmationWatchdogRef.current) {
+          clearTimeout(confirmationWatchdogRef.current);
+          confirmationWatchdogRef.current = null;
+        }
+
+        if (outcome === "error") {
+          setIsSubmitting(false);
+          setError(SUBMISSION_CONFIRMATION_ERROR);
+          return;
+        }
+
         setSuccess(true);
         setIsSubmitting(false);
         setError("");
+        setFieldErrors({});
 
         setFormData({
           name: "",
@@ -183,11 +267,22 @@ const DemoRequestSection = ({
     return () => {
       observer.disconnect();
 
+      if (confirmationWatchdogRef.current) {
+        clearTimeout(confirmationWatchdogRef.current);
+        confirmationWatchdogRef.current = null;
+      }
+
       if (container.contains(script)) {
         container.removeChild(script);
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (success) {
+      successHeadingRef.current?.focus();
+    }
+  }, [success]);
 
   const updateField = (field: keyof FormData, value: string) => {
     setFormData((previous) => ({
@@ -197,6 +292,13 @@ const DemoRequestSection = ({
 
     setError("");
     setSuccess(false);
+
+    if (field !== "message") {
+      setFieldErrors((previous) => ({
+        ...previous,
+        [field]: undefined,
+      }));
+    }
   };
 
   const setEmbeddedFieldValue = (
@@ -233,13 +335,66 @@ const DemoRequestSection = ({
     setError("");
     setSuccess(false);
 
+    const validationErrors: FieldErrors = {};
+    const form = event.currentTarget;
+    const nameInput = form.elements.namedItem("name") as HTMLInputElement;
+    const emailInput = form.elements.namedItem("email") as HTMLInputElement;
+    const phoneInput = form.elements.namedItem("phone") as HTMLInputElement;
+    const companyInput = form.elements.namedItem("company") as HTMLInputElement;
+
+    if (!nameInput.validity.valid) {
+      validationErrors.name = "Informe seu nome.";
+    }
+
+    if (!emailInput.validity.valid) {
+      validationErrors.email = emailInput.validity.typeMismatch
+        ? "Informe um e-mail válido."
+        : "Informe seu e-mail.";
+    }
+
+    if (!phoneInput.validity.valid) {
+      validationErrors.phone = "Informe seu telefone.";
+    }
+
+    if (!companyInput.validity.valid) {
+      validationErrors.company = "Informe o nome da empresa.";
+    }
+
     if (!formData.companySegment) {
-      setError("Selecione o segmento da empresa.");
-      return;
+      validationErrors.companySegment = "Selecione o segmento da empresa.";
     }
 
     if (!formData.employeeRange) {
-      setError("Selecione o número de colaboradores.");
+      validationErrors.employeeRange =
+        "Selecione o número de colaboradores.";
+    }
+
+    setFieldErrors(validationErrors);
+
+    const fieldOrder: ValidatedField[] = [
+      "name",
+      "email",
+      "phone",
+      "company",
+      "companySegment",
+      "employeeRange",
+    ];
+    const firstInvalidField = fieldOrder.find(
+      (field) => validationErrors[field]
+    );
+
+    if (firstInvalidField) {
+      requestAnimationFrame(() => {
+        const fieldId =
+          firstInvalidField === "companySegment"
+            ? companySegmentId
+            : firstInvalidField === "employeeRange"
+              ? employeeRangeId
+              : firstInvalidField;
+
+        document.getElementById(fieldId)?.focus();
+      });
+
       return;
     }
 
@@ -274,15 +429,45 @@ const DemoRequestSection = ({
       return;
     }
 
+    if (confirmationWatchdogRef.current) {
+      clearTimeout(confirmationWatchdogRef.current);
+    }
+
+    const dataLayer = (
+      window as Window & {
+        dataLayer?: unknown[];
+      }
+    ).dataLayer;
+
+    dataLayerStartIndexRef.current = Array.isArray(dataLayer)
+      ? dataLayer.length
+      : 0;
+
     setIsSubmitting(true);
 
-    embeddedForm.requestSubmit();
+    confirmationWatchdogRef.current = setTimeout(() => {
+      confirmationWatchdogRef.current = null;
+      setIsSubmitting(false);
+      setError(SUBMISSION_CONFIRMATION_ERROR);
+    }, SUBMISSION_CONFIRMATION_TIMEOUT_MS);
+
+    try {
+      embeddedForm.requestSubmit();
+    } catch {
+      if (confirmationWatchdogRef.current) {
+        clearTimeout(confirmationWatchdogRef.current);
+        confirmationWatchdogRef.current = null;
+      }
+
+      setIsSubmitting(false);
+      setError(SUBMISSION_CONFIRMATION_ERROR);
+    }
   };
 
   return (
     <section
       id="demonstracao"
-      className={cn("scroll-mt-20 py-32", className)}
+      className={cn("scroll-mt-20 py-20 md:py-24 lg:py-32", className)}
     >
       <div className="container mx-auto">
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-16">
@@ -307,7 +492,7 @@ const DemoRequestSection = ({
                   className="flex w-full items-start gap-3 border-b py-6 last:border-b-0"
                 >
                   <Check
-                    className="mt-0.5 size-5 shrink-0 text-green-500"
+                    className="mt-0.5 size-5 shrink-0 text-success"
                     strokeWidth={2}
                     aria-hidden="true"
                   />
@@ -329,17 +514,25 @@ const DemoRequestSection = ({
           {/* Formulário */}
           <Card className="w-full max-w-xl place-self-center bg-muted/40 p-6 lg:max-w-none lg:place-self-start lg:p-8">
             {success ? (
-              <div className="flex min-h-[500px] flex-col items-center justify-center gap-4 text-center">
-                <div className="flex size-12 items-center justify-center rounded-full bg-green-100 text-green-700">
+              <div
+                role="status"
+                aria-live="polite"
+                className="flex min-h-[500px] flex-col items-center justify-center gap-4 text-center"
+              >
+                <div className="flex size-12 items-center justify-center rounded-full bg-success-muted text-success-foreground">
                   ✓
                 </div>
 
-                <h3 className="text-2xl font-semibold">
+                <h3
+                  ref={successHeadingRef}
+                  tabIndex={-1}
+                  className="text-2xl font-semibold outline-none"
+                >
                   Solicitação enviada
                 </h3>
 
                 <p className="max-w-md text-muted-foreground">
-                  {SUCCESS_MESSAGE}
+                  {EMBED_SUCCESS_MESSAGE}
                 </p>
 
                 <Button
@@ -352,16 +545,27 @@ const DemoRequestSection = ({
                 </Button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+              <form
+                noValidate
+                onSubmit={handleSubmit}
+                className="flex flex-col gap-6"
+              >
                 {/* Nome */}
                 <FormGroup>
-                  <Label htmlFor="name">Nome</Label>
+                  <Label htmlFor="name">
+                    <span>
+                      Nome <span aria-hidden="true">*</span>
+                    </span>
+                  </Label>
 
                   <Input
                     id="name"
                     name="name"
                     type="text"
+                    autoComplete="name"
                     required
+                    aria-invalid={Boolean(fieldErrors.name)}
+                    aria-describedby={fieldErrors.name ? nameErrorId : undefined}
                     placeholder="Seu nome"
                     value={formData.name}
                     onChange={(event) =>
@@ -369,18 +573,33 @@ const DemoRequestSection = ({
                     }
                     className="bg-background"
                   />
+
+                  {fieldErrors.name && (
+                    <p id={nameErrorId} className="text-sm text-destructive">
+                      {fieldErrors.name}
+                    </p>
+                  )}
                 </FormGroup>
 
                 {/* Email + telefone */}
                 <div className="grid gap-6 sm:grid-cols-2">
                   <FormGroup>
-                    <Label htmlFor="email">E-mail</Label>
+                    <Label htmlFor="email">
+                      <span>
+                        E-mail <span aria-hidden="true">*</span>
+                      </span>
+                    </Label>
 
                     <Input
                       id="email"
                       name="email"
                       type="email"
+                      autoComplete="email"
                       required
+                      aria-invalid={Boolean(fieldErrors.email)}
+                      aria-describedby={
+                        fieldErrors.email ? emailErrorId : undefined
+                      }
                       placeholder="voce@empresa.com.br"
                       value={formData.email}
                       onChange={(event) =>
@@ -388,16 +607,31 @@ const DemoRequestSection = ({
                       }
                       className="bg-background"
                     />
+
+                    {fieldErrors.email && (
+                      <p id={emailErrorId} className="text-sm text-destructive">
+                        {fieldErrors.email}
+                      </p>
+                    )}
                   </FormGroup>
 
                   <FormGroup>
-                    <Label htmlFor="phone">Telefone</Label>
+                    <Label htmlFor="phone">
+                      <span>
+                        Telefone <span aria-hidden="true">*</span>
+                      </span>
+                    </Label>
 
                     <Input
                       id="phone"
                       name="phone"
                       type="tel"
+                      autoComplete="tel"
                       required
+                      aria-invalid={Boolean(fieldErrors.phone)}
+                      aria-describedby={
+                        fieldErrors.phone ? phoneErrorId : undefined
+                      }
                       placeholder="(00) 00000-0000"
                       value={formData.phone}
                       onChange={(event) =>
@@ -405,18 +639,33 @@ const DemoRequestSection = ({
                       }
                       className="bg-background"
                     />
+
+                    {fieldErrors.phone && (
+                      <p id={phoneErrorId} className="text-sm text-destructive">
+                        {fieldErrors.phone}
+                      </p>
+                    )}
                   </FormGroup>
                 </div>
 
                 {/* Empresa */}
                 <FormGroup>
-                  <Label htmlFor="company">Empresa</Label>
+                  <Label htmlFor="company">
+                    <span>
+                      Empresa <span aria-hidden="true">*</span>
+                    </span>
+                  </Label>
 
                   <Input
                     id="company"
                     name="company"
                     type="text"
+                    autoComplete="organization"
                     required
+                    aria-invalid={Boolean(fieldErrors.company)}
+                    aria-describedby={
+                      fieldErrors.company ? companyErrorId : undefined
+                    }
                     placeholder="Nome da empresa"
                     value={formData.company}
                     onChange={(event) =>
@@ -424,11 +673,21 @@ const DemoRequestSection = ({
                     }
                     className="bg-background"
                   />
+
+                  {fieldErrors.company && (
+                    <p id={companyErrorId} className="text-sm text-destructive">
+                      {fieldErrors.company}
+                    </p>
+                  )}
                 </FormGroup>
 
                 {/* Segmento */}
                 <FormGroup>
-                  <Label>Segmento da empresa</Label>
+                  <Label htmlFor={companySegmentId}>
+                    <span>
+                      Segmento da empresa <span aria-hidden="true">*</span>
+                    </span>
+                  </Label>
 
                   <Select
                     value={formData.companySegment}
@@ -436,41 +695,57 @@ const DemoRequestSection = ({
                       updateField("companySegment", value ?? "")
                     }
                   >
-                    <SelectTrigger className="w-full bg-background">
+                    <SelectTrigger
+                      id={companySegmentId}
+                      aria-required={true}
+                      aria-invalid={Boolean(fieldErrors.companySegment)}
+                      aria-describedby={
+                        fieldErrors.companySegment
+                          ? companySegmentErrorId
+                          : undefined
+                      }
+                      className="w-full bg-background"
+                    >
                       <SelectValue placeholder="Selecione uma opção" />
                     </SelectTrigger>
 
                     <SelectContent>
-                      <SelectItem value="Indústria de alimentos ou bebidas">
-                        Indústria de alimentos ou bebidas
+                      <SelectItem value="Frigorífico">
+                        Frigorífico
                       </SelectItem>
 
-                      <SelectItem value="Saúde e laboratórios">
-                        Saúde e laboratórios
+                      <SelectItem value="Indústria de alimentos">
+                        Indústria de alimentos
                       </SelectItem>
 
-                      <SelectItem value="Indústria automotiva">
-                        Indústria automotiva
+                      <SelectItem value="Distribuidora">
+                        Distribuidora
                       </SelectItem>
 
-                      <SelectItem value="Energia, gás e óleo">
-                        Energia, gás e óleo
-                      </SelectItem>
-
-                      <SelectItem value="Indústria química ou cosmética">
-                        Indústria química ou cosmética
-                      </SelectItem>
-
-                      <SelectItem value="Manufatura">
-                        Manufatura
+                      <SelectItem value="Outro">
+                        Outro
                       </SelectItem>
                     </SelectContent>
                   </Select>
+
+                  {fieldErrors.companySegment && (
+                    <p
+                      id={companySegmentErrorId}
+                      className="text-sm text-destructive"
+                    >
+                      {fieldErrors.companySegment}
+                    </p>
+                  )}
                 </FormGroup>
 
                 {/* Colaboradores */}
                 <FormGroup>
-                  <Label>Número de colaboradores da empresa</Label>
+                  <Label htmlFor={employeeRangeId}>
+                    <span>
+                      Número de colaboradores da empresa{" "}
+                      <span aria-hidden="true">*</span>
+                    </span>
+                  </Label>
 
                   <Select
                     value={formData.employeeRange}
@@ -478,7 +753,17 @@ const DemoRequestSection = ({
                       updateField("employeeRange", value ?? "")
                     }
                   >
-                    <SelectTrigger className="w-full bg-background">
+                    <SelectTrigger
+                      id={employeeRangeId}
+                      aria-required={true}
+                      aria-invalid={Boolean(fieldErrors.employeeRange)}
+                      aria-describedby={
+                        fieldErrors.employeeRange
+                          ? employeeRangeErrorId
+                          : undefined
+                      }
+                      className="w-full bg-background"
+                    >
                       <SelectValue placeholder="Selecione uma opção" />
                     </SelectTrigger>
 
@@ -508,6 +793,15 @@ const DemoRequestSection = ({
                       </SelectItem>
                     </SelectContent>
                   </Select>
+
+                  {fieldErrors.employeeRange && (
+                    <p
+                      id={employeeRangeErrorId}
+                      className="text-sm text-destructive"
+                    >
+                      {fieldErrors.employeeRange}
+                    </p>
+                  )}
                 </FormGroup>
 
                 {/* Mensagem */}
@@ -530,7 +824,7 @@ const DemoRequestSection = ({
 
                 {/* Erro */}
                 {error && (
-                  <p className="text-sm text-destructive">
+                  <p role="alert" className="text-sm text-destructive">
                     {error}
                   </p>
                 )}
