@@ -31,32 +31,32 @@ const defaultProps: OperationalBenefitsProps = {
   heading: "Do olho ao dado",
 
   description:
-    "A Tipificação de Animais com IA transforma a avaliação da carcaça em informação para uma operação mais precisa.",
+    "A Tipificação de carcaças com IA reúne análise, sugestão e validação do operador em informações integradas ao Frigosoft.",
 
   features: [
     {
       icon: <ScanEye className="size-5" strokeWidth={1.5} />,
-      title: "Precisão na avaliação",
+      title: "Análise assistida por IA",
       description:
-        "A IA aplica os mesmos critérios em cada carcaça, trazendo mais objetividade para a avaliação.",
+        "A IA analisa cobertura de gordura e conformação para apresentar uma sugestão de classificação.",
     },
     {
       icon: <RefreshCw className="size-5" strokeWidth={1.5} />,
-      title: "Consistência na classificação",
+      title: "Validação do operador",
       description:
-        "Mais uniformidade entre operadores e turnos, com correções que ajudam a aprimorar o modelo.",
+        "O operador pode validar ou ajustar a sugestão da IA, mantendo a decisão final sobre a classificação.",
     },
     {
       icon: <BadgeDollarSign className="size-5" strokeWidth={1.5} />,
-      title: "Segurança na precificação",
+      title: "Registro da classificação",
       description:
-        "Mais informação sobre a carcaça para apoiar uma precificação mais criteriosa da matéria-prima.",
+        "A sugestão da IA e a classificação final do operador ficam registradas no fluxo do Frigosoft.",
     },
     {
       icon: <History className="size-5" strokeWidth={1.5} />,
-      title: "Histórico para análise",
+      title: "Histórico das classificações",
       description:
-        "Dados registrados por lote, período e produtor para apoiar compras, comparações e decisões da operação.",
+        "As informações registradas ficam disponíveis para consulta e comparação no fluxo operacional.",
     },
   ],
 
@@ -80,7 +80,7 @@ const OperationalBenefits = (props: Props) => {
   return (
     <section
       className={cn(
-        "bg-muted py-20 dark:bg-zinc-900 lg:py-24",
+        "bg-muted py-20 dark:bg-surface-subtle lg:py-24",
         className
       )}
     >
@@ -89,7 +89,7 @@ const OperationalBenefits = (props: Props) => {
         <div className="mx-auto mb-14 flex max-w-3xl flex-col items-center text-center">
           <div className="flex flex-col items-center gap-6">
             <GeistBadge variant="turbo" contrast="low">
-              Inteligência para decidir melhor
+              IA no apoio à decisão
             </GeistBadge>
 
             <h2 className="text-pretty text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
@@ -98,7 +98,7 @@ const OperationalBenefits = (props: Props) => {
           </div>
 
           {description && (
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground dark:text-zinc-300">
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground dark:text-surface-muted-foreground">
               {description}
             </p>
           )}
@@ -120,16 +120,16 @@ const OperationalBenefits = (props: Props) => {
                 bg-card
                 p-8
                 shadow-sm
-                transition-all
+                transition-[transform,translate,box-shadow,background-color]
                 duration-300
 
-                hover:-translate-y-2
+                motion-safe:hover:-translate-y-2
                 hover:shadow-xl
 
-                dark:border-white/10
-                dark:bg-zinc-800
-                dark:text-white
-                dark:hover:bg-zinc-700
+                dark:border-border
+                dark:bg-surface-raised
+                dark:text-surface-foreground
+                dark:hover:bg-surface-raised-hover
               "
             >
               {/* Ícone */}
@@ -143,14 +143,14 @@ const OperationalBenefits = (props: Props) => {
                   rounded-xl
                   bg-accent
                   text-foreground
-                  transition-all
+                  transition-[transform,scale,background-color,color]
                   duration-300
 
-                  group-hover:scale-110
+                  motion-safe:group-hover:scale-110
 
-                  dark:bg-white/10
-                  dark:text-white
-                  dark:group-hover:bg-white/15
+                  dark:bg-surface-overlay
+                  dark:text-surface-foreground
+                  dark:group-hover:bg-surface-overlay-hover
                 "
               >
                 {feature.icon}
@@ -162,7 +162,7 @@ const OperationalBenefits = (props: Props) => {
               </h3>
 
               {/* Descrição */}
-              <p className="leading-relaxed text-muted-foreground dark:text-zinc-300">
+              <p className="leading-relaxed text-muted-foreground dark:text-surface-muted-foreground">
                 {feature.description}
               </p>
             </div>
@@ -178,9 +178,9 @@ const OperationalBenefits = (props: Props) => {
                 Tudo conectado à operação do frigorífico
               </h3>
 
-              <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground dark:text-zinc-300 lg:text-lg">
-                A tipificação gera dados que acompanham a carcaça e apoiam
-                diferentes etapas da operação.
+              <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground dark:text-surface-muted-foreground lg:text-lg">
+                As informações da tipificação são integradas ao Frigosoft
+                e ficam disponíveis no fluxo operacional.
               </p>
             </div>
 

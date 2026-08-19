@@ -35,19 +35,19 @@ type ClassificationWorkflowProps = FeatureIconListProps;
 type Props = Partial<ClassificationWorkflowProps>;
 
 const defaultProps: ClassificationWorkflowProps = {
-  heading: "Faça a classificação da carcaça em segundos",
+  heading: "Da imagem à classificação com apoio da IA",
   features: [
     {
       icon: <Smartphone className="size-5" />,
       title: "Fotografe",
       description:
-        "Com o smartphone, o operador registra a carcaça diretamente na linha de abate, com flexibilidade e sem depender de equipamento fixo.",
+        "Com o smartphone, o operador registra a imagem da carcaça diretamente na linha de abate para iniciar a análise.",
     },
     {
       icon: <ScanLine className="size-5" />,
       title: "Analise",
       description:
-        "A IA avalia cobertura de gordura e conformação muscular para sugerir a classificação em segundos, trazendo mais padronização ao processo.",
+        "A IA analisa a cobertura de gordura e a conformação muscular para apresentar uma sugestão de classificação ao operador.",
     },
     {
       icon: <Check className="size-5" />,
