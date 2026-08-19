@@ -1,29 +1,28 @@
+import Image from "next/image";
+
 import { GeistBadge } from "@/components/ui/geist-badge";
 import { Button } from "@/components/ui/button";
 
 import { cn } from "@/lib/utils";
 
-interface Image {
+interface FeatureImage {
   src: string;
   alt: string;
-  srcDark?: string;
 }
 
 interface ButtonProps {
   text: string;
   url: string;
-  icon?: React.ReactNode;
 }
 
 interface Buttons {
   primary?: ButtonProps;
-  secondary?: ButtonProps;
 }
 
 interface FeatureSingleFocusProps {
   heading: string;
   description: string;
-  image: Image;
+  image: FeatureImage;
   buttons?: Buttons;
   className?: string;
 }
@@ -59,9 +58,12 @@ const ClassificationConsistency = (props: Props) => {
           
           {/* Imagem */}
           <div className="order-2 flex w-full items-center justify-center lg:order-1 lg:justify-start">
-            <img
+            <Image
               src={image.src}
               alt={image.alt}
+              width={1288}
+              height={2615}
+              sizes="(max-width: 639px) 207px, (max-width: 1023px) 237px, 320px"
               className="h-auto max-h-[420px] w-auto max-w-full object-contain sm:max-h-[480px] lg:max-h-[650px]"
             />
           </div>

@@ -14,6 +14,8 @@ interface SiteHeaderProps {
     alt: string;
     title: string;
     className?: string;
+    width?: number;
+    height?: number;
   };
 }
 
@@ -25,6 +27,8 @@ const SiteHeader = ({
     src: "/images/logo/atak-sistemas-logo.svg",
     alt: "Atak Sistemas",
     title: "Atak Sistemas",
+    width: 1163.5,
+    height: 146.9,
   },
   className,
 }: SiteHeaderProps) => {
@@ -75,9 +79,12 @@ const SiteHeader = ({
             aria-label={logo.title}
             className="flex h-10 items-center"
           >
+            {/* eslint-disable-next-line @next/next/no-img-element -- logo.src is configurable and may point to an external URL */}
             <img
               src={logo.src}
               alt={logo.alt}
+              width={logo.width}
+              height={logo.height}
               className={cn(
                 "block h-5 w-auto dark:invert",
                 logo.className

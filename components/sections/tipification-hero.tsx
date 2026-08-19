@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 import { GeistBadge } from "@/components/ui/geist-badge";
@@ -63,10 +64,13 @@ const TipificationHero = ({
           </div>
 
           <div className="flex w-full items-center justify-center lg:justify-end">
-            <img
+            <Image
               src={imageSrc}
               alt={imageAlt}
-              fetchPriority="high"
+              width={1288}
+              height={2615}
+              sizes="(max-width: 639px) 207px, (max-width: 1023px) 237px, 320px"
+              preload
               decoding="async"
               className="h-auto max-h-[420px] w-auto max-w-full object-contain sm:max-h-[480px] lg:max-h-[650px]"
             />
