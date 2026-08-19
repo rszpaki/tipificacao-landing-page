@@ -12,18 +12,15 @@ interface FeatureIconListItem {
   title: string;
   description: string;
   icon?: React.ReactNode;
-  href?: string;
 }
 
 interface ButtonProps {
   text: string;
   url: string;
-  icon?: React.ReactNode;
 }
 
 interface Buttons {
   primary?: ButtonProps;
-  secondary?: ButtonProps;
 }
 
 interface FeatureIconListProps {
@@ -61,7 +58,7 @@ const defaultProps: ClassificationWorkflowProps = {
   ],
   buttons: {
     primary: {
-      text: "Veja como funciona",
+      text: "Agendar uma demonstração",
       url: "#demonstracao",
     },
   },
@@ -78,7 +75,7 @@ const ClassificationWorkflow = (props: Props) => {
   const items = (features ?? []).slice(0, MAX_FEATURES);
 
   return (
-    <section className={cn("bg-muted/40 py-32", className)}>
+    <section className={cn("bg-muted/40 py-20 md:py-24 lg:py-32", className)}>
       <div className="container mx-auto">
         {/* Cabeçalho */}
         {heading && (
@@ -87,7 +84,7 @@ const ClassificationWorkflow = (props: Props) => {
               IA aplicada à tipificação
             </GeistBadge>
 
-            <h2 className="text-4xl font-medium tracking-tight text-pretty lg:text-5xl">
+            <h2 className="text-balance text-3xl font-medium tracking-tight md:text-4xl lg:text-pretty lg:text-5xl">
               {heading}
             </h2>
           </div>
@@ -109,16 +106,16 @@ const ClassificationWorkflow = (props: Props) => {
                 bg-card
                 p-8
                 shadow-sm
-                transition-all
+                transition-[transform,translate,box-shadow,background-color]
                 duration-300
 
-                hover:-translate-y-2
+                motion-safe:hover:-translate-y-2
                 hover:shadow-xl
 
-                dark:border-white/10
-                dark:bg-zinc-900
-                dark:text-white
-                dark:hover:bg-zinc-800
+                dark:border-border
+                dark:bg-surface-subtle
+                dark:text-surface-foreground
+                dark:hover:bg-surface-raised
               "
             >
               {/* Ícone */}
@@ -131,14 +128,14 @@ const ClassificationWorkflow = (props: Props) => {
                   justify-center
                   rounded-xl
                   bg-accent
-                  transition-all
+                  transition-[transform,scale,background-color,color]
                   duration-300
 
-                  group-hover:scale-110
+                  motion-safe:group-hover:scale-110
 
-                  dark:bg-white/10
-                  dark:text-white
-                  dark:group-hover:bg-white/15
+                  dark:bg-surface-overlay
+                  dark:text-surface-foreground
+                  dark:group-hover:bg-surface-overlay-hover
                 "
               >
                 {feature.icon}
@@ -150,7 +147,7 @@ const ClassificationWorkflow = (props: Props) => {
               </h3>
 
               {/* Descrição */}
-              <p className="leading-relaxed text-muted-foreground dark:text-zinc-300">
+              <p className="leading-relaxed text-muted-foreground dark:text-surface-muted-foreground">
                 {feature.description}
               </p>
             </div>

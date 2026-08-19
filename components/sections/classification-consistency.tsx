@@ -75,7 +75,7 @@ const ClassificationConsistency = (props: Props) => {
                 IA para avaliar melhor
               </GeistBadge>
 
-              <h2 className="text-4xl font-medium tracking-tight text-balance lg:text-5xl">
+              <h2 className="text-balance text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
                 {heading}
               </h2>
             </div>

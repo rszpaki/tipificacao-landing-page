@@ -8,14 +8,18 @@ import { OperationalBenefits } from "@/components/sections/operational-benefits"
 
 export default function LandingPage() {
   return (
-    <main className="flex min-h-screen w-full flex-col overflow-x-hidden">
+    <>
       <SiteHeader />
+
+      <main className="flex min-h-screen w-full flex-col overflow-x-hidden">
         <TipificationHero />
         <ClassificationWorkflow />
         <ClassificationConsistency />
         <OperationalBenefits />
         <DemoRequestSection />
+      </main>
+
       <SiteFooter />
-    </main>
+    </>
   );
 }

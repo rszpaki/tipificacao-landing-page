@@ -30,9 +30,9 @@ const SiteFooter = (props: Props) => {
   };
 
   return (
-    <section className={cn("border-t border-border/50 py-8", className)}>
+    <footer className={cn("border-t border-border/50 py-8", className)}>
       <div className="container mx-auto">
-        <footer className="flex flex-col items-center justify-between gap-4 md:flex-row">
+        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           {/* Logo */}
           {logo && (
             <img
@@ -47,9 +47,9 @@ const SiteFooter = (props: Props) => {
           <p className="text-center text-xs font-medium text-muted-foreground md:text-right">
             {copyright}
           </p>
-        </footer>
+        </div>
       </div>
-    </section>
+    </footer>
   );
 };
 

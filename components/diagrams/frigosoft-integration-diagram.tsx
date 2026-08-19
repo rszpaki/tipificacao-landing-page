@@ -45,9 +45,9 @@ const Circle = forwardRef<
           "text-foreground",
 
           // Dark mode
-          "dark:border-zinc-700",
-          "dark:bg-zinc-800",
-          "dark:text-zinc-100",
+          "dark:border-surface-border",
+          "dark:bg-surface-raised",
+          "dark:text-integration-foreground",
 
           // Espaçamento
           "p-3",
@@ -130,6 +130,12 @@ export function FrigosoftIntegrationDiagram({
         className
       )}
     >
+      <p className="sr-only">
+        Fluxo de integração: o smartphone envia os dados de tipificação ao
+        Frigosoft, que integra as informações da carcaça, temperatura, estoque
+        e logística.
+      </p>
+
       {/*
         Estrutura:
         
@@ -168,6 +174,7 @@ export function FrigosoftIntegrationDiagram({
             <Smartphone
               className="size-6"
               strokeWidth={1.5}
+              aria-hidden="true"
             />
           </Circle>
         </div>
@@ -178,14 +185,15 @@ export function FrigosoftIntegrationDiagram({
             ref={frigosoftRef}
             className="
               size-20
-              dark:border-zinc-700
-              dark:bg-zinc-800
-              dark:text-white
+              dark:border-surface-border
+              dark:bg-surface-raised
+              dark:text-surface-foreground
             "
           >
             <MonitorCog
               className="size-8"
               strokeWidth={1.5}
+              aria-hidden="true"
             />
           </Circle>
         </div>
@@ -210,6 +218,7 @@ export function FrigosoftIntegrationDiagram({
             <Beef
               className="size-6"
               strokeWidth={1.5}
+              aria-hidden="true"
             />
           </Circle>
 
@@ -218,6 +227,7 @@ export function FrigosoftIntegrationDiagram({
             <ThermometerSnowflake
               className="size-6"
               strokeWidth={1.5}
+              aria-hidden="true"
             />
           </Circle>
 
@@ -226,6 +236,7 @@ export function FrigosoftIntegrationDiagram({
             <PackageOpen
               className="size-6"
               strokeWidth={1.5}
+              aria-hidden="true"
             />
           </Circle>
 
@@ -234,6 +245,7 @@ export function FrigosoftIntegrationDiagram({
             <Truck
               className="size-6"
               strokeWidth={1.5}
+              aria-hidden="true"
             />
           </Circle>
         </div>

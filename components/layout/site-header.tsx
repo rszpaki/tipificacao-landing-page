@@ -37,15 +37,31 @@ const SiteHeader = ({
   );
 
   const isDark = mounted && resolvedTheme === "dark";
+  const themeToggleLabel = isDark
+    ? "Ativar tema claro"
+    : "Ativar tema escuro";
 
   const toggleTheme = () => {
     if (!mounted) return;
 
+    const transitionGuard = document.createElement("style");
+
+    transitionGuard.textContent =
+      "*,*::before,*::after{transition-property:transform,translate,scale,rotate,opacity,filter!important}";
+
+    document.head.appendChild(transitionGuard);
+
     setTheme(isDark ? "light" : "dark");
+
+    void document.body.offsetHeight;
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => transitionGuard.remove());
+    });
   };
 
   return (
-    <section
+    <header
       className={cn(
         "border-b border-muted py-6",
         className
@@ -55,6 +71,7 @@ const SiteHeader = ({
         <nav className="flex min-h-10 items-center justify-between">
           {/* Logo */}
           <a
+            href={logo.url}
             aria-label={logo.title}
             className="flex h-10 items-center"
           >
@@ -73,8 +90,9 @@ const SiteHeader = ({
             type="button"
             onClick={toggleTheme}
             disabled={!mounted}
-            aria-label="Alternar tema"
-            title="Alternar tema"
+            aria-label={themeToggleLabel}
+            aria-pressed={isDark}
+            title={themeToggleLabel}
             className="
               relative
               h-10
@@ -92,7 +110,8 @@ const SiteHeader = ({
             <span
               className={cn(
                 "absolute left-[3px] top-[3px] size-8 rounded-full bg-background shadow-sm",
-                isDark && "translate-x-9"
+                "transition-transform duration-300 ease-out",
+                isDark && "translate-x-[37px]"
               )}
             />
 
@@ -100,6 +119,7 @@ const SiteHeader = ({
             <span
               className={cn(
                 "absolute left-[3px] top-[3px] z-10 grid size-8 place-items-center",
+                "transition-colors duration-300",
                 mounted
                   ? isDark
                     ? "text-muted-foreground"
@@ -109,6 +129,7 @@ const SiteHeader = ({
             >
               <Sun
                 className="size-4"
+                strokeWidth={2}
                 aria-hidden="true"
               />
             </span>
@@ -116,7 +137,8 @@ const SiteHeader = ({
             {/* Dark */}
             <span
               className={cn(
-                "absolute right-[3px] top-[3px] z-10 grid size-8 place-items-center",
+                "absolute right-[2px] top-[3px] z-10 grid size-8 place-items-center",
+                "transition-colors duration-300",
                 mounted
                   ? isDark
                     ? "text-foreground"
@@ -126,13 +148,14 @@ const SiteHeader = ({
             >
               <MoonStar
                 className="size-4"
+                strokeWidth={2}
                 aria-hidden="true"
               />
             </span>
           </button>
         </nav>
       </div>
-    </section>
+    </header>
   );
 };
 
