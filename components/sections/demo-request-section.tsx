@@ -492,7 +492,7 @@ const DemoRequestSection = ({
                 {badge}
               </GeistBadge>
 
-              <h2 className="w-full text-balance text-center text-4xl font-medium leading-[1.08] tracking-tight lg:max-w-[32rem] lg:text-left lg:text-5xl">
+              <h2 className="w-full text-balance text-center text-[38px] font-medium leading-[1.08] tracking-tight lg:max-w-[30rem] lg:text-left lg:text-[48px]">
                 {heading}
               </h2>
             </div>

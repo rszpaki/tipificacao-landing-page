@@ -55,7 +55,6 @@ const ClassificationConsistency = (props: Props) => {
     <section className={cn("overflow-hidden py-20 lg:py-24", className)}>
       <div className="container mx-auto">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-24 xl:gap-32">
-          
           {/* Imagem */}
           <div className="order-2 flex w-full items-center justify-center lg:order-1 lg:justify-start">
             <Image
@@ -70,21 +69,20 @@ const ClassificationConsistency = (props: Props) => {
 
           {/* Conteúdo */}
           <div className="order-1 flex min-w-0 flex-col items-center text-center lg:order-2 lg:items-start lg:text-left">
-            
             {/* Badge + Título */}
             <div className="mb-6 flex flex-col items-center gap-6 lg:items-start">
               <GeistBadge variant="turbo" contrast="low">
                 IA aplicada à avaliação
               </GeistBadge>
 
-              <h2 className="text-balance text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
+              <h2 className="text-balance text-[38px] font-medium leading-[1.08] tracking-tight lg:text-[48px]">
                 {heading}
               </h2>
             </div>
 
             {/* Descrição */}
             {description && (
-              <p className="mb-8 max-w-xl text-muted-foreground lg:text-lg">
+              <p className="mb-8 max-w-xl leading-relaxed text-muted-foreground lg:text-lg">
                 {description}
               </p>
             )}
@@ -103,7 +101,6 @@ const ClassificationConsistency = (props: Props) => {
               </div>
             )}
           </div>
-
         </div>
       </div>
     </section>
