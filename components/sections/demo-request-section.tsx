@@ -165,10 +165,10 @@ const getEmbedSubmissionOutcome = (
 
 const DemoRequestSection = ({
   badge = "Agende uma demonstração",
-  heading = "Veja a Tipificação de carcaças com IA na prática",
+  heading = "Veja a tipificação de carcaças com IA na prática",
   benefits = [
     "Converse com especialistas sobre a aplicação da solução no seu cenário.",
-    "Veja como a Tipificação de carcaças com IA pode se encaixar na rotina do seu frigorífico.",
+    "Veja como a tipificação de carcaças com IA pode se encaixar na rotina do seu frigorífico.",
     "Entenda como os dados da tipificação se conectam ao Frigosoft e ao fluxo operacional.",
     "Entenda os próximos passos para avaliar o módulo na sua operação.",
     "Veja na prática como a IA analisa a carcaça e apoia a classificação durante a operação.",
