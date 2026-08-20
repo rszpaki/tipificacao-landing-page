@@ -167,7 +167,7 @@ const getEmbedSubmissionOutcome = (
 
 const DemoRequestSection = ({
   badge = "Agende uma demonstração",
-  heading = "Veja a Tipificação de carcaças com IA na prática",
+  heading = "Veja a tipificação de carcaças com IA na prática",
   benefits = [
     "Conheça o fluxo de análise, validação do operador e integração das informações ao Frigosoft.",
   ],
