@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import React, { useEffect, useId, useRef, useState } from "react";
 
@@ -31,6 +31,8 @@ const FORM_EMBED_URL =
   `https://njnudpfwtjapekqtahpu.supabase.co/functions/v1/form-embed?type=script&form_name=Edge%20Forms&fields=name,email,phone,company,message&success_message=${encodeURIComponent(
     EMBED_SUCCESS_MESSAGE
   )}`;
+
+const FORM_CONTROL_TEXT_CLASS = "text-[16px]";
 
 const InfiniteMovingCarousel = ({ images }: { images: string[] }) => {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -167,11 +169,7 @@ const DemoRequestSection = ({
   badge = "Agende uma demonstração",
   heading = "Veja a Tipificação de carcaças com IA na prática",
   benefits = [
-    "Converse com especialistas sobre a aplicação da solução no seu cenário.",
-    "Veja como a Tipificação de carcaças com IA pode se encaixar na rotina do seu frigorífico.",
-    "Entenda como os dados da tipificação se conectam ao Frigosoft e ao fluxo operacional.",
-    "Entenda os próximos passos para avaliar o módulo na sua operação.",
-    "Veja na prática como a IA analisa a carcaça e apoia a classificação durante a operação.",
+    "Veja como a Tipificação de carcaças com IA funciona na prática e entenda como o módulo pode se integrar à operação do seu frigorífico.",
   ],
   companies = [],
   className,
@@ -210,6 +208,8 @@ const DemoRequestSection = ({
     employeeRange: "",
     message: "",
   });
+
+  const supportingText = benefits.filter(Boolean).join(" ");
 
   useEffect(() => {
     const container = embedContainerRef.current;
@@ -497,26 +497,12 @@ const DemoRequestSection = ({
               </h2>
             </div>
 
-            {/* Benefícios */}
-            <ul className="mt-10 flex w-full flex-col space-y-5">
-              {benefits.map((benefit, index) => (
-                <li
-                  key={`bookademo1-benefit-${index}`}
-                  className="flex w-full items-start gap-4"
-                >
-                  <span
-                    className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-success/10 text-success"
-                    aria-hidden="true"
-                  >
-                    <Check className="size-3.5" strokeWidth={2.25} />
-                  </span>
-
-                  <p className="min-w-0 flex-1 text-left font-medium leading-relaxed">
-                    {benefit}
-                  </p>
-                </li>
-              ))}
-            </ul>
+            {/* Texto de apoio */}
+            {supportingText && (
+              <p className="mx-auto mt-7 max-w-md text-center text-lg leading-relaxed text-muted-foreground lg:mx-0 lg:text-left">
+                {supportingText}
+              </p>
+            )}
 
             {companies.length > 0 && (
               <div className="mt-12 hidden w-full overflow-hidden lg:block">
@@ -587,7 +573,10 @@ const DemoRequestSection = ({
                     onChange={(event) =>
                       updateField("name", event.target.value)
                     }
-                    className="bg-background"
+                    className={cn(
+                      "bg-background",
+                      FORM_CONTROL_TEXT_CLASS
+                    )}
                   />
 
                   {fieldErrors.name && (
@@ -624,7 +613,10 @@ const DemoRequestSection = ({
                       onChange={(event) =>
                         updateField("email", event.target.value)
                       }
-                      className="bg-background"
+                      className={cn(
+                        "bg-background",
+                        FORM_CONTROL_TEXT_CLASS
+                      )}
                     />
 
                     {fieldErrors.email && (
@@ -659,7 +651,10 @@ const DemoRequestSection = ({
                       onChange={(event) =>
                         updateField("phone", event.target.value)
                       }
-                      className="bg-background"
+                      className={cn(
+                        "bg-background",
+                        FORM_CONTROL_TEXT_CLASS
+                      )}
                     />
 
                     {fieldErrors.phone && (
@@ -696,7 +691,10 @@ const DemoRequestSection = ({
                     onChange={(event) =>
                       updateField("company", event.target.value)
                     }
-                    className="bg-background"
+                    className={cn(
+                      "bg-background",
+                      FORM_CONTROL_TEXT_CLASS
+                    )}
                   />
 
                   {fieldErrors.company && (
@@ -735,25 +733,40 @@ const DemoRequestSection = ({
                           ? companySegmentErrorId
                           : undefined
                       }
-                      className="w-full bg-background"
+                      className={cn(
+                        "w-full bg-background",
+                        FORM_CONTROL_TEXT_CLASS
+                      )}
                     >
                       <SelectValue placeholder="Selecione uma opção" />
                     </SelectTrigger>
 
                     <SelectContent>
-                      <SelectItem value="Frigorífico">
+                      <SelectItem
+                        value="Frigorífico"
+                        className={FORM_CONTROL_TEXT_CLASS}
+                      >
                         Frigorífico
                       </SelectItem>
 
-                      <SelectItem value="Indústria de alimentos">
+                      <SelectItem
+                        value="Indústria de alimentos"
+                        className={FORM_CONTROL_TEXT_CLASS}
+                      >
                         Indústria de alimentos
                       </SelectItem>
 
-                      <SelectItem value="Distribuidora">
+                      <SelectItem
+                        value="Distribuidora"
+                        className={FORM_CONTROL_TEXT_CLASS}
+                      >
                         Distribuidora
                       </SelectItem>
 
-                      <SelectItem value="Outro">
+                      <SelectItem
+                        value="Outro"
+                        className={FORM_CONTROL_TEXT_CLASS}
+                      >
                         Outro
                       </SelectItem>
                     </SelectContent>
@@ -795,33 +808,54 @@ const DemoRequestSection = ({
                           ? employeeRangeErrorId
                           : undefined
                       }
-                      className="w-full bg-background"
+                      className={cn(
+                        "w-full bg-background",
+                        FORM_CONTROL_TEXT_CLASS
+                      )}
                     >
                       <SelectValue placeholder="Selecione uma opção" />
                     </SelectTrigger>
 
                     <SelectContent>
-                      <SelectItem value="Empresa em fase de implantação">
+                      <SelectItem
+                        value="Empresa em fase de implantação"
+                        className={FORM_CONTROL_TEXT_CLASS}
+                      >
                         Empresa em fase de implantação
                       </SelectItem>
 
-                      <SelectItem value="1 a 50 funcionários">
+                      <SelectItem
+                        value="1 a 50 funcionários"
+                        className={FORM_CONTROL_TEXT_CLASS}
+                      >
                         1 a 50 funcionários
                       </SelectItem>
 
-                      <SelectItem value="51 a 100 funcionários">
+                      <SelectItem
+                        value="51 a 100 funcionários"
+                        className={FORM_CONTROL_TEXT_CLASS}
+                      >
                         51 a 100 funcionários
                       </SelectItem>
 
-                      <SelectItem value="101 a 200 funcionários">
+                      <SelectItem
+                        value="101 a 200 funcionários"
+                        className={FORM_CONTROL_TEXT_CLASS}
+                      >
                         101 a 200 funcionários
                       </SelectItem>
 
-                      <SelectItem value="201 a 500 funcionários">
+                      <SelectItem
+                        value="201 a 500 funcionários"
+                        className={FORM_CONTROL_TEXT_CLASS}
+                      >
                         201 a 500 funcionários
                       </SelectItem>
 
-                      <SelectItem value="Mais de 500 funcionários">
+                      <SelectItem
+                        value="Mais de 500 funcionários"
+                        className={FORM_CONTROL_TEXT_CLASS}
+                      >
                         Mais de 500 funcionários
                       </SelectItem>
                     </SelectContent>
@@ -851,7 +885,10 @@ const DemoRequestSection = ({
                     onChange={(event) =>
                       updateField("message", event.target.value)
                     }
-                    className="min-h-28 bg-background"
+                    className={cn(
+                      "min-h-28 bg-background",
+                      FORM_CONTROL_TEXT_CLASS
+                    )}
                   />
                 </FormGroup>
 
