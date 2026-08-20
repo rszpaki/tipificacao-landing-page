@@ -31,7 +31,7 @@ const defaultProps: OperationalBenefitsProps = {
   heading: "Do olho ao dado",
 
   description:
-    "A Tipificação de carcaças com IA reúne análise, sugestão e validação do operador em informações integradas ao Frigosoft.",
+    "A tipificação de carcaças com IA reúne análise, sugestão e validação do operador em informações integradas ao Frigosoft.",
 
   features: [
     {
