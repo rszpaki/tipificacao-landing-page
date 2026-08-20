@@ -38,19 +38,19 @@ const InfiniteMovingCarousel = ({ images }: { images: string[] }) => {
   const [width, setWidth] = useState(0);
 
   useEffect(() => {
-    if (!carouselRef.current) return;
+    const carousel = carouselRef.current;
 
-    setWidth(carouselRef.current.clientWidth);
+    if (!carousel) return;
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setWidth(entry.target.clientWidth);
-        }
-      });
+    const observer = new ResizeObserver((entries) => {
+      const entry = entries[0];
+
+      if (!entry) return;
+
+      setWidth(entry.contentRect.width);
     });
 
-    observer.observe(carouselRef.current);
+    observer.observe(carousel);
 
     return () => {
       observer.disconnect();
@@ -872,9 +872,7 @@ const DemoRequestSection = ({
                   disabled={isSubmitting}
                   className="h-11 w-full cursor-pointer disabled:cursor-not-allowed"
                 >
-                  {isSubmitting
-                    ? "Enviando..."
-                    : "Agendar demonstração"}
+                  {isSubmitting ? "Enviando..." : "Agendar demonstração"}
 
                   {!isSubmitting && (
                     <ArrowRight className="size-4" />
