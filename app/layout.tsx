@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { GoogleTagManager } from "@next/third-parties/google";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
@@ -81,6 +82,8 @@ export default function RootLayout({
         geist.variable
       )}
     >
+      <GoogleTagManager gtmId="GTM-5BSF4FD" />
+
       <body>
         <ThemeProvider
           attribute="class"
