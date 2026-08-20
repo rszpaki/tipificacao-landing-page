@@ -479,9 +479,8 @@ const DemoRequestSection = ({
 
   return (
     <section
-      id="demonstracao"
-      className={cn("scroll-mt-20 py-20 lg:py-24", className)}
-    >
+  className={cn("py-20 lg:py-24", className)}
+>
       <div className="container mx-auto">
         <div className="grid grid-cols-1 items-start gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
           {/* Conteúdo */}
@@ -512,13 +511,16 @@ const DemoRequestSection = ({
           </div>
 
           {/* Formulário */}
-          <Card className="w-full max-w-xl place-self-center rounded-2xl border-border/80 bg-card p-5 shadow-md sm:p-6 lg:max-w-none lg:place-self-start lg:p-8">
-            {success ? (
-              <div
-                role="status"
-                aria-live="polite"
-                className="flex min-h-[500px] flex-col items-center justify-center gap-4 text-center"
-              >
+          <Card
+  id="demonstracao"
+  className="scroll-mt-24 w-full max-w-xl place-self-center rounded-2xl border-border/80 bg-card p-5 shadow-md sm:p-6 lg:max-w-none lg:place-self-start lg:p-8"
+>
+  {success ? (
+    <div
+      role="status"
+      aria-live="polite"
+      className="flex min-h-[500px] flex-col items-center justify-center gap-4 text-center"
+    >
                 <div className="flex size-12 items-center justify-center rounded-full bg-success-muted text-success-foreground">
                   ✓
                 </div>
