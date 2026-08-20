@@ -25,7 +25,7 @@ const fontMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://tipificacao.atak.com.br"),
 
-  title: "Tipificação de Carcaças com IA para Frigoríficos | Atak",
+  title: "Tipificação de carcaças com IA | Atak",
 
   description:
     "Use inteligência artificial para apoiar a tipificação de carcaças, analisar cobertura de gordura e conformação e integrar os dados ao Frigosoft.",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     url: "https://tipificacao.atak.com.br",
     siteName: "Atak Sistemas",
-    title: "Tipificação de Carcaças com IA para Frigoríficos | Atak",
+    title: "Tipificação de carcaças com IA | Atak",
     description:
       "Use inteligência artificial para apoiar a tipificação de carcaças, analisar cobertura de gordura e conformação e integrar os dados ao Frigosoft.",
     images: [
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Tipificação de Carcaças com IA para Frigoríficos | Atak",
+    title: "Tipificação de carcaças com IA | Atak",
     description:
       "Use inteligência artificial para apoiar a tipificação de carcaças, analisar cobertura de gordura e conformação e integrar os dados ao Frigosoft.",
     images: ["/images/social/tipificacao-og.png"],
