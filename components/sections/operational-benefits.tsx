@@ -92,7 +92,7 @@ const OperationalBenefits = (props: Props) => {
               IA no apoio à decisão
             </GeistBadge>
 
-            <h2 className="text-pretty text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
+            <h2 className="text-balance text-[38px] font-medium leading-[1.08] tracking-tight lg:text-[48px]">
               {heading}
             </h2>
           </div>
@@ -174,7 +174,7 @@ const OperationalBenefits = (props: Props) => {
           <div className="mx-auto mt-14 grid w-full max-w-6xl items-center gap-6 lg:grid-cols-2">
             {/* Texto */}
             <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-              <h3 className="max-w-md text-pretty text-3xl font-medium tracking-tight lg:text-4xl">
+              <h3 className="max-w-md text-balance text-[34px] font-medium leading-[1.1] tracking-tight lg:text-[40px]">
                 Tudo conectado à operação do frigorífico
               </h3>
 

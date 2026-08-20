@@ -84,7 +84,7 @@ const ClassificationWorkflow = (props: Props) => {
               IA aplicada à tipificação
             </GeistBadge>
 
-            <h2 className="text-balance text-3xl font-medium tracking-tight md:text-4xl lg:text-pretty lg:text-5xl">
+            <h2 className="text-balance text-[38px] font-medium leading-[1.08] tracking-tight lg:text-[48px]">
               {heading}
             </h2>
           </div>
