@@ -32,7 +32,8 @@ const FORM_EMBED_URL =
     EMBED_SUCCESS_MESSAGE
   )}`;
 
-const FORM_CONTROL_TEXT_CLASS = "text-[16px]";
+const FORM_CONTROL_TEXT_CLASS =
+  "text-[16px] md:text-[16px]";
 
 const InfiniteMovingCarousel = ({ images }: { images: string[] }) => {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -106,7 +107,7 @@ const FormGroup = ({ children }: { children: React.ReactNode }) => {
 interface DemoRequestSectionProps {
   badge?: string;
   heading?: string;
-  benefits?: string[];
+  supportingText?: string;
   companies?: string[];
   className?: string;
 }
@@ -167,10 +168,9 @@ const getEmbedSubmissionOutcome = (
 
 const DemoRequestSection = ({
   badge = "Agende uma demonstração",
-  heading = "Veja a tipificação de carcaças com IA na prática",
-  benefits = [
+  heading = "Veja a Tipificação de carcaças com IA na prática",
+  supportingText =
     "Conheça o fluxo de análise, validação do operador e integração das informações ao Frigosoft.",
-  ],
   companies = [],
   className,
 }: DemoRequestSectionProps) => {
@@ -208,8 +208,6 @@ const DemoRequestSection = ({
     employeeRange: "",
     message: "",
   });
-
-  const supportingText = benefits.filter(Boolean).join(" ");
 
   useEffect(() => {
     const container = embedContainerRef.current;
