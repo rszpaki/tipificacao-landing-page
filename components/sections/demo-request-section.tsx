@@ -4,9 +4,9 @@ import { ArrowRight, Check } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import React, { useEffect, useId, useRef, useState } from "react";
 
-import { GeistBadge } from "@/components/ui/geist-badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { GeistBadge } from "@/components/ui/geist-badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -23,11 +23,14 @@ const EMBED_SUCCESS_MESSAGE =
   "Parabéns pela decisão! Entraremos em contato logo mais";
 
 const SUBMISSION_CONFIRMATION_TIMEOUT_MS = 30_000;
+
 const SUBMISSION_CONFIRMATION_ERROR =
   "Não foi possível confirmar o envio. Verifique sua conexão e tente novamente.";
 
 const FORM_EMBED_URL =
-  `https://njnudpfwtjapekqtahpu.supabase.co/functions/v1/form-embed?type=script&form_name=Edge%20Forms&fields=name,email,phone,company,message&success_message=${encodeURIComponent(EMBED_SUCCESS_MESSAGE)}`;
+  `https://njnudpfwtjapekqtahpu.supabase.co/functions/v1/form-embed?type=script&form_name=Edge%20Forms&fields=name,email,phone,company,message&success_message=${encodeURIComponent(
+    EMBED_SUCCESS_MESSAGE
+  )}`;
 
 const InfiniteMovingCarousel = ({ images }: { images: string[] }) => {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -117,6 +120,7 @@ interface FormData {
 }
 
 type ValidatedField = Exclude<keyof FormData, "message">;
+
 type FieldErrors = Partial<Record<ValidatedField, string>>;
 
 type EmbedSubmissionOutcome = "success" | "error" | null;
@@ -147,7 +151,9 @@ const getEmbedSubmissionOutcome = (
 
     if (event.form_name !== "Edge Forms") continue;
 
-    if (event.event === "edge_forms_error") return "error";
+    if (event.event === "edge_forms_error") {
+      return "error";
+    }
 
     if (event.event === "edge_forms") {
       return event.success === true ? "success" : "error";
@@ -159,7 +165,7 @@ const getEmbedSubmissionOutcome = (
 
 const DemoRequestSection = ({
   badge = "Agende uma demonstração",
-  heading = "Veja a Tipificação de carcaças com IA na prática",
+  heading = "Veja a Tipificação de Carcaças com IA na prática",
   benefits = [
     "Converse com especialistas sobre a aplicação da solução no seu cenário.",
     "Veja como a Tipificação de carcaças com IA pode se encaixar na rotina do seu frigorífico.",
@@ -173,9 +179,11 @@ const DemoRequestSection = ({
   const embedContainerRef = useRef<HTMLDivElement>(null);
   const embedFormRef = useRef<HTMLFormElement | null>(null);
   const successHeadingRef = useRef<HTMLHeadingElement>(null);
+
   const confirmationWatchdogRef = useRef<ReturnType<
     typeof setTimeout
   > | null>(null);
+
   const dataLayerStartIndexRef = useRef(0);
 
   const nameErrorId = useId();
@@ -337,10 +345,13 @@ const DemoRequestSection = ({
 
     const validationErrors: FieldErrors = {};
     const form = event.currentTarget;
+
     const nameInput = form.elements.namedItem("name") as HTMLInputElement;
     const emailInput = form.elements.namedItem("email") as HTMLInputElement;
     const phoneInput = form.elements.namedItem("phone") as HTMLInputElement;
-    const companyInput = form.elements.namedItem("company") as HTMLInputElement;
+    const companyInput = form.elements.namedItem(
+      "company"
+    ) as HTMLInputElement;
 
     if (!nameInput.validity.valid) {
       validationErrors.name = "Informe seu nome.";
@@ -361,7 +372,8 @@ const DemoRequestSection = ({
     }
 
     if (!formData.companySegment) {
-      validationErrors.companySegment = "Selecione o segmento da empresa.";
+      validationErrors.companySegment =
+        "Selecione o segmento da empresa.";
     }
 
     if (!formData.employeeRange) {
@@ -379,6 +391,7 @@ const DemoRequestSection = ({
       "companySegment",
       "employeeRange",
     ];
+
     const firstInvalidField = fieldOrder.find(
       (field) => validationErrors[field]
     );
@@ -467,35 +480,36 @@ const DemoRequestSection = ({
   return (
     <section
       id="demonstracao"
-      className={cn("scroll-mt-20 py-20 md:py-24 lg:py-32", className)}
+      className={cn("scroll-mt-20 py-20 lg:py-24", className)}
     >
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-16">
+        <div className="grid grid-cols-1 items-start gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
           {/* Conteúdo */}
           <div className="mx-auto flex w-full max-w-md flex-col lg:mx-0 lg:max-w-none">
             {/* Badge + título */}
-            <div className="flex w-full flex-col items-center gap-6 lg:items-start">
+            <div className="flex w-full flex-col items-center gap-7 lg:items-start">
               <GeistBadge variant="turbo" contrast="low">
                 {badge}
               </GeistBadge>
 
-              <h2 className="w-full text-center text-3xl font-medium tracking-tight lg:max-w-xl lg:text-left lg:text-5xl">
+              <h2 className="w-full text-balance text-center text-4xl font-medium leading-[1.08] tracking-tight lg:max-w-[32rem] lg:text-left lg:text-5xl">
                 {heading}
               </h2>
             </div>
 
             {/* Benefícios */}
-            <ul className="mt-8 flex w-full flex-col">
+            <ul className="mt-10 flex w-full flex-col space-y-5">
               {benefits.map((benefit, index) => (
                 <li
                   key={`bookademo1-benefit-${index}`}
-                  className="flex w-full items-start gap-3 border-b py-6 last:border-b-0"
+                  className="flex w-full items-start gap-4"
                 >
-                  <Check
-                    className="mt-0.5 size-5 shrink-0 text-success"
-                    strokeWidth={2}
+                  <span
+                    className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-success/10 text-success"
                     aria-hidden="true"
-                  />
+                  >
+                    <Check className="size-3.5" strokeWidth={2.25} />
+                  </span>
 
                   <p className="min-w-0 flex-1 text-left font-medium leading-relaxed">
                     {benefit}
@@ -512,7 +526,7 @@ const DemoRequestSection = ({
           </div>
 
           {/* Formulário */}
-          <Card className="w-full max-w-xl place-self-center bg-muted/40 p-6 lg:max-w-none lg:place-self-start lg:p-8">
+          <Card className="w-full max-w-xl place-self-center rounded-2xl border-border/80 bg-card p-5 shadow-md sm:p-6 lg:max-w-none lg:place-self-start lg:p-8">
             {success ? (
               <div
                 role="status"
@@ -565,7 +579,9 @@ const DemoRequestSection = ({
                     autoComplete="name"
                     required
                     aria-invalid={Boolean(fieldErrors.name)}
-                    aria-describedby={fieldErrors.name ? nameErrorId : undefined}
+                    aria-describedby={
+                      fieldErrors.name ? nameErrorId : undefined
+                    }
                     placeholder="Seu nome"
                     value={formData.name}
                     onChange={(event) =>
@@ -575,7 +591,10 @@ const DemoRequestSection = ({
                   />
 
                   {fieldErrors.name && (
-                    <p id={nameErrorId} className="text-sm text-destructive">
+                    <p
+                      id={nameErrorId}
+                      className="text-sm text-destructive"
+                    >
                       {fieldErrors.name}
                     </p>
                   )}
@@ -609,7 +628,10 @@ const DemoRequestSection = ({
                     />
 
                     {fieldErrors.email && (
-                      <p id={emailErrorId} className="text-sm text-destructive">
+                      <p
+                        id={emailErrorId}
+                        className="text-sm text-destructive"
+                      >
                         {fieldErrors.email}
                       </p>
                     )}
@@ -641,7 +663,10 @@ const DemoRequestSection = ({
                     />
 
                     {fieldErrors.phone && (
-                      <p id={phoneErrorId} className="text-sm text-destructive">
+                      <p
+                        id={phoneErrorId}
+                        className="text-sm text-destructive"
+                      >
                         {fieldErrors.phone}
                       </p>
                     )}
@@ -675,7 +700,10 @@ const DemoRequestSection = ({
                   />
 
                   {fieldErrors.company && (
-                    <p id={companyErrorId} className="text-sm text-destructive">
+                    <p
+                      id={companyErrorId}
+                      className="text-sm text-destructive"
+                    >
                       {fieldErrors.company}
                     </p>
                   )}
@@ -685,7 +713,8 @@ const DemoRequestSection = ({
                 <FormGroup>
                   <Label htmlFor={companySegmentId}>
                     <span>
-                      Segmento da empresa <span aria-hidden="true">*</span>
+                      Segmento da empresa{" "}
+                      <span aria-hidden="true">*</span>
                     </span>
                   </Label>
 
@@ -698,7 +727,9 @@ const DemoRequestSection = ({
                     <SelectTrigger
                       id={companySegmentId}
                       aria-required={true}
-                      aria-invalid={Boolean(fieldErrors.companySegment)}
+                      aria-invalid={Boolean(
+                        fieldErrors.companySegment
+                      )}
                       aria-describedby={
                         fieldErrors.companySegment
                           ? companySegmentErrorId
@@ -756,7 +787,9 @@ const DemoRequestSection = ({
                     <SelectTrigger
                       id={employeeRangeId}
                       aria-required={true}
-                      aria-invalid={Boolean(fieldErrors.employeeRange)}
+                      aria-invalid={Boolean(
+                        fieldErrors.employeeRange
+                      )}
                       aria-describedby={
                         fieldErrors.employeeRange
                           ? employeeRangeErrorId
@@ -824,7 +857,10 @@ const DemoRequestSection = ({
 
                 {/* Erro */}
                 {error && (
-                  <p role="alert" className="text-sm text-destructive">
+                  <p
+                    role="alert"
+                    className="text-sm text-destructive"
+                  >
                     {error}
                   </p>
                 )}
@@ -834,7 +870,7 @@ const DemoRequestSection = ({
                   type="submit"
                   size="lg"
                   disabled={isSubmitting}
-                  className="w-full cursor-pointer sm:w-fit sm:self-end disabled:cursor-not-allowed"
+                  className="h-11 w-full cursor-pointer disabled:cursor-not-allowed"
                 >
                   {isSubmitting
                     ? "Enviando..."
