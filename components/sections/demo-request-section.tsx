@@ -32,7 +32,7 @@ const FORM_EMBED_URL =
     EMBED_SUCCESS_MESSAGE
   )}`;
 
-const FORM_CONTROL_TEXT_CLASS = "text-[16px]";
+const FORM_CONTROL_TEXT_CLASS = "text-[16px] md:text-[16px]";
 
 const InfiniteMovingCarousel = ({ images }: { images: string[] }) => {
   const carouselRef = useRef<HTMLDivElement>(null);
