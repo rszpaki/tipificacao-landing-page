@@ -37,24 +37,24 @@ const Circle = forwardRef<
           "items-center",
           "justify-center",
           "rounded-full",
-          "border",
+
+          // Borda sutil no mesmo padrão dos cards
+          "!border-transparent",
+          "ring-1",
+          "ring-inset",
+          "ring-black/[0.06]",
 
           // Light mode
-          "border-border/70",
           "bg-card",
           "text-foreground",
 
           // Dark mode
-          "dark:border-surface-border",
           "dark:bg-surface-raised",
           "dark:text-integration-foreground",
+          "dark:ring-white/[0.07]",
 
           // Espaçamento
           "p-3",
-
-          // Sombra
-          "shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)]",
-          "dark:shadow-[0_0_24px_-10px_rgba(0,0,0,0.9)]",
 
           // Transição
           "transition-colors",
@@ -138,7 +138,7 @@ export function FrigosoftIntegrationDiagram({
 
       {/*
         Estrutura:
-        
+
         MOBILE
               Smartphone
                   ↓
@@ -149,6 +149,7 @@ export function FrigosoftIntegrationDiagram({
         DESKTOP
         Smartphone → Frigosoft → áreas conectadas
       */}
+
       <div
         className="
           flex
@@ -185,7 +186,6 @@ export function FrigosoftIntegrationDiagram({
             ref={frigosoftRef}
             className="
               size-20
-              dark:border-surface-border
               dark:bg-surface-raised
               dark:text-surface-foreground
             "

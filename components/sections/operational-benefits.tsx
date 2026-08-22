@@ -1,82 +1,180 @@
 import type { ReactNode } from "react";
 
-import {
-  BadgeDollarSign,
-  History,
-  RefreshCw,
-  ScanEye,
-} from "lucide-react";
+import { Check, X } from "lucide-react";
 
 import { FrigosoftIntegrationDiagram } from "@/components/diagrams/frigosoft-integration-diagram";
 import { GeistBadge } from "@/components/ui/geist-badge";
 import { cn } from "@/lib/utils";
 
-interface FeatureIconListItem {
+interface ComparisonItem {
+  eyebrow: string;
   title: string;
   description: string;
-  icon?: ReactNode;
+  items: string[];
 }
 
 interface OperationalBenefitsProps {
-  heading: string;
-  description?: string;
-  features?: FeatureIconListItem[];
+  heading?: string;
+  withoutAI?: ComparisonItem;
+  withAI?: ComparisonItem;
   footer?: ReactNode;
   className?: string;
 }
 
-type Props = Partial<OperationalBenefitsProps>;
-
-const defaultProps: OperationalBenefitsProps = {
-  heading: "Do olho ao dado",
-
+const defaultWithoutAI: ComparisonItem = {
+  eyebrow: "Processo tradicional",
+  title: "Sem tipificação por IA",
   description:
-    "A tipificação de carcaças com IA reúne análise, sugestão e validação do operador em informações integradas ao Frigosoft.",
-
-  features: [
-    {
-      icon: <ScanEye className="size-5" strokeWidth={1.5} />,
-      title: "Análise assistida por IA",
-      description:
-        "A IA analisa cobertura de gordura e conformação para apresentar uma sugestão de classificação.",
-    },
-    {
-      icon: <RefreshCw className="size-5" strokeWidth={1.5} />,
-      title: "Validação do operador",
-      description:
-        "O operador pode validar ou ajustar a sugestão da IA, mantendo a decisão final sobre a classificação.",
-    },
-    {
-      icon: <BadgeDollarSign className="size-5" strokeWidth={1.5} />,
-      title: "Registro da classificação",
-      description:
-        "A sugestão da IA e a classificação final do operador ficam registradas no fluxo do Frigosoft.",
-    },
-    {
-      icon: <History className="size-5" strokeWidth={1.5} />,
-      title: "Histórico das classificações",
-      description:
-        "As informações registradas ficam disponíveis para consulta e comparação no fluxo operacional.",
-    },
+    "A avaliação feita no olho pode gerar retrabalho, perda de tempo e diferenças de classificação que impactam a operação.",
+  items: [
+    "Avaliação subjetiva e visual da carcaça.",
+    "Entrada manual de gordura e conformação.",
+    "Classificação manual pelo operador.",
+    "Registro da classificação final em papel.",
+    "Sem referência automatizada para comparação.",
   ],
-
-  footer: <FrigosoftIntegrationDiagram />,
 };
 
-const OperationalBenefits = (props: Props) => {
-  const {
-    heading,
-    description,
-    features,
-    footer,
-    className,
-  } = {
-    ...defaultProps,
-    ...props,
-  };
+const defaultWithAI: ComparisonItem = {
+  eyebrow: "Processo seguro",
+  title: "Com tipificação por IA",
+  description:
+    "A IA traz mais controle para a classificação e mais segurança sobre o valor de cada carcaça.",
+  items: [
+    "Captura da carcaça pelo smartphone.",
+    "Análise de gordura e conformação pela IA.",
+    "Sugestão de classificação pela IA.",
+    "Decisão final mantida pelo operador.",
+    "Informação registrada no fluxo do Frigosoft.",
+  ],
+};
 
-  const items = (features ?? []).slice(0, 4);
+interface ComparisonCardProps extends ComparisonItem {
+  variant: "traditional" | "ai";
+}
 
+const ComparisonCard = ({
+  eyebrow,
+  title,
+  description,
+  items,
+  variant,
+}: ComparisonCardProps) => {
+  const isAI = variant === "ai";
+
+  return (
+    <article
+      className={cn(
+        "flex h-full flex-col rounded-2xl !border-transparent p-6 ring-1 ring-inset ring-black/[0.06] dark:ring-white/[0.07] sm:p-8 lg:p-9",
+        isAI
+          ? [
+              "bg-card",
+              "shadow-none",
+              "transition-[transform,translate,box-shadow,background-color]",
+              "duration-300",
+              "motion-safe:hover:-translate-y-2",
+              "hover:shadow-xl",
+              "dark:bg-surface-raised",
+              "dark:hover:bg-surface-raised-hover",
+            ]
+          : [
+              "bg-muted",
+              "shadow-none",
+              "dark:bg-surface-subtle",
+            ]
+      )}
+    >
+      {/* Badge */}
+      <div className="flex">
+        {isAI ? (
+          <GeistBadge
+            variant="turbo"
+            contrast="low"
+            className="
+              bg-emerald-500/10
+              text-emerald-600
+              [&_svg]:hidden
+              dark:bg-emerald-400/10
+              dark:text-emerald-400
+            "
+          >
+            {eyebrow}
+          </GeistBadge>
+        ) : (
+          <GeistBadge
+            variant="turbo"
+            contrast="low"
+            className="
+              bg-foreground/[0.05]
+              text-foreground/70
+              [&_svg]:hidden
+              dark:bg-white/[0.07]
+              dark:text-white/70
+            "
+          >
+            {eyebrow}
+          </GeistBadge>
+        )}
+      </div>
+
+      {/* Título */}
+      <h3 className="mt-6 text-[28px] font-medium leading-[1.1] tracking-tight sm:text-[30px]">
+        {title}
+      </h3>
+
+      {/* Descrição */}
+      <p className="mt-4 max-w-xl leading-relaxed text-muted-foreground dark:text-surface-muted-foreground">
+        {description}
+      </p>
+
+      {/* Divisor */}
+      <div className="my-7 h-px w-full bg-border/70" />
+
+      {/* Itens */}
+      <ul className="flex flex-col gap-4">
+        {items.map((item, index) => (
+          <li
+            key={`${title}-${index}`}
+            className="flex items-center gap-3"
+          >
+            {isAI ? (
+              <Check
+                className="size-4 shrink-0 text-emerald-500 dark:text-emerald-400"
+                strokeWidth={2.25}
+                aria-hidden="true"
+              />
+            ) : (
+              <X
+                className="size-4 shrink-0 text-red-500 dark:text-red-400"
+                strokeWidth={2.25}
+                aria-hidden="true"
+              />
+            )}
+
+            <p
+              className={cn(
+                "min-w-0 flex-1 leading-relaxed",
+                isAI
+                  ? "text-foreground dark:text-surface-foreground"
+                  : "text-muted-foreground dark:text-surface-muted-foreground"
+              )}
+            >
+              {item}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </article>
+  );
+};
+
+const OperationalBenefits = ({
+  heading = "O que muda na rotina de tipificação",
+  withoutAI = defaultWithoutAI,
+  withAI = defaultWithAI,
+  footer = <FrigosoftIntegrationDiagram />,
+  className,
+}: OperationalBenefitsProps) => {
   return (
     <section
       className={cn(
@@ -89,102 +187,46 @@ const OperationalBenefits = (props: Props) => {
         <div className="mx-auto mb-14 flex max-w-3xl flex-col items-center text-center">
           <div className="flex flex-col items-center gap-6">
             <GeistBadge variant="turbo" contrast="low">
-              IA no apoio à decisão
+              Comparativo operacional 
             </GeistBadge>
 
             <h2 className="text-balance text-[38px] font-medium leading-[1.08] tracking-tight lg:text-[48px]">
               {heading}
             </h2>
           </div>
-
-          {description && (
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground dark:text-surface-muted-foreground">
-              {description}
-            </p>
-          )}
         </div>
 
-        {/* Features */}
-        <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2">
-          {items.map((feature, idx) => (
-            <div
-              key={idx}
-              className="
-                group
-                flex
-                h-full
-                flex-col
-                rounded-2xl
-                border
-                border-border/60
-                bg-card
-                p-8
-                shadow-sm
-                transition-[transform,translate,box-shadow,background-color]
-                duration-300
+        {/* Comparativo */}
+        <div className="mx-auto grid max-w-6xl items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
+          <ComparisonCard
+            {...withoutAI}
+            variant="traditional"
+          />
 
-                motion-safe:hover:-translate-y-2
-                hover:shadow-xl
-
-                dark:border-border
-                dark:bg-surface-raised
-                dark:text-surface-foreground
-                dark:hover:bg-surface-raised-hover
-              "
-            >
-              {/* Ícone */}
-              <div
-                className="
-                  mb-6
-                  flex
-                  size-12
-                  items-center
-                  justify-center
-                  rounded-xl
-                  bg-accent
-                  text-foreground
-                  transition-[transform,scale,background-color,color]
-                  duration-300
-
-                  motion-safe:group-hover:scale-110
-
-                  dark:bg-surface-overlay
-                  dark:text-surface-foreground
-                  dark:group-hover:bg-surface-overlay-hover
-                "
-              >
-                {feature.icon}
-              </div>
-
-              {/* Título */}
-              <h3 className="mb-3 text-xl font-semibold tracking-tight">
-                {feature.title}
-              </h3>
-
-              {/* Descrição */}
-              <p className="leading-relaxed text-muted-foreground dark:text-surface-muted-foreground">
-                {feature.description}
-              </p>
-            </div>
-          ))}
+          <ComparisonCard
+            {...withAI}
+            variant="ai"
+          />
         </div>
 
         {/* Integração */}
         {footer && (
-          <div className="mx-auto mt-14 grid w-full max-w-6xl items-center gap-6 lg:grid-cols-2">
-            {/* Texto */}
+          <div className="mx-auto mt-20 grid w-full max-w-6xl items-center gap-10 lg:grid-cols-2 lg:gap-14">
             <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-              <h3 className="max-w-md text-balance text-[34px] font-medium leading-[1.1] tracking-tight lg:text-[40px]">
-                Tudo conectado à operação do frigorífico
+              <GeistBadge variant="turbo" contrast="low">
+                Fluxo operacional integrado
+              </GeistBadge>
+
+              <h3 className="mt-6 max-w-md text-balance text-[34px] font-medium leading-[1.1] tracking-tight lg:text-[40px]">
+                Tudo conectado ao Frigosoft
               </h3>
 
               <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground dark:text-surface-muted-foreground lg:text-lg">
-                As informações da tipificação são integradas ao Frigosoft
-                e ficam disponíveis no fluxo operacional.
+                As informações da tipificação são integradas ao Frigosoft e
+                ficam disponíveis no fluxo operacional.
               </p>
             </div>
 
-            {/* Animação */}
             <div className="w-full min-w-0">
               {footer}
             </div>
