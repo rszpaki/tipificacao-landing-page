@@ -9,6 +9,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { DynamicFavicon } from "@/components/dynamic-favicon";
+import { StructuredData } from "@/components/structured-data";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 
@@ -44,9 +45,12 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     url: "https://tipificacao.atak.com.br",
     siteName: "Atak Sistemas",
+
     title: "Tipificação de Carcaças com IA para Frigoríficos | Atak",
+
     description:
       "Use inteligência artificial para apoiar a tipificação de carcaças, analisar cobertura de gordura e conformação e integrar os dados ao Frigosoft.",
+
     images: [
       {
         url: "/images/social/tipificacao-og.png",
@@ -59,9 +63,12 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
+
     title: "Tipificação de Carcaças com IA para Frigoríficos | Atak",
+
     description:
       "Use inteligência artificial para apoiar a tipificação de carcaças, analisar cobertura de gordura e conformação e integrar os dados ao Frigosoft.",
+
     images: ["/images/social/tipificacao-og.png"],
   },
 };
@@ -85,6 +92,8 @@ export default function RootLayout({
       <GoogleTagManager gtmId="GTM-5BSF4FD" />
 
       <body>
+        <StructuredData />
+
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
