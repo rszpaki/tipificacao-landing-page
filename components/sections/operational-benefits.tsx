@@ -65,26 +65,30 @@ const ComparisonCard = ({
   return (
     <article
       className={cn(
-        "flex h-full flex-col rounded-2xl !border-transparent p-6 ring-1 ring-inset ring-black/[0.06] dark:ring-white/[0.07] sm:p-8 lg:p-9",
+        "flex h-full flex-col rounded-2xl !border-transparent p-6 ring-1 ring-inset sm:p-8 lg:p-9",
         isAI
           ? [
               "bg-card",
+              "ring-black/[0.07]",
               "shadow-none",
               "transition-[transform,translate,box-shadow,background-color]",
               "duration-300",
               "motion-safe:hover:-translate-y-2",
               "hover:shadow-xl",
               "dark:bg-surface-raised",
+              "dark:ring-white/[0.08]",
               "dark:hover:bg-surface-raised-hover",
             ]
           : [
               "bg-muted",
+              "ring-black/[0.06]",
               "shadow-none",
               "dark:bg-surface-subtle",
+              "dark:ring-white/[0.07]",
             ]
       )}
     >
-      {/* Badge */}
+      {/* Badge do card */}
       <div className="flex">
         {isAI ? (
           <GeistBadge
@@ -108,7 +112,7 @@ const ComparisonCard = ({
               bg-foreground/[0.05]
               text-foreground/70
               [&_svg]:hidden
-              dark:bg-white/[0.07]
+              dark:bg-white/[0.06]
               dark:text-white/70
             "
           >
@@ -183,11 +187,11 @@ const OperationalBenefits = ({
       )}
     >
       <div className="container mx-auto">
-        {/* Cabeçalho */}
+        {/* Comparativo */}
         <div className="mx-auto mb-14 flex max-w-3xl flex-col items-center text-center">
           <div className="flex flex-col items-center gap-6">
             <GeistBadge variant="turbo" contrast="low">
-              Comparativo operacional 
+              Comparativo operacional
             </GeistBadge>
 
             <h2 className="text-balance text-[38px] font-medium leading-[1.08] tracking-tight lg:text-[48px]">
@@ -196,7 +200,7 @@ const OperationalBenefits = ({
           </div>
         </div>
 
-        {/* Comparativo */}
+        {/* Cards comparativos */}
         <div className="mx-auto grid max-w-6xl items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
           <ComparisonCard
             {...withoutAI}
@@ -209,24 +213,21 @@ const OperationalBenefits = ({
           />
         </div>
 
-        {/* Integração */}
+        {/* Integração com o Frigosoft */}
         {footer && (
           <div className="mx-auto mt-20 grid w-full max-w-6xl items-center gap-10 lg:grid-cols-2 lg:gap-14">
+            {/* Texto */}
             <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-              <GeistBadge variant="turbo" contrast="low">
-                Fluxo operacional integrado
-              </GeistBadge>
-
-              <h3 className="mt-6 max-w-md text-balance text-[34px] font-medium leading-[1.1] tracking-tight lg:text-[40px]">
-                Tudo conectado ao Frigosoft
+              <h3 className="max-w-md text-balance text-[34px] font-medium leading-[1.1] tracking-tight lg:text-[40px]">
+                A classificação vira dado operacional
               </h3>
 
               <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground dark:text-surface-muted-foreground lg:text-lg">
-                As informações da tipificação são integradas ao Frigosoft e
-                ficam disponíveis no fluxo operacional.
+                Após a validação do operador, o resultado é registrado no Frigosoft e fica disponível no fluxo da operação.
               </p>
             </div>
 
+            {/* Diagrama */}
             <div className="w-full min-w-0">
               {footer}
             </div>
