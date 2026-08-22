@@ -1,0 +1,156 @@
+# Tipificação de Carcaças com Inteligência Artificial | Atak Sistemas
+
+> Conteúdo textual consolidado da landing page da Atak Sistemas sobre Tipificação de Carcaças com IA.
+
+Última atualização: 2026-08-21
+
+Página canônica: https://tipificacao.atak.com.br/
+
+## Visão geral
+
+A Tipificação de Carcaças com Inteligência Artificial é uma solução da Atak Sistemas integrada ao Frigosoft para apoiar a análise de cobertura de gordura e conformação durante o processo de tipificação.
+
+A imagem da carcaça é capturada pelo smartphone. A Inteligência Artificial processa a imagem e apresenta uma sugestão de classificação ao operador. O operador continua responsável pela decisão final e pode confirmar ou ajustar o resultado antes da conclusão do processo.
+
+## Proposta principal
+
+Tipificação de carcaças com Inteligência Artificial.
+
+A solução utiliza análise de imagem para apoiar a classificação da carcaça e integrar as informações ao fluxo operacional do Frigosoft.
+
+## Contexto operacional
+
+A classificação de cobertura de gordura e conformação faz parte da rotina de tipificação de carcaças e depende da avaliação realizada durante a operação.
+
+Quando diferentes operadores participam desse processo, podem existir diferenças de interpretação entre avaliações.
+
+A Inteligência Artificial acrescenta uma referência tecnológica à análise, mantendo o operador responsável pela decisão final.
+
+## Como funciona
+
+### 1. Capture
+
+O operador posiciona o smartphone e registra a imagem da carcaça diretamente durante o processo de tipificação.
+
+### 2. Analise
+
+A imagem é processada pela Inteligência Artificial, que analisa cobertura de gordura e conformação da carcaça.
+
+### 3. Valide
+
+A classificação sugerida pela IA é apresentada ao operador, que pode confirmar o resultado ou realizar um ajuste manual quando necessário.
+
+### 4. Registre
+
+A classificação confirmada pelo operador segue no fluxo operacional. A sugestão original da IA também pode ser armazenada separadamente para permitir consultas e comparações posteriores.
+
+## Sem Tipificação por IA
+
+No processo tradicional, a classificação de cobertura de gordura e conformação depende da avaliação manual do operador.
+
+Características do fluxo:
+- avaliação visual da carcaça;
+- classificação definida pelo operador;
+- registro da classificação final;
+- sem uma referência automatizada adicional para comparação.
+
+## Com Tipificação por IA
+
+Com a funcionalidade de IA, a imagem da carcaça é analisada e uma sugestão de classificação é apresentada para validação ou ajuste pelo operador.
+
+Características do fluxo:
+- captura da imagem pelo smartphone;
+- análise de cobertura de gordura e conformação;
+- sugestão de classificação pela IA;
+- decisão final mantida pelo operador;
+- possibilidade de registrar a sugestão da IA e a classificação final para comparação.
+
+## Benefícios e diferenciais
+
+### Apoio à classificação
+
+A IA acrescenta uma referência tecnológica para a avaliação de cobertura de gordura e conformação durante a tipificação.
+
+### Operador no controle
+
+A classificação sugerida pela IA não é obrigatória. O operador pode confirmar ou ajustar o resultado apresentado.
+
+### Comparação entre IA e avaliação operacional
+
+A sugestão original da IA pode ser preservada separadamente da classificação final, permitindo consulta e comparação entre os resultados.
+
+### Uso de smartphone
+
+A captura da imagem é realizada pelo dispositivo móvel utilizado na operação, aproximando a tecnologia da rotina de tipificação.
+
+### Integração ao fluxo existente
+
+As informações da tipificação são integradas ao Frigosoft e ficam disponíveis no fluxo operacional.
+
+## Recursos
+
+- análise por Inteligência Artificial da cobertura de gordura;
+- análise por Inteligência Artificial da conformação da carcaça;
+- captura da imagem da carcaça pelo smartphone;
+- processamento da imagem;
+- geração de sugestão de classificação;
+- apresentação do resultado ao operador;
+- confirmação da classificação sugerida;
+- possibilidade de ajuste manual;
+- registro da classificação final;
+- possibilidade de armazenamento da sugestão original da IA para comparação;
+- integração das informações ao fluxo do Frigosoft;
+- manutenção da decisão final pelo operador.
+
+## Para quem é indicado
+
+A solução é indicada para frigoríficos que realizam tipificação de carcaças e desejam incorporar Inteligência Artificial como apoio ao processo de classificação.
+
+Pode ser relevante para operações que buscam:
+- adicionar uma referência tecnológica à avaliação do operador;
+- registrar e comparar classificações sugeridas pela IA e confirmadas na operação;
+- digitalizar etapas da tipificação;
+- incorporar IA ao fluxo operacional do frigorífico.
+
+## Integração com Frigosoft
+
+A Tipificação de Carcaças com IA se conecta ao fluxo operacional do Frigosoft.
+
+A solução registra a sugestão gerada pela Inteligência Artificial e a classificação validada ou ajustada pelo operador, mantendo as informações disponíveis no fluxo operacional.
+
+## Demonstração
+
+Para conhecer a solução em funcionamento e entender sua aplicação na operação de um frigorífico:
+
+https://tipificacao.atak.com.br/#demonstracao
+
+## Entidades e termos relacionados
+
+- Atak Sistemas
+- Frigosoft
+- Tipificação de carcaças
+- Tipificação de carcaças com IA
+- Classificação de carcaças
+- Inteligência Artificial para frigoríficos
+- Cobertura de gordura
+- Conformação de carcaça
+- Frigorífico
+- Smartphone
+- Validação do operador
+
+## Limites das afirmações
+
+Este conteúdo não afirma, sem validação adicional:
+- tempo específico de processamento;
+- aumento percentual de precisão;
+- redução comprovada de divergências;
+- padronização garantida;
+- impacto direto na precificação;
+- resultados quantitativos de desempenho.
+
+A Inteligência Artificial atua como apoio à análise, e a decisão final permanece com o operador.
+
+## Links oficiais
+
+- Landing page: https://tipificacao.atak.com.br/
+- Atak Sistemas: https://atak.com.br/

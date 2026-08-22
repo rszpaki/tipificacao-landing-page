@@ -1,0 +1,30 @@
+# Atak Sistemas — Tipificação de Carcaças com IA
+
+> Landing page oficial da Atak Sistemas sobre Tipificação de Carcaças com Inteligência Artificial, com análise de cobertura de gordura e conformação, sugestão de classificação pela IA, validação do operador e integração das informações ao Frigosoft.
+
+## Página principal
+
+- [Tipificação de Carcaças com IA](https://tipificacao.atak.com.br/): página oficial da solução, com funcionamento, benefícios, integração ao Frigosoft e formulário para demonstração.
+
+## Conteúdo para LLMs
+
+- [Conteúdo completo da página](https://tipificacao.atak.com.br/llms-full.txt): versão textual consolidada, sem elementos visuais ou de navegação.
+
+## Sobre a solução
+
+- A imagem da carcaça é capturada pelo smartphone durante a operação.
+- A Inteligência Artificial analisa cobertura de gordura e conformação.
+- A IA apresenta uma sugestão de classificação.
+- O operador pode validar ou ajustar a sugestão.
+- A decisão final permanece com o operador.
+- A sugestão da IA e a classificação final podem ser registradas para consulta e comparação.
+- As informações fazem parte do fluxo operacional integrado ao Frigosoft.
+
+## Público
+
+A solução é destinada a frigoríficos que realizam tipificação de carcaças e desejam incorporar Inteligência Artificial como apoio ao processo de classificação.
+
+## Contato
+
+- [Agendar uma demonstração](https://tipificacao.atak.com.br/#demonstracao)
+- [Atak Sistemas](https://atak.com.br/)
