@@ -478,14 +478,11 @@ const DemoRequestSection = ({
   };
 
   return (
-    <section
-  className={cn("py-20 lg:py-24", className)}
->
+    <section className={cn("py-20 lg:py-24", className)}>
       <div className="container mx-auto">
         <div className="grid grid-cols-1 items-start gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
           {/* Conteúdo */}
           <div className="mx-auto flex w-full max-w-md flex-col lg:mx-0 lg:max-w-none">
-            {/* Badge + título */}
             <div className="flex w-full flex-col items-center gap-7 lg:items-start">
               <GeistBadge variant="turbo" contrast="low">
                 {badge}
@@ -496,7 +493,6 @@ const DemoRequestSection = ({
               </h2>
             </div>
 
-            {/* Texto de apoio */}
             {supportingText && (
               <p className="mx-auto mt-7 max-w-md text-center text-lg leading-relaxed text-muted-foreground lg:mx-0 lg:text-left">
                 {supportingText}
@@ -513,14 +509,35 @@ const DemoRequestSection = ({
           {/* Formulário */}
           <Card
   id="demonstracao"
-  className="scroll-mt-24 w-full max-w-xl place-self-center rounded-2xl border-border/80 bg-card p-5 shadow-md sm:p-6 lg:max-w-none lg:place-self-start lg:p-8"
+  className="
+    scroll-mt-24
+    w-full
+    max-w-xl
+    place-self-center
+    -translate-y-1
+    rounded-2xl
+    !border-transparent
+    bg-card
+    p-5
+    shadow-[0_12px_32px_rgba(0,0,0,0.08)]
+    ring-1
+    ring-inset
+    ring-black/[0.06]
+    sm:p-6
+    lg:-translate-y-2
+    lg:max-w-none
+    lg:place-self-start
+    lg:p-8
+    dark:ring-white/[0.06]
+    dark:shadow-[0_12px_32px_rgba(0,0,0,0.28)]
+  "
 >
-  {success ? (
-    <div
-      role="status"
-      aria-live="polite"
-      className="flex min-h-[500px] flex-col items-center justify-center gap-4 text-center"
-    >
+            {success ? (
+              <div
+                role="status"
+                aria-live="polite"
+                className="flex min-h-[500px] flex-col items-center justify-center gap-4 text-center"
+              >
                 <div className="flex size-12 items-center justify-center rounded-full bg-success-muted text-success-foreground">
                   ✓
                 </div>
@@ -591,7 +608,7 @@ const DemoRequestSection = ({
                   )}
                 </FormGroup>
 
-                {/* Email + telefone */}
+                {/* E-mail + telefone */}
                 <div className="grid gap-6 sm:grid-cols-2">
                   <FormGroup>
                     <Label htmlFor="email">
@@ -727,9 +744,7 @@ const DemoRequestSection = ({
                     <SelectTrigger
                       id={companySegmentId}
                       aria-required={true}
-                      aria-invalid={Boolean(
-                        fieldErrors.companySegment
-                      )}
+                      aria-invalid={Boolean(fieldErrors.companySegment)}
                       aria-describedby={
                         fieldErrors.companySegment
                           ? companySegmentErrorId
@@ -802,9 +817,7 @@ const DemoRequestSection = ({
                     <SelectTrigger
                       id={employeeRangeId}
                       aria-required={true}
-                      aria-invalid={Boolean(
-                        fieldErrors.employeeRange
-                      )}
+                      aria-invalid={Boolean(fieldErrors.employeeRange)}
                       aria-describedby={
                         fieldErrors.employeeRange
                           ? employeeRangeErrorId
@@ -921,7 +934,6 @@ const DemoRequestSection = ({
             )}
           </Card>
 
-          {/* Carousel mobile */}
           {companies.length > 0 && (
             <div className="mt-10 block w-full overflow-hidden lg:hidden">
               <InfiniteMovingCarousel images={companies} />
@@ -929,7 +941,6 @@ const DemoRequestSection = ({
           )}
         </div>
 
-        {/* Formulário original usado apenas para realizar o envio */}
         <div
           ref={embedContainerRef}
           className="hidden"

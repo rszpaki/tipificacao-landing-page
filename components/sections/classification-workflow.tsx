@@ -31,7 +31,6 @@ interface FeatureIconListProps {
 }
 
 type ClassificationWorkflowProps = FeatureIconListProps;
-
 type Props = Partial<ClassificationWorkflowProps>;
 
 const defaultProps: ClassificationWorkflowProps = {
@@ -75,9 +74,13 @@ const ClassificationWorkflow = (props: Props) => {
   const items = (features ?? []).slice(0, MAX_FEATURES);
 
   return (
-    <section className={cn("bg-muted/40 py-20 md:py-24 lg:py-32", className)}>
+    <section
+      className={cn(
+        "bg-muted/40 py-20 md:py-24 lg:py-32",
+        className
+      )}
+    >
       <div className="container mx-auto">
-        {/* Cabeçalho */}
         {heading && (
           <div className="mx-auto mb-16 flex max-w-3xl flex-col items-center gap-6 text-center">
             <GeistBadge variant="turbo" contrast="low">
@@ -90,7 +93,6 @@ const ClassificationWorkflow = (props: Props) => {
           </div>
         )}
 
-        {/* Cards */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {items.map((feature, i) => (
             <div
@@ -101,24 +103,23 @@ const ClassificationWorkflow = (props: Props) => {
                 h-full
                 flex-col
                 rounded-2xl
-                border
-                border-border/60
+                !border-transparent
                 bg-card
                 p-8
-                shadow-sm
+                shadow-none
+                ring-1
+                ring-inset
+                ring-black/[0.06]
                 transition-[transform,translate,box-shadow,background-color]
                 duration-300
-
                 motion-safe:hover:-translate-y-2
                 hover:shadow-xl
-
-                dark:border-border
                 dark:bg-surface-subtle
                 dark:text-surface-foreground
+                dark:ring-white/[0.07]
                 dark:hover:bg-surface-raised
               "
             >
-              {/* Ícone */}
               <div
                 className="
                   mb-6
@@ -130,9 +131,7 @@ const ClassificationWorkflow = (props: Props) => {
                   bg-accent
                   transition-[transform,scale,background-color,color]
                   duration-300
-
                   motion-safe:group-hover:scale-110
-
                   dark:bg-surface-overlay
                   dark:text-surface-foreground
                   dark:group-hover:bg-surface-overlay-hover
@@ -141,12 +140,10 @@ const ClassificationWorkflow = (props: Props) => {
                 {feature.icon}
               </div>
 
-              {/* Título */}
               <h3 className="mb-3 text-xl font-semibold">
                 {feature.title}
               </h3>
 
-              {/* Descrição */}
               <p className="leading-relaxed text-muted-foreground dark:text-surface-muted-foreground">
                 {feature.description}
               </p>
@@ -154,7 +151,6 @@ const ClassificationWorkflow = (props: Props) => {
           ))}
         </div>
 
-        {/* CTA */}
         {buttons?.primary?.url && (
           <div className="mt-16 flex justify-center">
             <Button
