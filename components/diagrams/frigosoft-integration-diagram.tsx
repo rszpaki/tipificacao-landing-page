@@ -38,25 +38,20 @@ const Circle = forwardRef<
           "justify-center",
           "rounded-full",
 
-          // Borda sutil no mesmo padrão dos cards
           "!border-transparent",
           "ring-1",
           "ring-inset",
           "ring-black/[0.06]",
 
-          // Light mode
           "bg-card",
           "text-foreground",
 
-          // Dark mode
           "dark:bg-surface-raised",
           "dark:text-integration-foreground",
           "dark:ring-white/[0.07]",
 
-          // Espaçamento
           "p-3",
 
-          // Transição
           "transition-colors",
           "duration-300",
         ],
@@ -77,13 +72,9 @@ export function FrigosoftIntegrationDiagram({
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Entrada
   const smartphoneRef = useRef<HTMLDivElement>(null);
-
-  // Nó central — Frigosoft
   const frigosoftRef = useRef<HTMLDivElement>(null);
 
-  // Saídas / áreas conectadas
   const beefRef = useRef<HTMLDivElement>(null);
   const priceRef = useRef<HTMLDivElement>(null);
   const packageRef = useRef<HTMLDivElement>(null);
@@ -123,8 +114,6 @@ export function FrigosoftIntegrationDiagram({
           "items-center",
           "justify-center",
           "overflow-hidden",
-
-          // Desktop
           "lg:h-[320px]",
         ],
         className
@@ -135,20 +124,6 @@ export function FrigosoftIntegrationDiagram({
         Frigosoft, que integra as informações da carcaça, temperatura, estoque
         e logística.
       </p>
-
-      {/*
-        Estrutura:
-
-        MOBILE
-              Smartphone
-                  ↓
-              Frigosoft
-             ↙ ↓ ↓ ↘
-          áreas conectadas
-
-        DESKTOP
-        Smartphone → Frigosoft → áreas conectadas
-      */}
 
       <div
         className="
@@ -169,7 +144,6 @@ export function FrigosoftIntegrationDiagram({
           lg:py-0
         "
       >
-        {/* Entrada — Smartphone */}
         <div className="flex flex-col items-center justify-center">
           <Circle ref={smartphoneRef}>
             <Smartphone
@@ -180,7 +154,6 @@ export function FrigosoftIntegrationDiagram({
           </Circle>
         </div>
 
-        {/* Nó central — Frigosoft */}
         <div className="flex flex-col items-center justify-center">
           <Circle
             ref={frigosoftRef}
@@ -198,7 +171,6 @@ export function FrigosoftIntegrationDiagram({
           </Circle>
         </div>
 
-        {/* Áreas conectadas */}
         <div
           className="
             flex
@@ -213,7 +185,6 @@ export function FrigosoftIntegrationDiagram({
             lg:justify-center
           "
         >
-          {/* Carcaça */}
           <Circle ref={beefRef}>
             <Beef
               className="size-6"
@@ -222,7 +193,6 @@ export function FrigosoftIntegrationDiagram({
             />
           </Circle>
 
-          {/* Armazenagem / temperatura */}
           <Circle ref={priceRef}>
             <ThermometerSnowflake
               className="size-6"
@@ -231,7 +201,6 @@ export function FrigosoftIntegrationDiagram({
             />
           </Circle>
 
-          {/* Estoque / produto */}
           <Circle ref={packageRef}>
             <PackageOpen
               className="size-6"
@@ -240,7 +209,6 @@ export function FrigosoftIntegrationDiagram({
             />
           </Circle>
 
-          {/* Logística */}
           <Circle ref={truckRef}>
             <Truck
               className="size-6"
@@ -251,7 +219,6 @@ export function FrigosoftIntegrationDiagram({
         </div>
       </div>
 
-      {/* Smartphone → Frigosoft */}
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={smartphoneRef}
@@ -260,7 +227,6 @@ export function FrigosoftIntegrationDiagram({
         orientation={orientation}
       />
 
-      {/* Frigosoft → Carcaça */}
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={frigosoftRef}
@@ -269,7 +235,6 @@ export function FrigosoftIntegrationDiagram({
         orientation={orientation}
       />
 
-      {/* Frigosoft → Temperatura */}
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={frigosoftRef}
@@ -278,7 +243,6 @@ export function FrigosoftIntegrationDiagram({
         orientation={orientation}
       />
 
-      {/* Frigosoft → Estoque */}
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={frigosoftRef}
@@ -287,7 +251,6 @@ export function FrigosoftIntegrationDiagram({
         orientation={orientation}
       />
 
-      {/* Frigosoft → Logística */}
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={frigosoftRef}
