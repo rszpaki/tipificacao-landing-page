@@ -27,11 +27,11 @@ const defaultWithoutAI: ComparisonItem = {
   description:
     "A avaliação feita no olho pode gerar retrabalho, perda de tempo e diferenças de classificação que impactam a operação.",
   items: [
-    "Avaliação subjetiva e visual da carcaça.",
-    "Entrada manual de gordura e conformação.",
-    "Classificação manual pelo operador.",
-    "Registro da classificação final em papel.",
-    "Sem referência automatizada para comparação.",
+    "Avaliação baseada apenas na percepção visual.",
+    "Maior dependência da experiência de cada operador.",
+    "Conferências e ajustes podem consumir mais tempo.",
+    "Classificação registrada de forma manual.",
+    "Menos referência para comparar decisões.",
   ],
 };
 
