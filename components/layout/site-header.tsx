@@ -77,7 +77,7 @@ const SiteHeader = ({
           <a
             href={logo.url}
             aria-label={logo.title}
-            className="flex h-10 items-center"
+            className="flex h10 items-center"
           >
             {/* eslint-disable-next-line @next/next/no-img-element -- logo.src is configurable and may point to an external URL */}
             <img
@@ -86,7 +86,7 @@ const SiteHeader = ({
               width={logo.width}
               height={logo.height}
               className={cn(
-                "block h-5 w-auto dark:invert",
+                "block h-3 w-auto dark:invert",
                 logo.className
               )}
             />

@@ -41,7 +41,7 @@ const Circle = forwardRef<
           "!border-transparent",
           "ring-1",
           "ring-inset",
-          "ring-black/[0.06]",
+          "ring-black/[0.1]",
 
           "bg-card",
           "text-foreground",
