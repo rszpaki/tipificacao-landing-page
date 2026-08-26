@@ -46,7 +46,7 @@ const SiteFooter = (props: Props) => {
               title={logo.title}
               width={logo.width}
               height={logo.height}
-              className="h-5 w-auto dark:invert"
+              className="h-4 w-auto dark:invert"
             />
           )}
 
