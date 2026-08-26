@@ -53,19 +53,22 @@ const TipificationHero = ({
               {description}
             </p>
 
-            <Button
-              size="lg"
-              className="w-auto font-semibold"
-              render={<a href={buttonUrl} />}
-              nativeButton={false}
-            >
-              {buttonText}
+            {/* 24px do gap + 8px = 32px entre texto e CTA */}
+            <div className="mt-2">
+              <Button
+                size="lg"
+                className="w-auto font-semibold"
+                render={<a href={buttonUrl} />}
+                nativeButton={false}
+              >
+                {buttonText}
 
-              <ArrowRight
-                className="size-4"
-                strokeWidth={1.75}
-              />
-            </Button>
+                <ArrowRight
+                  className="size-4"
+                  strokeWidth={1.75}
+                />
+              </Button>
+            </div>
           </div>
 
           {/* Imagem */}

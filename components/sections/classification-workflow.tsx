@@ -166,9 +166,9 @@ const ClassificationWorkflow = (props: Props) => {
           ))}
         </div>
 
-        {/* CTA */}
+        {/* CTA — 48px após os cards */}
         {buttons?.primary?.url && (
-          <div className="mt-16 flex justify-center">
+          <div className="mt-12 flex justify-center">
             <Button
               size="lg"
               className="w-auto justify-center"
