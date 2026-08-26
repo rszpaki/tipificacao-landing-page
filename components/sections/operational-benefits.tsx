@@ -65,30 +65,58 @@ const ComparisonCard = ({
   return (
     <article
       className={cn(
-        "flex h-full flex-col rounded-2xl !border-transparent p-6 ring-1 ring-inset sm:p-8 lg:p-9",
+        [
+          "flex",
+          "h-full",
+          "flex-col",
+          "rounded-2xl",
+          "!border-transparent",
+          "p-6",
+          "ring-1",
+          "ring-inset",
+          "transition-[transform,translate,box-shadow,background-color]",
+          "duration-300",
+          "sm:p-8",
+          "lg:p-9",
+        ],
         isAI
           ? [
+              // Mobile: floating constante
+              "-translate-y-2",
               "bg-card",
               "ring-black/[0.07]",
-              "shadow-none",
-              "transition-[transform,translate,box-shadow,background-color]",
-              "duration-300",
-              "motion-safe:hover:-translate-y-2",
-              "hover:shadow-xl",
+              "shadow-[0_12px_32px_rgba(0,0,0,0.08)]",
+
+              // Tablet/desktop: estado normal
+              "md:translate-y-0",
+              "md:shadow-none",
+
+              // Desktop: floating no hover
+              "md:motion-safe:hover:-translate-y-2",
+              "md:hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)]",
+
+              // Dark
               "dark:bg-surface-raised",
               "dark:ring-white/[0.08]",
-              "dark:hover:bg-surface-raised-hover",
+              "dark:shadow-[0_12px_32px_rgba(0,0,0,0.28)]",
+              "dark:md:shadow-none",
+              "dark:md:hover:bg-surface-raised-hover",
+              "dark:md:hover:shadow-[0_12px_32px_rgba(0,0,0,0.28)]",
             ]
           : [
+              // Processo tradicional permanece normal
+              "translate-y-0",
               "bg-muted",
               "ring-black/[0.06]",
               "shadow-none",
+
+              // Dark
               "dark:bg-surface-subtle",
               "dark:ring-white/[0.07]",
             ]
       )}
     >
-      {/* Badge do card */}
+      {/* Badge */}
       <div className="flex">
         {isAI ? (
           <GeistBadge
@@ -200,8 +228,8 @@ const OperationalBenefits = ({
           </div>
         </div>
 
-        {/* Cards comparativos */}
-        <div className="mx-auto grid max-w-6xl items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
+        {/* Cards */}
+        <div className="mx-auto grid max-w-6xl items-stretch gap-8 lg:grid-cols-2">
           <ComparisonCard
             {...withoutAI}
             variant="traditional"
@@ -213,21 +241,20 @@ const OperationalBenefits = ({
           />
         </div>
 
-        {/* Integração com o Frigosoft */}
+        {/* Integração com Frigosoft */}
         {footer && (
           <div className="mx-auto mt-20 grid w-full max-w-6xl items-center gap-10 lg:grid-cols-2 lg:gap-14">
-            {/* Texto */}
             <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
               <h3 className="max-w-md text-balance text-[34px] font-medium leading-[1.1] tracking-tight lg:text-[40px]">
-                A classificação vira dado operacional
+                Tudo conectado ao Frigosoft
               </h3>
 
               <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground dark:text-surface-muted-foreground lg:text-lg">
-                Após a validação do operador, o resultado é registrado no Frigosoft e fica disponível no fluxo da operação.
+                As informações da tipificação são integradas ao Frigosoft e
+                ficam disponíveis no fluxo operacional.
               </p>
             </div>
 
-            {/* Diagrama */}
             <div className="w-full min-w-0">
               {footer}
             </div>

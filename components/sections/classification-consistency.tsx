@@ -1,8 +1,7 @@
 import Image from "next/image";
 
-import { GeistBadge } from "@/components/ui/geist-badge";
 import { Button } from "@/components/ui/button";
-
+import { GeistBadge } from "@/components/ui/geist-badge";
 import { cn } from "@/lib/utils";
 
 interface FeatureImage {
@@ -62,14 +61,22 @@ const ClassificationConsistency = (props: Props) => {
               alt={image.alt}
               width={1288}
               height={2615}
-              sizes="(max-width: 639px) 207px, (max-width: 1023px) 237px, 320px"
-              className="h-auto max-h-[420px] w-auto max-w-full object-contain sm:max-h-[480px] lg:max-h-[650px]"
+              sizes="(max-width: 639px) 246px, (max-width: 1023px) 257px, 320px"
+              className="
+                h-auto
+                max-h-[500px]
+                w-auto
+                max-w-full
+                object-contain
+                sm:max-h-[520px]
+                lg:max-h-[650px]
+              "
             />
           </div>
 
           {/* Conteúdo */}
           <div className="order-1 flex min-w-0 flex-col items-center text-center lg:order-2 lg:items-start lg:text-left">
-            {/* Badge + Título */}
+            {/* Badge + título */}
             <div className="mb-6 flex flex-col items-center gap-6 lg:items-start">
               <GeistBadge variant="turbo" contrast="low">
                 IA aplicada à avaliação
