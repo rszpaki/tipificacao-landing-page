@@ -1,11 +1,11 @@
 import {
-  Smartphone,
-  ScanLine,
   Check,
+  ScanLine,
+  Smartphone,
 } from "lucide-react";
 
-import { GeistBadge } from "@/components/ui/geist-badge";
 import { Button } from "@/components/ui/button";
+import { GeistBadge } from "@/components/ui/geist-badge";
 import { cn } from "@/lib/utils";
 
 interface FeatureIconListItem {
@@ -81,6 +81,7 @@ const ClassificationWorkflow = (props: Props) => {
       )}
     >
       <div className="container mx-auto">
+        {/* Cabeçalho */}
         {heading && (
           <div className="mx-auto mb-16 flex max-w-3xl flex-col items-center gap-6 text-center">
             <GeistBadge variant="turbo" contrast="low">
@@ -93,7 +94,8 @@ const ClassificationWorkflow = (props: Props) => {
           </div>
         )}
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {/* Cards */}
+        <div className="grid gap-8 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
           {items.map((feature, i) => (
             <div
               key={i}
@@ -101,25 +103,34 @@ const ClassificationWorkflow = (props: Props) => {
                 group
                 flex
                 h-full
+                -translate-y-2
                 flex-col
                 rounded-2xl
                 !border-transparent
                 bg-card
                 p-8
-                shadow-none
+                shadow-[0_12px_32px_rgba(0,0,0,0.08)]
                 ring-1
                 ring-inset
                 ring-black/[0.06]
                 transition-[transform,translate,box-shadow,background-color]
                 duration-300
-                motion-safe:hover:-translate-y-2
-                hover:shadow-xl
+
+                md:translate-y-0
+                md:shadow-none
+                md:motion-safe:hover:-translate-y-2
+                md:hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)]
+
                 dark:bg-surface-subtle
                 dark:text-surface-foreground
                 dark:ring-white/[0.07]
-                dark:hover:bg-surface-raised
+                dark:shadow-[0_12px_32px_rgba(0,0,0,0.28)]
+                dark:md:shadow-none
+                dark:md:hover:bg-surface-raised
+                dark:md:hover:shadow-[0_12px_32px_rgba(0,0,0,0.28)]
               "
             >
+              {/* Ícone */}
               <div
                 className="
                   mb-6
@@ -131,19 +142,23 @@ const ClassificationWorkflow = (props: Props) => {
                   bg-accent
                   transition-[transform,scale,background-color,color]
                   duration-300
-                  motion-safe:group-hover:scale-110
+
+                  md:motion-safe:group-hover:scale-110
+
                   dark:bg-surface-overlay
                   dark:text-surface-foreground
-                  dark:group-hover:bg-surface-overlay-hover
+                  dark:md:group-hover:bg-surface-overlay-hover
                 "
               >
                 {feature.icon}
               </div>
 
+              {/* Título */}
               <h3 className="mb-3 text-xl font-semibold">
                 {feature.title}
               </h3>
 
+              {/* Descrição */}
               <p className="leading-relaxed text-muted-foreground dark:text-surface-muted-foreground">
                 {feature.description}
               </p>
@@ -151,6 +166,7 @@ const ClassificationWorkflow = (props: Props) => {
           ))}
         </div>
 
+        {/* CTA */}
         {buttons?.primary?.url && (
           <div className="mt-16 flex justify-center">
             <Button

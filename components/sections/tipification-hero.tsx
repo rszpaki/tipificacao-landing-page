@@ -39,6 +39,7 @@ const TipificationHero = ({
     <section className={cn("overflow-hidden py-20 lg:py-24", className)}>
       <div className="container mx-auto">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-24 xl:gap-32">
+          {/* Conteúdo */}
           <div className="flex min-w-0 flex-col items-center gap-6 text-center lg:items-start lg:text-left">
             <GeistBadge variant="turbo" contrast="low">
               IA integrada à operação
@@ -59,20 +60,33 @@ const TipificationHero = ({
               nativeButton={false}
             >
               {buttonText}
-              <ArrowRight className="size-4" strokeWidth={1.75} />
+
+              <ArrowRight
+                className="size-4"
+                strokeWidth={1.75}
+              />
             </Button>
           </div>
 
+          {/* Imagem */}
           <div className="flex w-full items-center justify-center lg:justify-end">
             <Image
               src={imageSrc}
               alt={imageAlt}
               width={1288}
               height={2615}
-              sizes="(max-width: 639px) 207px, (max-width: 1023px) 237px, 320px"
+              sizes="(max-width: 639px) 246px, (max-width: 1023px) 257px, 320px"
               preload
               decoding="async"
-              className="h-auto max-h-[420px] w-auto max-w-full object-contain sm:max-h-[480px] lg:max-h-[650px]"
+              className="
+                h-auto
+                max-h-[500px]
+                w-auto
+                max-w-full
+                object-contain
+                sm:max-h-[520px]
+                lg:max-h-[650px]
+              "
             />
           </div>
         </div>

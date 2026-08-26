@@ -216,12 +216,35 @@ const DemoRequestSection = ({
 
     if (!container) return;
 
-    const script = document.createElement("script");
+    /*
+     * Evita criar o script mais de uma vez.
+     * Isso é importante principalmente em desenvolvimento,
+     * onde o React Strict Mode pode executar efeitos mais de uma vez.
+     */
+    let script = container.querySelector<HTMLScriptElement>(
+      'script[data-edge-forms-embed="true"]'
+    );
 
-    script.src = FORM_EMBED_URL;
-    script.async = true;
+    if (!script) {
+      script = document.createElement("script");
 
-    container.appendChild(script);
+      script.src = FORM_EMBED_URL;
+      script.async = true;
+      script.dataset.edgeFormsEmbed = "true";
+
+      container.appendChild(script);
+    }
+
+    /*
+     * Caso o formulário já tenha sido criado antes do observer,
+     * atualizamos a referência imediatamente.
+     */
+    const existingForm = container.querySelector("form");
+
+    if (existingForm) {
+      embedFormRef.current = existingForm;
+      setIsEmbedReady(true);
+    }
 
     const observer = new MutationObserver(() => {
       const embeddedForm = container.querySelector("form");
@@ -280,9 +303,19 @@ const DemoRequestSection = ({
         confirmationWatchdogRef.current = null;
       }
 
-      if (container.contains(script)) {
-        container.removeChild(script);
-      }
+      /*
+       * IMPORTANTE:
+       *
+       * Não removemos o script do Edge Forms aqui.
+       *
+       * Em desenvolvimento, o React Strict Mode pode executar
+       * mount → cleanup → mount enquanto o script externo ainda
+       * está carregando.
+       *
+       * Se o script for removido nesse intervalo, ele pode continuar
+       * executando e tentar chamar insertBefore() usando um parentNode
+       * que já não existe.
+       */
     };
   }, []);
 
@@ -508,30 +541,30 @@ const DemoRequestSection = ({
 
           {/* Formulário */}
           <Card
-  id="demonstracao"
-  className="
-    scroll-mt-24
-    w-full
-    max-w-xl
-    place-self-center
-    -translate-y-1
-    rounded-2xl
-    !border-transparent
-    bg-card
-    p-5
-    shadow-[0_12px_32px_rgba(0,0,0,0.08)]
-    ring-1
-    ring-inset
-    ring-black/[0.06]
-    sm:p-6
-    lg:-translate-y-2
-    lg:max-w-none
-    lg:place-self-start
-    lg:p-8
-    dark:ring-white/[0.06]
-    dark:shadow-[0_12px_32px_rgba(0,0,0,0.28)]
-  "
->
+            id="demonstracao"
+            className="
+              scroll-mt-24
+              w-full
+              max-w-xl
+              place-self-center
+              -translate-y-1
+              rounded-2xl
+              !border-transparent
+              bg-card
+              p-5
+              shadow-[0_12px_32px_rgba(0,0,0,0.08)]
+              ring-1
+              ring-inset
+              ring-black/[0.08]
+              sm:p-6
+              lg:-translate-y-2
+              lg:max-w-none
+              lg:place-self-start
+              lg:p-8
+              dark:ring-white/[0.06]
+              dark:shadow-[0_12px_32px_rgba(0,0,0,0.28)]
+            "
+          >
             {success ? (
               <div
                 role="status"
@@ -941,6 +974,7 @@ const DemoRequestSection = ({
           )}
         </div>
 
+        {/* Edge Forms oculto */}
         <div
           ref={embedContainerRef}
           className="hidden"
