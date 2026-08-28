@@ -71,20 +71,30 @@ const ComparisonCard = ({
           "flex-col",
           "rounded-2xl",
           "!border-transparent",
+
+          // Mesma superfície dos cards do ClassificationWorkflow
+          "bg-card",
+
           "p-6",
           "ring-1",
           "ring-inset",
+          "ring-black/[0.06]",
+
           "transition-[transform,translate,box-shadow,background-color]",
           "duration-300",
+
           "sm:p-8",
           "lg:p-9",
+
+          // Dark — igual ao ClassificationWorkflow
+          "dark:bg-surface-subtle",
+          "dark:text-surface-foreground",
+          "dark:ring-white/[0.07]",
         ],
         isAI
           ? [
               // Mobile: floating constante
               "-translate-y-2",
-              "bg-card",
-              "ring-black/[0.07]",
               "shadow-[0_12px_32px_rgba(0,0,0,0.08)]",
 
               // Tablet/desktop: estado normal
@@ -95,24 +105,20 @@ const ComparisonCard = ({
               "md:motion-safe:hover:-translate-y-2",
               "md:hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)]",
 
-              // Dark
-              "dark:bg-surface-raised",
-              "dark:ring-white/[0.08]",
+              // Dark mobile: floating constante
               "dark:shadow-[0_12px_32px_rgba(0,0,0,0.28)]",
+
+              // Dark tablet/desktop: normal
               "dark:md:shadow-none",
-              "dark:md:hover:bg-surface-raised-hover",
+
+              // Dark desktop: mesma mudança de cor do ClassificationWorkflow
+              "dark:md:hover:bg-surface-raised",
               "dark:md:hover:shadow-[0_12px_32px_rgba(0,0,0,0.28)]",
             ]
           : [
-              // Processo tradicional permanece normal
+              // Card tradicional permanece estático
               "translate-y-0",
-              "bg-muted",
-              "ring-black/[0.06]",
               "shadow-none",
-
-              // Dark
-              "dark:bg-surface-subtle",
-              "dark:ring-white/[0.07]",
             ]
       )}
     >
@@ -126,6 +132,7 @@ const ComparisonCard = ({
               bg-emerald-500/10
               text-emerald-600
               [&_svg]:hidden
+
               dark:bg-emerald-400/10
               dark:text-emerald-400
             "
@@ -140,6 +147,7 @@ const ComparisonCard = ({
               bg-foreground/[0.04]
               text-foreground/40
               [&_svg]:hidden
+
               dark:bg-white/[0.06]
               dark:text-white/70
             "
@@ -210,7 +218,8 @@ const OperationalBenefits = ({
   return (
     <section
       className={cn(
-        "bg-muted py-20 dark:bg-surface-subtle lg:py-24",
+        // Mesmo background do ClassificationWorkflow
+        "bg-muted/40 py-20 lg:py-24",
         className
       )}
     >
