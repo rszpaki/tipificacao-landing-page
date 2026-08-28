@@ -689,10 +689,6 @@ const DemoRequestSection = ({
                 onSubmit={handleSubmit}
                 className="flex flex-col gap-6"
               >
-                <p className="text-sm text-muted-foreground">
-                  Campos marcados com * são obrigatórios.
-                </p>
-
                 {/* Nome */}
                 <FormGroup>
                   <Label htmlFor="name">
