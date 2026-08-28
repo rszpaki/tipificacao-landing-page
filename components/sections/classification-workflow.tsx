@@ -37,19 +37,19 @@ const defaultProps: ClassificationWorkflowProps = {
   heading: "Da imagem à classificação com apoio da IA",
   features: [
     {
-      icon: <Smartphone className="size-5" />,
+      icon: <Smartphone className="size-5" aria-hidden="true" />,
       title: "Fotografe",
       description:
         "Com o smartphone, o operador registra a imagem da carcaça diretamente na linha de abate para iniciar a análise.",
     },
     {
-      icon: <ScanLine className="size-5" />,
+      icon: <ScanLine className="size-5" aria-hidden="true" />,
       title: "Analise",
       description:
         "A IA analisa a cobertura de gordura e a conformação muscular para apresentar uma sugestão de classificação ao operador.",
     },
     {
-      icon: <Check className="size-5" />,
+      icon: <Check className="size-5" aria-hidden="true" />,
       title: "Confirme",
       description:
         "O operador valida ou ajusta a sugestão da IA, mantendo a decisão final sob seu controle e todo o processo registrado no Frigosoft.",
