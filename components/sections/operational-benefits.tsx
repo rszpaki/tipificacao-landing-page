@@ -25,7 +25,7 @@ const defaultWithoutAI: ComparisonItem = {
   eyebrow: "Processo tradicional",
   title: "Sem tipificação por IA",
   description:
-    "A avaliação feita no olho pode gerar retrabalho, perda de tempo e diferenças que impactam a operação.",
+    "No processo tradicional, a classificação depende da avaliação visual realizada pelo operador.",
   items: [
     "Avaliação baseada apenas na percepção visual.",
     "Maior dependência da experiência de cada operador.",
@@ -39,7 +39,7 @@ const defaultWithAI: ComparisonItem = {
   eyebrow: "Processo seguro",
   title: "Com tipificação por IA",
   description:
-    "A IA traz mais controle para a classificação e mais segurança sobre o valor de cada carcaça.",
+    "A IA apoia a classificação, o operador mantém a decisão final e tudo fica registrado no Frigosoft.",
   items: [
     "Captura da carcaça pelo smartphone.",
     "Análise de gordura e conformação pela IA.",
@@ -250,8 +250,7 @@ const OperationalBenefits = ({
               </h3>
 
               <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground dark:text-surface-muted-foreground lg:text-lg">
-                As informações da tipificação são integradas ao Frigosoft e
-                ficam disponíveis no fluxo operacional.
+                As informações da tipificação são integradas ao Frigosoft e passam a fazer parte do fluxo operacional do frigorífico.
               </p>
             </div>
 

@@ -22,6 +22,9 @@ import { cn } from "@/lib/utils";
 const EMBED_SUCCESS_MESSAGE =
   "Parabéns pela decisão! Entraremos em contato logo mais";
 
+const SUCCESS_MESSAGE =
+  "Recebemos seus dados. Nossa equipe entrará em contato para entender sua operação e combinar a demonstração.";
+
 const SUBMISSION_CONFIRMATION_TIMEOUT_MS = 30_000;
 
 const SUBMISSION_CONFIRMATION_ERROR =
@@ -166,10 +169,10 @@ const getEmbedSubmissionOutcome = (
 };
 
 const DemoRequestSection = ({
-  badge = "Agende uma demonstração",
+  badge = "Solicite uma demonstração",
   heading = "Veja a tipificação de carcaças com IA na prática",
   benefits = [
-    "Conheça o fluxo de análise, validação do operador e integração das informações ao Frigosoft.",
+    "Preencha seus dados. Nossa equipe entrará em contato para entender sua operação e combinar a demonstração.",
   ],
   companies = [],
   className,
@@ -580,11 +583,11 @@ const DemoRequestSection = ({
                   tabIndex={-1}
                   className="text-2xl font-semibold outline-none"
                 >
-                  Solicitação enviada
+                  Solicitação recebida
                 </h3>
 
                 <p className="max-w-md text-muted-foreground">
-                  {EMBED_SUCCESS_MESSAGE}
+                  {SUCCESS_MESSAGE}
                 </p>
 
                 <Button
@@ -602,6 +605,10 @@ const DemoRequestSection = ({
                 onSubmit={handleSubmit}
                 className="flex flex-col gap-6"
               >
+                <p className="text-sm text-muted-foreground">
+                  Campos marcados com * são obrigatórios.
+                </p>
+
                 {/* Nome */}
                 <FormGroup>
                   <Label htmlFor="name">
@@ -837,7 +844,7 @@ const DemoRequestSection = ({
                 <FormGroup>
                   <Label htmlFor={employeeRangeId}>
                     <span>
-                      Número de colaboradores da empresa{" "}
+                      Número de colaboradores{" "}
                       <span aria-hidden="true">*</span>
                     </span>
                   </Label>
@@ -877,35 +884,35 @@ const DemoRequestSection = ({
                         value="1 a 50 funcionários"
                         className={FORM_CONTROL_TEXT_CLASS}
                       >
-                        1 a 50 funcionários
+                        1 a 50 colaboradores
                       </SelectItem>
 
                       <SelectItem
                         value="51 a 100 funcionários"
                         className={FORM_CONTROL_TEXT_CLASS}
                       >
-                        51 a 100 funcionários
+                        51 a 100 colaboradores
                       </SelectItem>
 
                       <SelectItem
                         value="101 a 200 funcionários"
                         className={FORM_CONTROL_TEXT_CLASS}
                       >
-                        101 a 200 funcionários
+                        101 a 200 colaboradores
                       </SelectItem>
 
                       <SelectItem
                         value="201 a 500 funcionários"
                         className={FORM_CONTROL_TEXT_CLASS}
                       >
-                        201 a 500 funcionários
+                        201 a 500 colaboradores
                       </SelectItem>
 
                       <SelectItem
                         value="Mais de 500 funcionários"
                         className={FORM_CONTROL_TEXT_CLASS}
                       >
-                        Mais de 500 funcionários
+                        Mais de 500 colaboradores
                       </SelectItem>
                     </SelectContent>
                   </Select>
@@ -923,7 +930,7 @@ const DemoRequestSection = ({
                 {/* Mensagem */}
                 <FormGroup>
                   <Label htmlFor="message">
-                    Como podemos ajudar?
+                    Como podemos ajudar? (opcional)
                   </Label>
 
                   <Textarea
@@ -958,7 +965,7 @@ const DemoRequestSection = ({
                   disabled={isSubmitting}
                   className="h-11 w-full cursor-pointer disabled:cursor-not-allowed"
                 >
-                  {isSubmitting ? "Enviando…" : "Agendar demonstração"}
+                  {isSubmitting ? "Enviando…" : "Solicitar demonstração"}
 
                   {!isSubmitting && (
                     <ArrowRight className="size-4" aria-hidden="true" />

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "Use inteligência artificial para apoiar a tipificação de carcaças, analisar cobertura de gordura e conformação e integrar os dados ao Frigosoft.",
 
   alternates: {
-    canonical: "/",
+    canonical: "https://tipificacao.atak.com.br/",
   },
 
   robots: {
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "pt_BR",
-    url: "https://tipificacao.atak.com.br",
+    url: "https://tipificacao.atak.com.br/",
     siteName: "Atak Sistemas",
 
     title: "Tipificação de Carcaças com IA para Frigoríficos | Atak",

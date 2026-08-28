@@ -57,7 +57,7 @@ const defaultProps: ClassificationWorkflowProps = {
   ],
   buttons: {
     primary: {
-      text: "Agendar uma demonstração",
+      text: "Solicitar uma demonstração",
       url: "#demonstracao",
     },
   },
