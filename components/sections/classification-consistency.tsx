@@ -34,7 +34,7 @@ const defaultProps: FeatureSingleFocusProps = {
     "A solução registra a sugestão gerada pela IA e a classificação validada ou ajustada pelo operador, mantendo as informações disponíveis no fluxo do Frigosoft.",
   buttons: {
     primary: {
-      text: "Agendar uma demonstração",
+      text: "Solicitar uma demonstração",
       url: "#demonstracao",
     },
   },

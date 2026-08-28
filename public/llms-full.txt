@@ -2,7 +2,7 @@
 
 > Conteúdo textual consolidado da landing page da Atak Sistemas sobre Tipificação de Carcaças com IA.
 
-Última atualização: 2026-08-21
+Última atualização: 2026-08-28
 
 Página canônica: https://tipificacao.atak.com.br/
 
@@ -46,7 +46,7 @@ A classificação confirmada pelo operador segue no fluxo operacional. A sugest�
 
 ## Sem Tipificação por IA
 
-No processo tradicional, a classificação de cobertura de gordura e conformação depende da avaliação manual do operador.
+No processo tradicional, a classificação depende da avaliação visual realizada pelo operador.
 
 Características do fluxo:
 - avaliação visual da carcaça;

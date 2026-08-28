@@ -18,8 +18,8 @@ interface HeroProps {
 const defaultProps = {
   heading: "Tipificação de carcaças com inteligência artificial",
   description:
-    "A IA analisa cobertura de gordura e conformação, sugere a classificação e conecta o resultado ao Frigosoft para uma operação mais orientada por dados.",
-  buttonText: "Agendar uma demonstração",
+    "A Tipificação de Carcaças com IA é um módulo do Frigosoft, da Atak Sistemas. A IA analisa cobertura de gordura e conformação, apresenta uma sugestão de classificação ao operador e integra as informações ao fluxo do sistema.",
+  buttonText: "Solicitar uma demonstração",
   buttonUrl: "#demonstracao",
   imageSrc: "/images/hero/atak-hero-img.png",
   imageAlt:
