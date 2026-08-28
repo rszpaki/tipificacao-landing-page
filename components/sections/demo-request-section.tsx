@@ -128,6 +128,8 @@ type ValidatedField = Exclude<keyof FormData, "message">;
 
 type FieldErrors = Partial<Record<ValidatedField, string>>;
 
+type TouchedFields = Partial<Record<ValidatedField, boolean>>;
+
 type EmbedSubmissionOutcome = "success" | "error" | null;
 
 const getEmbedSubmissionOutcome = (
@@ -186,6 +188,8 @@ const DemoRequestSection = ({
   > | null>(null);
 
   const dataLayerStartIndexRef = useRef(0);
+  const companySegmentValueRef = useRef("");
+  const employeeRangeValueRef = useRef("");
 
   const nameErrorId = useId();
   const emailErrorId = useId();
@@ -201,6 +205,7 @@ const DemoRequestSection = ({
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+  const [touchedFields, setTouchedFields] = useState<TouchedFields>({});
 
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -279,6 +284,9 @@ const DemoRequestSection = ({
         setIsSubmitting(false);
         setError("");
         setFieldErrors({});
+        setTouchedFields({});
+        companySegmentValueRef.current = "";
+        employeeRangeValueRef.current = "";
 
         setFormData({
           name: "",
@@ -328,7 +336,79 @@ const DemoRequestSection = ({
     }
   }, [success]);
 
+  const getTextFieldError = (
+    field: Exclude<ValidatedField, "companySegment" | "employeeRange">,
+    input: HTMLInputElement
+  ) => {
+    if (!input.value.trim()) {
+      return "Este campo é obrigatório.";
+    }
+
+    if (field === "email" && input.validity.typeMismatch) {
+      return "Informe um e-mail válido.";
+    }
+
+    if (!input.validity.valid) {
+      return field === "phone"
+        ? "Informe um telefone válido."
+        : "Este campo é obrigatório.";
+    }
+
+    return undefined;
+  };
+
+  const validateTextField = (
+    field: Exclude<ValidatedField, "companySegment" | "employeeRange">,
+    input: HTMLInputElement
+  ) => {
+    const fieldError = getTextFieldError(field, input);
+
+    setFieldErrors((previous) => ({
+      ...previous,
+      [field]: fieldError,
+    }));
+  };
+
+  const handleTextFieldBlur = (
+    field: Exclude<ValidatedField, "companySegment" | "employeeRange">,
+    input: HTMLInputElement
+  ) => {
+    setTouchedFields((previous) => ({
+      ...previous,
+      [field]: true,
+    }));
+
+    validateTextField(field, input);
+  };
+
+  const handleRequiredSelectClose = (
+    field: "companySegment" | "employeeRange"
+  ) => {
+    const value =
+      field === "companySegment"
+        ? companySegmentValueRef.current
+        : employeeRangeValueRef.current;
+
+    setTouchedFields((previous) => ({
+      ...previous,
+      [field]: true,
+    }));
+
+    setFieldErrors((previous) => ({
+      ...previous,
+      [field]: value ? undefined : "Este campo é obrigatório.",
+    }));
+  };
+
   const updateField = (field: keyof FormData, value: string) => {
+    if (field === "companySegment") {
+      companySegmentValueRef.current = value;
+    }
+
+    if (field === "employeeRange") {
+      employeeRangeValueRef.current = value;
+    }
+
     setFormData((previous) => ({
       ...previous,
       [field]: value,
@@ -340,8 +420,19 @@ const DemoRequestSection = ({
     if (field !== "message") {
       setFieldErrors((previous) => ({
         ...previous,
-        [field]: undefined,
+        [field]: value ? undefined : previous[field],
       }));
+    }
+  };
+
+  const handleTextFieldChange = (
+    field: Exclude<ValidatedField, "companySegment" | "employeeRange">,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    updateField(field, event.target.value);
+
+    if (touchedFields[field]) {
+      validateTextField(field, event.target);
     }
   };
 
@@ -389,35 +480,28 @@ const DemoRequestSection = ({
       "company"
     ) as HTMLInputElement;
 
-    if (!nameInput.validity.valid) {
-      validationErrors.name = "Informe seu nome.";
-    }
-
-    if (!emailInput.validity.valid) {
-      validationErrors.email = emailInput.validity.typeMismatch
-        ? "Informe um e-mail válido."
-        : "Informe seu e-mail.";
-    }
-
-    if (!phoneInput.validity.valid) {
-      validationErrors.phone = "Informe seu telefone.";
-    }
-
-    if (!companyInput.validity.valid) {
-      validationErrors.company = "Informe o nome da empresa.";
-    }
+    validationErrors.name = getTextFieldError("name", nameInput);
+    validationErrors.email = getTextFieldError("email", emailInput);
+    validationErrors.phone = getTextFieldError("phone", phoneInput);
+    validationErrors.company = getTextFieldError("company", companyInput);
 
     if (!formData.companySegment) {
-      validationErrors.companySegment =
-        "Selecione o segmento da empresa.";
+      validationErrors.companySegment = "Este campo é obrigatório.";
     }
 
     if (!formData.employeeRange) {
-      validationErrors.employeeRange =
-        "Selecione o número de colaboradores.";
+      validationErrors.employeeRange = "Este campo é obrigatório.";
     }
 
     setFieldErrors(validationErrors);
+    setTouchedFields({
+      name: true,
+      email: true,
+      phone: true,
+      company: true,
+      companySegment: true,
+      employeeRange: true,
+    });
 
     const fieldOrder: ValidatedField[] = [
       "name",
@@ -630,7 +714,10 @@ const DemoRequestSection = ({
                     placeholder="Seu nome"
                     value={formData.name}
                     onChange={(event) =>
-                      updateField("name", event.target.value)
+                      handleTextFieldChange("name", event)
+                    }
+                    onBlur={(event) =>
+                      handleTextFieldBlur("name", event.currentTarget)
                     }
                     className={cn(
                       "bg-background",
@@ -641,7 +728,7 @@ const DemoRequestSection = ({
                   {fieldErrors.name && (
                     <p
                       id={nameErrorId}
-                      className="text-sm text-destructive"
+                      className="text-xs text-destructive"
                     >
                       {fieldErrors.name}
                     </p>
@@ -671,7 +758,10 @@ const DemoRequestSection = ({
                       placeholder="voce@empresa.com.br"
                       value={formData.email}
                       onChange={(event) =>
-                        updateField("email", event.target.value)
+                        handleTextFieldChange("email", event)
+                      }
+                      onBlur={(event) =>
+                        handleTextFieldBlur("email", event.currentTarget)
                       }
                       className={cn(
                         "bg-background",
@@ -682,7 +772,7 @@ const DemoRequestSection = ({
                     {fieldErrors.email && (
                       <p
                         id={emailErrorId}
-                        className="text-sm text-destructive"
+                        className="text-xs text-destructive"
                       >
                         {fieldErrors.email}
                       </p>
@@ -709,7 +799,10 @@ const DemoRequestSection = ({
                       placeholder="(00) 00000-0000"
                       value={formData.phone}
                       onChange={(event) =>
-                        updateField("phone", event.target.value)
+                        handleTextFieldChange("phone", event)
+                      }
+                      onBlur={(event) =>
+                        handleTextFieldBlur("phone", event.currentTarget)
                       }
                       className={cn(
                         "bg-background",
@@ -720,7 +813,7 @@ const DemoRequestSection = ({
                     {fieldErrors.phone && (
                       <p
                         id={phoneErrorId}
-                        className="text-sm text-destructive"
+                        className="text-xs text-destructive"
                       >
                         {fieldErrors.phone}
                       </p>
@@ -749,7 +842,10 @@ const DemoRequestSection = ({
                     placeholder="Nome da empresa"
                     value={formData.company}
                     onChange={(event) =>
-                      updateField("company", event.target.value)
+                      handleTextFieldChange("company", event)
+                    }
+                    onBlur={(event) =>
+                      handleTextFieldBlur("company", event.currentTarget)
                     }
                     className={cn(
                       "bg-background",
@@ -760,7 +856,7 @@ const DemoRequestSection = ({
                   {fieldErrors.company && (
                     <p
                       id={companyErrorId}
-                      className="text-sm text-destructive"
+                      className="text-xs text-destructive"
                     >
                       {fieldErrors.company}
                     </p>
@@ -781,6 +877,11 @@ const DemoRequestSection = ({
                     onValueChange={(value) =>
                       updateField("companySegment", value ?? "")
                     }
+                    onOpenChange={(open) => {
+                      if (!open) {
+                        handleRequiredSelectClose("companySegment");
+                      }
+                    }}
                   >
                     <SelectTrigger
                       id={companySegmentId}
@@ -833,7 +934,7 @@ const DemoRequestSection = ({
                   {fieldErrors.companySegment && (
                     <p
                       id={companySegmentErrorId}
-                      className="text-sm text-destructive"
+                      className="text-xs text-destructive"
                     >
                       {fieldErrors.companySegment}
                     </p>
@@ -854,6 +955,11 @@ const DemoRequestSection = ({
                     onValueChange={(value) =>
                       updateField("employeeRange", value ?? "")
                     }
+                    onOpenChange={(open) => {
+                      if (!open) {
+                        handleRequiredSelectClose("employeeRange");
+                      }
+                    }}
                   >
                     <SelectTrigger
                       id={employeeRangeId}
@@ -920,7 +1026,7 @@ const DemoRequestSection = ({
                   {fieldErrors.employeeRange && (
                     <p
                       id={employeeRangeErrorId}
-                      className="text-sm text-destructive"
+                      className="text-xs text-destructive"
                     >
                       {fieldErrors.employeeRange}
                     </p>
