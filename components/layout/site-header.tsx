@@ -77,7 +77,7 @@ const SiteHeader = ({
           <a
             href={logo.url}
             aria-label={logo.title}
-            className="flex h10 items-center"
+            className="flex h10 items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             {/* eslint-disable-next-line @next/next/no-img-element -- logo.src is configurable and may point to an external URL */}
             <img
@@ -110,6 +110,11 @@ const SiteHeader = ({
               border
               border-border
               bg-muted
+              focus-visible:outline-none
+              focus-visible:ring-2
+              focus-visible:ring-ring
+              focus-visible:ring-offset-2
+              focus-visible:ring-offset-background
               disabled:cursor-default
             "
           >
@@ -117,7 +122,7 @@ const SiteHeader = ({
             <span
               className={cn(
                 "absolute left-[3px] top-[3px] size-8 rounded-full bg-background shadow-sm",
-                "transition-transform duration-300 ease-out",
+                "transition-transform duration-300 ease-out motion-reduce:transition-none",
                 isDark && "translate-x-[37px]"
               )}
             />
@@ -126,7 +131,7 @@ const SiteHeader = ({
             <span
               className={cn(
                 "absolute left-[3px] top-[3px] z-10 grid size-8 place-items-center",
-                "transition-colors duration-300",
+                "transition-colors duration-300 motion-reduce:transition-none",
                 mounted
                   ? isDark
                     ? "text-muted-foreground"
@@ -145,7 +150,7 @@ const SiteHeader = ({
             <span
               className={cn(
                 "absolute right-[2px] top-[3px] z-10 grid size-8 place-items-center",
-                "transition-colors duration-300",
+                "transition-colors duration-300 motion-reduce:transition-none",
                 mounted
                   ? isDark
                     ? "text-foreground"

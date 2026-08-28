@@ -66,6 +66,7 @@ const TipificationHero = ({
                 <ArrowRight
                   className="size-4"
                   strokeWidth={1.75}
+                  aria-hidden="true"
                 />
               </Button>
             </div>

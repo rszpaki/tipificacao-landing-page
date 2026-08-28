@@ -25,7 +25,7 @@ const defaultWithoutAI: ComparisonItem = {
   eyebrow: "Processo tradicional",
   title: "Sem tipificação por IA",
   description:
-    "A avaliação feita no olho pode gerar retrabalho, perda de tempo e diferenças de classificação que impactam a operação.",
+    "A avaliação feita no olho pode gerar retrabalho, perda de tempo e diferenças que impactam a operação.",
   items: [
     "Avaliação baseada apenas na percepção visual.",
     "Maior dependência da experiência de cada operador.",
@@ -137,8 +137,8 @@ const ComparisonCard = ({
             variant="turbo"
             contrast="low"
             className="
-              bg-foreground/[0.05]
-              text-foreground/70
+              bg-foreground/[0.04]
+              text-foreground/40
               [&_svg]:hidden
               dark:bg-white/[0.06]
               dark:text-white/70

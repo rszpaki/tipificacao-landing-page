@@ -555,7 +555,7 @@ const DemoRequestSection = ({
               shadow-[0_12px_32px_rgba(0,0,0,0.08)]
               ring-1
               ring-inset
-              ring-black/[0.08]
+              ring-black/[0.06]
               sm:p-6
               lg:-translate-y-2
               lg:max-w-none
@@ -655,6 +655,7 @@ const DemoRequestSection = ({
                       name="email"
                       type="email"
                       autoComplete="email"
+                      spellCheck={false}
                       required
                       aria-invalid={Boolean(fieldErrors.email)}
                       aria-describedby={
@@ -957,10 +958,10 @@ const DemoRequestSection = ({
                   disabled={isSubmitting}
                   className="h-11 w-full cursor-pointer disabled:cursor-not-allowed"
                 >
-                  {isSubmitting ? "Enviando..." : "Agendar demonstração"}
+                  {isSubmitting ? "Enviando…" : "Agendar demonstração"}
 
                   {!isSubmitting && (
-                    <ArrowRight className="size-4" />
+                    <ArrowRight className="size-4" aria-hidden="true" />
                   )}
                 </Button>
               </form>
