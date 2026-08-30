@@ -216,11 +216,11 @@ const OperationalBenefits = ({
 }: OperationalBenefitsProps) => {
   return (
     <section
-      className={cn(
-        "bg-muted py-20 dark:bg-surface-subtle lg:py-24",
-        className
-      )}
-    >
+  className={cn(
+    "bg-muted/40 py-20 lg:py-24",
+    className
+  )}
+>
       <div className="container mx-auto">
         {/* Comparativo */}
         <div className="mx-auto mb-14 flex max-w-3xl flex-col items-center text-center">
