@@ -81,10 +81,12 @@ const ComparisonCard = ({
         ],
         isAI
           ? [
+              // Mesmo padrão dos cards do ClassificationWorkflow
+              "bg-card",
+              "ring-black/[0.06]",
+
               // Mobile: floating constante
               "-translate-y-2",
-              "bg-card",
-              "ring-black/[0.07]",
               "shadow-[0_12px_32px_rgba(0,0,0,0.08)]",
 
               // Tablet/desktop: estado normal
@@ -95,23 +97,28 @@ const ComparisonCard = ({
               "md:motion-safe:hover:-translate-y-2",
               "md:hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)]",
 
-              // Dark
-              "dark:bg-surface-raised",
-              "dark:ring-white/[0.08]",
+              // Dark: igual ao ClassificationWorkflow
+              "dark:bg-surface-subtle",
+              "dark:text-surface-foreground",
+              "dark:ring-white/[0.07]",
               "dark:shadow-[0_12px_32px_rgba(0,0,0,0.28)]",
+
+              // Dark desktop: repouso
               "dark:md:shadow-none",
-              "dark:md:hover:bg-surface-raised-hover",
+
+              // Dark desktop: floating + mudança de superfície
+              "dark:md:hover:bg-surface-raised",
               "dark:md:hover:shadow-[0_12px_32px_rgba(0,0,0,0.28)]",
             ]
           : [
-              // Processo tradicional permanece normal
+              // Processo tradicional acompanha o fundo da seção
               "translate-y-0",
-              "bg-muted",
+              "bg-transparent",
               "ring-black/[0.06]",
               "shadow-none",
 
-              // Dark
-              "dark:bg-surface-subtle",
+              // Dark também acompanha diretamente o fundo
+              "dark:bg-transparent",
               "dark:ring-white/[0.07]",
             ]
       )}
@@ -137,7 +144,7 @@ const ComparisonCard = ({
             variant="turbo"
             contrast="low"
             className="
-              bg-foreground/[0.04]
+              bg-foreground/[0.03]
               text-foreground/40
               [&_svg]:hidden
               dark:bg-white/[0.06]

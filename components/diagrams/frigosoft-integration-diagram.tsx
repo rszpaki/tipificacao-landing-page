@@ -102,6 +102,18 @@ export function FrigosoftIntegrationDiagram({
     ? "vertical"
     : "horizontal";
 
+  const beamProps = {
+  duration: 3,
+  orientation,
+
+  // Mantém exatamente as cores originais do AnimatedBeam
+  pathColor: "var(--integration-line)",
+  pathOpacity: 0.08,
+
+  gradientStartColor: "var(--integration-gradient-start)",
+  gradientStopColor: "var(--integration-gradient-end)",
+} as const;
+
   return (
     <div
       ref={containerRef}
@@ -223,40 +235,35 @@ export function FrigosoftIntegrationDiagram({
         containerRef={containerRef}
         fromRef={smartphoneRef}
         toRef={frigosoftRef}
-        duration={3}
-        orientation={orientation}
+        {...beamProps}
       />
 
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={frigosoftRef}
         toRef={beefRef}
-        duration={3}
-        orientation={orientation}
+        {...beamProps}
       />
 
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={frigosoftRef}
         toRef={priceRef}
-        duration={3}
-        orientation={orientation}
+        {...beamProps}
       />
 
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={frigosoftRef}
         toRef={packageRef}
-        duration={3}
-        orientation={orientation}
+        {...beamProps}
       />
 
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={frigosoftRef}
         toRef={truckRef}
-        duration={3}
-        orientation={orientation}
+        {...beamProps}
       />
     </div>
   );
