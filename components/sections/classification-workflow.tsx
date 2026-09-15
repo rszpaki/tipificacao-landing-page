@@ -4,8 +4,6 @@ import {
   Smartphone,
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { GeistBadge } from "@/components/ui/geist-badge";
 import { cn } from "@/lib/utils";
 
 interface FeatureIconListItem {
@@ -14,19 +12,10 @@ interface FeatureIconListItem {
   icon?: React.ReactNode;
 }
 
-interface ButtonProps {
-  text: string;
-  url: string;
-}
-
-interface Buttons {
-  primary?: ButtonProps;
-}
-
 interface FeatureIconListProps {
   heading: string;
+  description?: string;
   features?: FeatureIconListItem[];
-  buttons?: Buttons;
   className?: string;
 }
 
@@ -34,7 +23,9 @@ type ClassificationWorkflowProps = FeatureIconListProps;
 type Props = Partial<ClassificationWorkflowProps>;
 
 const defaultProps: ClassificationWorkflowProps = {
-  heading: "Da imagem à classificação com apoio da IA",
+  heading: "Classificação com apoio da IA",
+  description:
+    "Tecnologia na operação. Dados registrados no Frigosoft.",
   features: [
     {
       icon: <Smartphone className="size-5" aria-hidden="true" />,
@@ -46,27 +37,26 @@ const defaultProps: ClassificationWorkflowProps = {
       icon: <ScanLine className="size-5" aria-hidden="true" />,
       title: "Analise",
       description:
-        "A IA analisa a cobertura de gordura e a conformação muscular para apresentar uma sugestão de classificação ao operador.",
+        "A IA analisa a cobertura de gordura e a conformação muscular para apresentar uma sugestão de classificação.",
     },
     {
       icon: <Check className="size-5" aria-hidden="true" />,
       title: "Confirme",
       description:
-        "O operador valida ou ajusta a sugestão da IA, mantendo a decisão final sob seu controle e todo o processo registrado no Frigosoft.",
+        "O operador valida ou ajusta a sugestão da IA, mantendo a decisão sob seu controle e o registro no Frigosoft.",
     },
   ],
-  buttons: {
-    primary: {
-      text: "Solicitar uma demonstração",
-      url: "#demonstracao",
-    },
-  },
 };
 
 const MAX_FEATURES = 6;
 
 const ClassificationWorkflow = (props: Props) => {
-  const { heading, buttons, features, className } = {
+  const {
+    heading,
+    description,
+    features,
+    className,
+  } = {
     ...defaultProps,
     ...props,
   };
@@ -83,14 +73,16 @@ const ClassificationWorkflow = (props: Props) => {
       <div className="container mx-auto">
         {/* Cabeçalho */}
         {heading && (
-          <div className="mx-auto mb-16 flex max-w-3xl flex-col items-center gap-6 text-center">
-            <GeistBadge variant="turbo" contrast="low">
-              IA aplicada à tipificação
-            </GeistBadge>
-
+          <div className="mx-auto mb-16 flex max-w-3xl flex-col items-center text-center">
             <h2 className="text-balance text-[38px] font-medium leading-[1.08] tracking-tight lg:text-[48px]">
               {heading}
             </h2>
+
+            {description && (
+              <p className="mt-5 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground lg:text-lg">
+                {description}
+              </p>
+            )}
           </div>
         )}
 
@@ -103,7 +95,7 @@ const ClassificationWorkflow = (props: Props) => {
                 group
                 flex
                 h-full
-                -translate-y-2
+                -translate-y-1
                 flex-col
                 rounded-2xl
                 !border-transparent
@@ -113,21 +105,24 @@ const ClassificationWorkflow = (props: Props) => {
                 ring-1
                 ring-inset
                 ring-black/[0.06]
-                transition-[transform,translate,box-shadow,background-color]
+                transition-[transform,translate,background-color,box-shadow]
                 duration-300
 
                 md:translate-y-0
+                md:bg-transparent
                 md:shadow-none
                 md:motion-safe:hover:-translate-y-2
+                md:hover:bg-card
                 md:hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)]
 
-                dark:bg-surface-subtle
+                dark:bg-card
                 dark:text-surface-foreground
                 dark:ring-white/[0.07]
-                dark:shadow-[0_12px_32px_rgba(0,0,0,0.28)]
-                dark:md:shadow-none
-                dark:md:hover:bg-surface-raised
-                dark:md:hover:shadow-[0_12px_32px_rgba(0,0,0,0.28)]
+                dark:shadow-none
+
+                dark:md:bg-transparent
+                dark:md:hover:bg-[#212121]
+                dark:md:hover:shadow-none
               "
             >
               {/* Ícone */}
@@ -165,20 +160,6 @@ const ClassificationWorkflow = (props: Props) => {
             </div>
           ))}
         </div>
-
-        {/* CTA — 48px após os cards */}
-        {buttons?.primary?.url && (
-          <div className="mt-12 flex justify-center">
-            <Button
-              size="lg"
-              className="w-auto justify-center"
-              render={<a href={buttons.primary.url} />}
-              nativeButton={false}
-            >
-              {buttons.primary.text}
-            </Button>
-          </div>
-        )}
       </div>
     </section>
   );

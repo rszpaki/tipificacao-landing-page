@@ -1,12 +1,10 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import React, { useEffect, useId, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { GeistBadge } from "@/components/ui/geist-badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -171,10 +169,9 @@ const getEmbedSubmissionOutcome = (
 };
 
 const DemoRequestSection = ({
-  badge = "Solicite uma demonstração",
   heading = "Veja a tipificação de carcaças com IA na prática",
   benefits = [
-    "Preencha seus dados. Nossa equipe entrará em contato para entender sua operação e combinar a demonstração.",
+    "Preencha seus dados. Nossa equipe entrará em contato para entender sua operação e demonstrar como a IA pode transformar sua rotina.",
   ],
   companies = [],
   className,
@@ -494,6 +491,7 @@ const DemoRequestSection = ({
     }
 
     setFieldErrors(validationErrors);
+
     setTouchedFields({
       name: true,
       email: true,
@@ -604,10 +602,6 @@ const DemoRequestSection = ({
           {/* Conteúdo */}
           <div className="mx-auto flex w-full max-w-md flex-col lg:mx-0 lg:max-w-none">
             <div className="flex w-full flex-col items-center gap-7 lg:items-start">
-              <GeistBadge variant="turbo" contrast="low">
-                {badge}
-              </GeistBadge>
-
               <h2 className="w-full text-balance text-center text-[38px] font-medium leading-[1.08] tracking-tight lg:max-w-[30rem] lg:text-left lg:text-[48px]">
                 {heading}
               </h2>
@@ -649,7 +643,7 @@ const DemoRequestSection = ({
               lg:place-self-start
               lg:p-8
               dark:ring-white/[0.06]
-              dark:shadow-[0_12px_32px_rgba(0,0,0,0.28)]
+              dark:shadow-none
             "
           >
             {success ? (
@@ -1065,13 +1059,9 @@ const DemoRequestSection = ({
                   type="submit"
                   size="lg"
                   disabled={isSubmitting}
-                  className="h-11 w-full cursor-pointer disabled:cursor-not-allowed"
+                  className="h-12 w-full cursor-pointer disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? "Enviando…" : "Solicitar demonstração"}
-
-                  {!isSubmitting && (
-                    <ArrowRight className="size-4" aria-hidden="true" />
-                  )}
                 </Button>
               </form>
             )}

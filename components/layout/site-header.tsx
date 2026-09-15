@@ -86,7 +86,7 @@ const SiteHeader = ({
               width={logo.width}
               height={logo.height}
               className={cn(
-                "block h-4 w-auto dark:invert",
+                "block h-3.5 w-auto dark:invert",
                 logo.className
               )}
             />

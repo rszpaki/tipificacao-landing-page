@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
-import { GeistBadge } from "@/components/ui/geist-badge";
 import { cn } from "@/lib/utils";
 
 interface FeatureImage {
@@ -31,10 +30,10 @@ type Props = Partial<FeatureSingleFocusProps>;
 const defaultProps: FeatureSingleFocusProps = {
   heading: "Análise da IA. Decisão final do operador.",
   description:
-    "A solução registra a sugestão gerada pela IA e a classificação validada ou ajustada pelo operador, mantendo as informações disponíveis no fluxo do Frigosoft.",
+    "O sistema registra a sugestão da IA, a decisão do operador e mantém os dados registrados no fluxo do Frigosoft.",
   buttons: {
     primary: {
-      text: "Solicitar uma demonstração",
+      text: "Solicitar demonstração",
       url: "#demonstracao",
     },
   },
@@ -78,9 +77,6 @@ const ClassificationConsistency = (props: Props) => {
           <div className="order-1 flex min-w-0 flex-col items-center text-center lg:order-2 lg:items-start lg:text-left">
             {/* Badge + título */}
             <div className="mb-6 flex flex-col items-center gap-6 lg:items-start">
-              <GeistBadge variant="turbo" contrast="low">
-                IA aplicada à avaliação
-              </GeistBadge>
 
               <h2 className="text-balance text-[38px] font-medium leading-[1.08] tracking-tight lg:text-[48px]">
                 {heading}
