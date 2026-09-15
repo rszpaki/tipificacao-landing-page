@@ -25,77 +25,168 @@ interface FeatureSingleFocusProps {
   className?: string;
 }
 
-type Props = Partial<FeatureSingleFocusProps>;
+type ClassificationConsistencyProps = FeatureSingleFocusProps;
+type Props = Partial<ClassificationConsistencyProps>;
 
-const defaultProps: FeatureSingleFocusProps = {
+const defaultProps: ClassificationConsistencyProps = {
   heading: "Análise da IA. Decisão final do operador.",
   description:
-    "O sistema registra a sugestão da IA, a decisão do operador e mantém os dados registrados no fluxo do Frigosoft.",
+    "A solução registra a sugestão gerada pela IA e a classificação validada ou ajustada pelo operador, mantendo as informações disponíveis no fluxo do Frigosoft.",
+  image: {
+    src: "/images/atak-tipificacao-com-ia.png",
+    alt: "Operador utilizando a tipificação de carcaças com inteligência artificial",
+  },
   buttons: {
     primary: {
       text: "Solicitar demonstração",
       url: "#demonstracao",
     },
   },
-  image: {
-    src: "/images/atak-tipificacao-img.png",
-    alt: "Tipificação de carcaças com IA",
-  },
 };
 
 const ClassificationConsistency = (props: Props) => {
-  const { heading, description, image, buttons, className } = {
+  const {
+    heading,
+    description,
+    image,
+    buttons,
+    className,
+  } = {
     ...defaultProps,
     ...props,
   };
 
   return (
-    <section className={cn("overflow-hidden py-20 lg:py-24", className)}>
+    <section
+      className={cn(
+        "overflow-x-clip overflow-y-visible pt-20 lg:pt-24",
+        className
+      )}
+    >
       <div className="container mx-auto">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-24 xl:gap-32">
+        <div
+          className="
+            grid
+            items-stretch
+            gap-0
+
+            lg:min-h-[640px]
+            lg:grid-cols-2
+            lg:gap-24
+
+            xl:min-h-[680px]
+            xl:gap-32
+          "
+        >
           {/* Imagem */}
-          <div className="order-2 flex w-full items-center justify-center lg:order-1 lg:justify-start">
+          <div
+            className="
+              pointer-events-none
+              relative
+              z-0
+              order-2
+              min-h-[480px]
+              w-full
+              self-stretch
+
+              sm:min-h-[600px]
+
+              lg:order-1
+              lg:min-h-0
+            "
+          >
             <Image
               src={image.src}
               alt={image.alt}
               width={1288}
               height={2615}
-              sizes="(max-width: 639px) 246px, (max-width: 1023px) 257px, 320px"
+              sizes="(max-width: 639px) 280px, (max-width: 1023px) 340px, 520px"
+              decoding="async"
+              draggable={false}
               className="
-                h-auto
-                max-h-[500px]
-                w-auto
-                max-w-full
+                pointer-events-none
+                absolute
+                block
+                select-none
                 object-contain
-                sm:max-h-[520px]
-                lg:max-h-[650px]
+                object-bottom
+
+                /* MOBILE */
+                bottom-0
+                left-[50%]
+                h-[430px]
+                w-auto
+                max-w-none
+                -translate-x-1/2
+                translate-y-0
+                scale-[1.15]
+                origin-bottom-center
+
+                /* TABLET */
+                sm:bottom-0
+                sm:left-[50%]
+                sm:h-[520px]
+                sm:w-auto
+                sm:max-w-none
+                sm:-translate-x-1/2
+                sm:translate-y-0
+                sm:scale-[1.15]
+                sm:origin-bottom-center
+
+                /* DESKTOP */
+                lg:bottom-0
+                lg:left-0
+                lg:h-full
+                lg:w-auto
+                lg:max-w-none
+                lg:left-[-64px]
+                lg:translate-x-0
+                lg:translate-y-0
+                lg:scale-[1.08]
+                lg:origin-bottom-left
+
+                /* DESKTOP GRANDE */
+                xl:scale-[1.25]
               "
             />
           </div>
 
           {/* Conteúdo */}
-          <div className="order-1 flex min-w-0 flex-col items-center text-center lg:order-2 lg:items-start lg:text-left">
-            {/* Badge + título */}
-            <div className="mb-6 flex flex-col items-center gap-6 lg:items-start">
+          <div
+            className="
+              relative
+              z-10
+              order-1
+              flex
+              min-w-0
+              flex-col
+              items-center
+              gap-6
+              pb-8
+              text-center
 
-              <h2 className="text-balance text-[38px] font-medium leading-[1.08] tracking-tight lg:text-[48px]">
-                {heading}
-              </h2>
-            </div>
+              /* DESKTOP — POSIÇÃO DO TEXTO */
+              lg:order-2
+              lg:items-start
+              lg:justify-start
+              lg:pt-20
+              lg:pb-24
+              lg:text-left
+            "
+          >
+            <h2 className="max-w-xl text-balance text-[38px] font-medium leading-[1.08] tracking-tight lg:text-[48px]">
+              {heading}
+            </h2>
 
-            {/* Descrição */}
-            {description && (
-              <p className="mb-8 max-w-xl leading-relaxed text-muted-foreground lg:text-lg">
-                {description}
-              </p>
-            )}
+            <p className="max-w-xl text-base leading-relaxed text-muted-foreground lg:text-lg">
+              {description}
+            </p>
 
-            {/* CTA */}
-            {buttons?.primary && (
-              <div className="flex w-auto flex-col justify-center gap-2 sm:flex-row lg:justify-start">
+            {buttons?.primary?.url && (
+              <div className="mt-2">
                 <Button
-                  variant="default"
                   size="lg"
+                  className="w-auto font-regular"
                   render={<a href={buttons.primary.url} />}
                   nativeButton={false}
                 >
