@@ -31,7 +31,7 @@ type Props = Partial<ClassificationConsistencyProps>;
 const defaultProps: ClassificationConsistencyProps = {
   heading: "Análise da IA. Decisão final do operador.",
   description:
-    "A solução registra a sugestão gerada pela IA e a classificação validada ou ajustada pelo operador, mantendo as informações disponíveis no fluxo do Frigosoft.",
+    "O sistema registra a sugestão gerada pela IA e a classificação do operador, mantendo os dados disponíveis no fluxo do Frigosoft.",
   image: {
     src: "/images/atak-tipificacao-com-ia.png",
     alt: "Operador utilizando a tipificação de carcaças com inteligência artificial",
@@ -113,7 +113,7 @@ const ClassificationConsistency = (props: Props) => {
 
                 /* MOBILE */
                 bottom-0
-                left-[50%]
+                left-[60%]
                 h-[430px]
                 w-auto
                 max-w-none
@@ -178,7 +178,7 @@ const ClassificationConsistency = (props: Props) => {
               {heading}
             </h2>
 
-            <p className="max-w-xl text-base leading-relaxed text-muted-foreground lg:text-lg">
+            <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
               {description}
             </p>
 

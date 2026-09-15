@@ -87,7 +87,7 @@ const ClassificationWorkflow = (props: Props) => {
             </h2>
 
             {description && (
-              <p className="mt-5 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground lg:text-lg">
+              <p className="mt-5 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground">
                 {description}
               </p>
             )}
