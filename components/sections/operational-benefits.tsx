@@ -1,8 +1,5 @@
-import type { ReactNode } from "react";
-
 import { Check, X } from "lucide-react";
 
-import { FrigosoftIntegrationDiagram } from "@/components/diagrams/frigosoft-integration-diagram";
 import { GeistBadge } from "@/components/ui/geist-badge";
 import { cn } from "@/lib/utils";
 
@@ -17,7 +14,6 @@ interface OperationalBenefitsProps {
   description?: string;
   withoutAI?: ComparisonItem;
   withAI?: ComparisonItem;
-  footer?: ReactNode;
   className?: string;
 }
 
@@ -82,7 +78,7 @@ const ComparisonCard = ({
               "shadow-[0_12px_32px_rgba(0,0,0,0.08)]",
               "ring-black/[0.06]",
 
-              // Tablet/desktop: volta ao estado normal
+              // Tablet/desktop: estado normal
               "md:translate-y-0",
               "md:bg-transparent",
               "md:shadow-none",
@@ -92,27 +88,27 @@ const ComparisonCard = ({
               "md:hover:bg-card",
               "md:hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)]",
 
-              // Dark mode — mobile
+              // Dark mobile
               "dark:bg-card",
               "dark:text-surface-foreground",
               "dark:ring-white/[0.07]",
               "dark:shadow-none",
 
-              // Dark mode — desktop normal
+              // Dark desktop
               "dark:md:bg-transparent",
 
-              // Dark mode — hover
+              // Dark hover
               "dark:md:hover:bg-[#212121]",
               "dark:md:hover:shadow-none",
             ]
           : [
-              // Card da esquerda permanece integrado ao fundo
+              // Processo tradicional
               "translate-y-0",
               "bg-transparent",
               "ring-black/[0.06]",
               "shadow-none",
 
-              // Dark mode também permanece transparente
+              // Dark
               "dark:bg-transparent",
               "dark:ring-white/[0.07]",
             ]
@@ -199,7 +195,6 @@ const OperationalBenefits = ({
   description = "Menos subjetividade. Mais consistência na classificação.",
   withoutAI = defaultWithoutAI,
   withAI = defaultWithAI,
-  footer = <FrigosoftIntegrationDiagram />,
   className,
 }: OperationalBenefitsProps) => {
   return (
@@ -235,25 +230,6 @@ const OperationalBenefits = ({
             variant="ai"
           />
         </div>
-
-        {/* Integração com Frigosoft */}
-        {footer && (
-          <div className="mx-auto mt-20 grid w-full max-w-6xl items-center gap-10 lg:grid-cols-2 lg:gap-14">
-            <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-              <h3 className="max-w-md text-balance text-[34px] font-medium leading-[1.1] tracking-tight lg:text-[32px]">
-                Tudo conectado ao Frigosoft
-              </h3>
-
-              <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground dark:text-surface-muted-foreground lg:text-lg">
-                Da imagem da carcaça à classificação final, os dados ficam registrados no fluxo operacional do frigorífico.
-              </p>
-            </div>
-
-            <div className="w-full min-w-0">
-              {footer}
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );

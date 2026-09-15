@@ -1,9 +1,12 @@
+import type { ReactNode } from "react";
+
 import {
   Check,
   ScanLine,
   Smartphone,
 } from "lucide-react";
 
+import { FrigosoftIntegrationDiagram } from "@/components/diagrams/frigosoft-integration-diagram";
 import { cn } from "@/lib/utils";
 
 interface FeatureIconListItem {
@@ -16,6 +19,7 @@ interface FeatureIconListProps {
   heading: string;
   description?: string;
   features?: FeatureIconListItem[];
+  footer?: ReactNode;
   className?: string;
 }
 
@@ -46,6 +50,7 @@ const defaultProps: ClassificationWorkflowProps = {
         "O operador valida ou ajusta a sugestão da IA, mantendo a decisão sob seu controle e o registro no Frigosoft.",
     },
   ],
+  footer: <FrigosoftIntegrationDiagram />,
 };
 
 const MAX_FEATURES = 6;
@@ -55,6 +60,7 @@ const ClassificationWorkflow = (props: Props) => {
     heading,
     description,
     features,
+    footer,
     className,
   } = {
     ...defaultProps,
@@ -62,6 +68,8 @@ const ClassificationWorkflow = (props: Props) => {
   };
 
   const items = (features ?? []).slice(0, MAX_FEATURES);
+
+  const showFrigosoftIntegration = false;
 
   return (
     <section
@@ -160,6 +168,25 @@ const ClassificationWorkflow = (props: Props) => {
             </div>
           ))}
         </div>
+
+        {/* Integração com Frigosoft — desabilitada temporariamente */}
+        {showFrigosoftIntegration && footer && (
+          <div className="mx-auto mt-20 grid w-full max-w-6xl items-center gap-10 lg:grid-cols-2 lg:gap-14">
+            <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+              <h3 className="max-w-md text-balance text-[34px] font-medium leading-[1.1] tracking-tight lg:text-[32px]">
+                Tudo conectado ao Frigosoft
+              </h3>
+
+              <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground dark:text-surface-muted-foreground lg:text-lg">
+                Da imagem da carcaça à classificação final, os dados ficam registrados no fluxo operacional do frigorífico.
+              </p>
+            </div>
+
+            <div className="w-full min-w-0">
+              {footer}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
