@@ -1,8 +1,6 @@
-import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
-import { GeistBadge } from "@/components/ui/geist-badge";
 import { cn } from "@/lib/utils";
 
 interface HeroProps {
@@ -18,8 +16,8 @@ interface HeroProps {
 const defaultProps = {
   heading: "Tipificação de carcaças com inteligência artificial",
   description:
-    "A Tipificação de Carcaças com IA é um módulo do Frigosoft, da Atak Sistemas. A IA analisa cobertura de gordura e conformação, apresenta uma sugestão de classificação ao operador e integra as informações ao fluxo do sistema.",
-  buttonText: "Solicitar uma demonstração",
+    "A IA analisa cobertura de gordura e conformação, apresenta uma sugestão de classificação para o operador e integra os dados ao Frigosoft.",
+  buttonText: "Solicitar demonstração",
   buttonUrl: "#demonstracao",
   imageSrc: "/images/hero/atak-hero-img.png",
   imageAlt:
@@ -36,15 +34,16 @@ const TipificationHero = ({
   className,
 }: HeroProps) => {
   return (
-    <section className={cn("overflow-hidden py-20 lg:py-24", className)}>
+    <section
+      className={cn(
+        "overflow-hidden py-20 lg:py-24",
+        className
+      )}
+    >
       <div className="container mx-auto">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-24 xl:gap-32">
-          {/* Conteúdo */}
+          {/* Conteúdo textual */}
           <div className="flex min-w-0 flex-col items-center gap-6 text-center lg:items-start lg:text-left">
-            <GeistBadge variant="turbo" contrast="low">
-              IA integrada à operação
-            </GeistBadge>
-
             <h1 className="max-w-2xl text-[44px] font-medium leading-[1.04] tracking-tight sm:text-balance md:text-[56px] md:leading-[1.05] lg:text-wrap lg:text-[58px] xl:text-[64px]">
               {heading}
             </h1>
@@ -57,17 +56,11 @@ const TipificationHero = ({
             <div className="mt-2">
               <Button
                 size="lg"
-                className="w-auto font-semibold"
+                className="w-auto font-regular"
                 render={<a href={buttonUrl} />}
                 nativeButton={false}
               >
                 {buttonText}
-
-                <ArrowRight
-                  className="size-4"
-                  strokeWidth={1.75}
-                  aria-hidden="true"
-                />
               </Button>
             </div>
           </div>

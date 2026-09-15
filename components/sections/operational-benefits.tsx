@@ -9,12 +9,12 @@ import { cn } from "@/lib/utils";
 interface ComparisonItem {
   eyebrow: string;
   title: string;
-  description: string;
   items: string[];
 }
 
 interface OperationalBenefitsProps {
   heading?: string;
+  description?: string;
   withoutAI?: ComparisonItem;
   withAI?: ComparisonItem;
   footer?: ReactNode;
@@ -24,12 +24,10 @@ interface OperationalBenefitsProps {
 const defaultWithoutAI: ComparisonItem = {
   eyebrow: "Processo tradicional",
   title: "Sem tipificação por IA",
-  description:
-    "No processo tradicional, a classificação depende da avaliação visual realizada pelo operador.",
   items: [
-    "Avaliação baseada apenas na percepção visual.",
-    "Maior dependência da experiência de cada operador.",
-    "Conferências e ajustes podem consumir mais tempo.",
+    "Avaliação baseada na percepção visual.",
+    "Dependência da experiência de cada operador.",
+    "Conferências e ajustes consomem mais tempo.",
     "Classificação registrada de forma manual.",
     "Menos referência para comparar decisões.",
   ],
@@ -38,8 +36,6 @@ const defaultWithoutAI: ComparisonItem = {
 const defaultWithAI: ComparisonItem = {
   eyebrow: "Processo seguro",
   title: "Com tipificação por IA",
-  description:
-    "A IA apoia a classificação, o operador mantém a decisão final e tudo fica registrado no Frigosoft.",
   items: [
     "Captura da carcaça pelo smartphone.",
     "Análise de gordura e conformação pela IA.",
@@ -56,7 +52,6 @@ interface ComparisonCardProps extends ComparisonItem {
 const ComparisonCard = ({
   eyebrow,
   title,
-  description,
   items,
   variant,
 }: ComparisonCardProps) => {
@@ -74,50 +69,50 @@ const ComparisonCard = ({
           "p-6",
           "ring-1",
           "ring-inset",
-          "transition-[transform,translate,box-shadow,background-color]",
+          "transition-[transform,translate,background-color,box-shadow]",
           "duration-300",
           "sm:p-8",
           "lg:p-9",
         ],
         isAI
           ? [
-              // Mesmo padrão dos cards do ClassificationWorkflow
+              // Mobile: estado floating
+              "-translate-y-1",
               "bg-card",
+              "shadow-[0_12px_32px_rgba(0,0,0,0.08)]",
               "ring-black/[0.06]",
 
-              // Mobile: floating constante
-              "-translate-y-2",
-              "shadow-[0_12px_32px_rgba(0,0,0,0.08)]",
-
-              // Tablet/desktop: estado normal
+              // Tablet/desktop: volta ao estado normal
               "md:translate-y-0",
+              "md:bg-transparent",
               "md:shadow-none",
 
-              // Desktop: floating no hover
+              // Hover light
               "md:motion-safe:hover:-translate-y-2",
+              "md:hover:bg-card",
               "md:hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)]",
 
-              // Dark: igual ao ClassificationWorkflow
-              "dark:bg-surface-subtle",
+              // Dark mode — mobile
+              "dark:bg-card",
               "dark:text-surface-foreground",
               "dark:ring-white/[0.07]",
-              "dark:shadow-[0_12px_32px_rgba(0,0,0,0.28)]",
+              "dark:shadow-none",
 
-              // Dark desktop: repouso
-              "dark:md:shadow-none",
+              // Dark mode — desktop normal
+              "dark:md:bg-transparent",
 
-              // Dark desktop: floating + mudança de superfície
-              "dark:md:hover:bg-surface-raised",
-              "dark:md:hover:shadow-[0_12px_32px_rgba(0,0,0,0.28)]",
+              // Dark mode — hover
+              "dark:md:hover:bg-[#212121]",
+              "dark:md:hover:shadow-none",
             ]
           : [
-              // Processo tradicional acompanha o fundo da seção
+              // Card da esquerda permanece integrado ao fundo
               "translate-y-0",
               "bg-transparent",
               "ring-black/[0.06]",
               "shadow-none",
 
-              // Dark também acompanha diretamente o fundo
+              // Dark mode também permanece transparente
               "dark:bg-transparent",
               "dark:ring-white/[0.07]",
             ]
@@ -157,20 +152,12 @@ const ComparisonCard = ({
       </div>
 
       {/* Título */}
-      <h3 className="mt-6 text-[28px] font-medium leading-[1.1] tracking-tight sm:text-[30px]">
+      <h3 className="mt-6 text-[28px] font-medium leading-[1.1] tracking-tight sm:text-[24px]">
         {title}
       </h3>
 
-      {/* Descrição */}
-      <p className="mt-4 max-w-xl leading-relaxed text-muted-foreground dark:text-surface-muted-foreground">
-        {description}
-      </p>
-
-      {/* Divisor */}
-      <div className="my-7 h-px w-full bg-border/70" />
-
       {/* Itens */}
-      <ul className="flex flex-col gap-4">
+      <ul className="mt-7 flex flex-col gap-4">
         {items.map((item, index) => (
           <li
             key={`${title}-${index}`}
@@ -209,6 +196,7 @@ const ComparisonCard = ({
 
 const OperationalBenefits = ({
   heading = "O que muda na rotina de tipificação",
+  description = "Menos subjetividade. Mais consistência na classificação.",
   withoutAI = defaultWithoutAI,
   withAI = defaultWithAI,
   footer = <FrigosoftIntegrationDiagram />,
@@ -216,23 +204,23 @@ const OperationalBenefits = ({
 }: OperationalBenefitsProps) => {
   return (
     <section
-  className={cn(
-    "bg-muted/40 py-20 lg:py-24",
-    className
-  )}
->
+      className={cn(
+        "bg-muted/40 py-20 lg:py-24",
+        className
+      )}
+    >
       <div className="container mx-auto">
-        {/* Comparativo */}
+        {/* Cabeçalho */}
         <div className="mx-auto mb-14 flex max-w-3xl flex-col items-center text-center">
-          <div className="flex flex-col items-center gap-6">
-            <GeistBadge variant="turbo" contrast="low">
-              Comparativo operacional
-            </GeistBadge>
+          <h2 className="text-balance text-[38px] font-medium leading-[1.08] tracking-tight lg:text-[48px]">
+            {heading}
+          </h2>
 
-            <h2 className="text-balance text-[38px] font-medium leading-[1.08] tracking-tight lg:text-[48px]">
-              {heading}
-            </h2>
-          </div>
+          {description && (
+            <p className="mt-5 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground lg:text-lg">
+              {description}
+            </p>
+          )}
         </div>
 
         {/* Cards */}
@@ -252,12 +240,12 @@ const OperationalBenefits = ({
         {footer && (
           <div className="mx-auto mt-20 grid w-full max-w-6xl items-center gap-10 lg:grid-cols-2 lg:gap-14">
             <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-              <h3 className="max-w-md text-balance text-[34px] font-medium leading-[1.1] tracking-tight lg:text-[40px]">
+              <h3 className="max-w-md text-balance text-[34px] font-medium leading-[1.1] tracking-tight lg:text-[32px]">
                 Tudo conectado ao Frigosoft
               </h3>
 
               <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground dark:text-surface-muted-foreground lg:text-lg">
-                As informações da tipificação são integradas ao Frigosoft e passam a fazer parte do fluxo operacional do frigorífico.
+                Da imagem da carcaça à classificação final, os dados ficam registrados no fluxo operacional do frigorífico.
               </p>
             </div>
 
