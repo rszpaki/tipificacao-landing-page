@@ -16,12 +16,12 @@ interface HeroProps {
 const defaultProps = {
   heading: "Tipificação de carcaças com inteligência artificial",
   description:
-    "A IA analisa cobertura de gordura e conformação, apresenta uma sugestão de classificação para o operador e integra os dados ao Frigosoft.",
+    "A IA analisa cobertura de gordura e conformação, apresenta uma sugestão de classificação ao operador e integra os dados ao Frigosoft.",
   buttonText: "Solicitar demonstração",
   buttonUrl: "#demonstracao",
-  imageSrc: "/images/hero/atak-hero-img.png",
+  imageSrc: "/images/hero/atak-tipificacao-com-ia-hero.png",
   imageAlt:
-    "Tipificação de carcaças com IA integrada ao Frigosoft",
+    "Tipificação de carcaças com inteligência artificial integrada ao Frigosoft",
 };
 
 const TipificationHero = ({
@@ -36,14 +36,43 @@ const TipificationHero = ({
   return (
     <section
       className={cn(
-        "overflow-hidden py-20 lg:py-24",
+        "overflow-hidden pt-20 lg:pt-24",
         className
       )}
     >
       <div className="container mx-auto">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-24 xl:gap-32">
+        <div
+          className="
+            grid
+            items-stretch
+            gap-0
+
+            lg:min-h-[720px]
+            lg:grid-cols-2
+            lg:gap-24
+
+            xl:min-h-[680px]
+            xl:gap-32
+          "
+        >
           {/* Conteúdo textual */}
-          <div className="flex min-w-0 flex-col items-center gap-6 text-center lg:items-start lg:text-left">
+          <div
+            className="
+              flex
+              min-w-0
+              flex-col
+              items-center
+              gap-8
+              pb-8
+              text-center
+
+              lg:items-start
+              lg:justify-start
+              lg:pt-0
+              lg:pb-24
+              lg:text-left
+            "
+          >
             <h1 className="max-w-2xl text-[44px] font-medium leading-[1.04] tracking-tight sm:text-balance md:text-[56px] md:leading-[1.05] lg:text-wrap lg:text-[58px] xl:text-[64px]">
               {heading}
             </h1>
@@ -52,7 +81,6 @@ const TipificationHero = ({
               {description}
             </p>
 
-            {/* 24px do gap + 8px = 32px entre texto e CTA */}
             <div className="mt-2">
               <Button
                 size="lg"
@@ -66,23 +94,65 @@ const TipificationHero = ({
           </div>
 
           {/* Imagem */}
-          <div className="flex w-full items-center justify-center lg:justify-end">
+          <div
+            className="
+              relative
+              flex
+              min-h-[480px]
+              w-full
+              items-end
+              justify-center
+              self-stretch
+
+              sm:min-h-[500px]
+
+              lg:min-h-0
+              lg:justify-end
+            "
+          >
             <Image
               src={imageSrc}
               alt={imageAlt}
               width={1288}
               height={2615}
-              sizes="(max-width: 639px) 246px, (max-width: 1023px) 257px, 320px"
+              sizes="(max-width: 639px) 360px, (max-width: 1023px) 420px, 600px"
               preload
               decoding="async"
               className="
+                block
                 h-auto
-                max-h-[500px]
                 w-auto
                 max-w-full
                 object-contain
-                sm:max-h-[520px]
-                lg:max-h-[650px]
+                object-bottom
+
+                /* MOBILE */
+                -translate-x-16
+                -translate-y-10
+                scale-[1.5]
+                origin-bottom-center
+
+                /* TABLET */
+                sm:-translate-x-10
+                sm:-translate-y-10
+                sm:scale-[1.5]
+                sm:origin-bottom-center
+
+                /* DESKTOP */
+                lg:absolute
+                lg:bottom-0
+                lg:right-0
+                lg:h-[90%]
+                lg:w-auto
+                lg:max-w-none
+                lg:translate-x-16
+                lg:translate-y-0
+                lg:scale-[1.12]
+                lg:origin-bottom-right
+
+                /* DESKTOP GRANDE */
+                xl:h-[100%]
+                xl:scale-[1.08]
               "
             />
           </div>
