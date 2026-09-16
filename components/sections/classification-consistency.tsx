@@ -95,38 +95,33 @@ const ClassificationConsistency = (props: Props) => {
               lg:min-h-0
             "
           >
-            <Image
-              src={image.src}
-              alt={image.alt}
-              width={1288}
-              height={2615}
-              sizes="(max-width: 639px) 280px, (max-width: 1023px) 340px, 520px"
-              decoding="async"
-              draggable={false}
+            {/*
+              O wrapper controla tamanho e posicionamento.
+              Os valores abaixo preservam suas configurações atuais.
+            */}
+            <div
               className="
                 pointer-events-none
                 absolute
                 block
+                w-full
+                max-w-none
                 select-none
-                object-contain
-                object-bottom
 
                 /* MOBILE */
                 bottom-0
                 left-[60%]
                 h-[430px]
-                w-auto
-                max-w-none
                 -translate-x-1/2
                 translate-y-0
-                scale-[1.15]
-                origin-bottom-center
+                scale-[1.1]
+                origin-bottom
 
                 /* TABLET */
                 sm:bottom-0
                 sm:left-[50%]
                 sm:h-[520px]
-                sm:w-auto
+                sm:w-full
                 sm:max-w-none
                 sm:-translate-x-1/2
                 sm:translate-y-0
@@ -135,20 +130,37 @@ const ClassificationConsistency = (props: Props) => {
 
                 /* DESKTOP */
                 lg:bottom-0
-                lg:left-0
-                lg:h-full
-                lg:w-auto
-                lg:max-w-none
                 lg:left-[-64px]
+                lg:h-full
+                lg:w-full
+                lg:max-w-none
                 lg:translate-x-0
                 lg:translate-y-0
                 lg:scale-[1.08]
                 lg:origin-bottom-left
 
                 /* DESKTOP GRANDE */
-                xl:scale-[1.25]
+                xl:scale-[1.7]
               "
-            />
+            >
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                sizes="(max-width: 639px) 280px, (max-width: 1023px) 340px, 520px"
+                unoptimized
+                decoding="async"
+                draggable={false}
+                className="
+                  pointer-events-none
+                  select-none
+                  object-contain
+                  object-bottom
+
+                  lg:object-left-bottom
+                "
+              />
+            </div>
           </div>
 
           {/* Conteúdo */}

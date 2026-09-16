@@ -110,33 +110,27 @@ const TipificationHero = ({
               lg:justify-end
             "
           >
-            <Image
-              src={imageSrc}
-              alt={imageAlt}
-              width={1288}
-              height={2615}
-              sizes="(max-width: 639px) 360px, (max-width: 1023px) 420px, 600px"
-              preload
-              decoding="async"
+            {/*
+              Este wrapper controla SOMENTE o tamanho e a posição visual.
+              Os valores abaixo são exatamente os seus valores atuais.
+            */}
+            <div
               className="
-                block
-                h-auto
-                w-auto
-                max-w-full
-                object-contain
-                object-bottom
+                relative
 
                 /* MOBILE */
-                -translate-x-16
-                -translate-y-10
-                scale-[1.5]
+                w-full
+                max-w-full
+                -translate-x-24
+                -translate-y-6
+                scale-[1.15]
                 origin-bottom-center
 
                 /* TABLET */
-                sm:-translate-x-10
-                sm:-translate-y-10
-                sm:scale-[1.5]
-                sm:origin-bottom-center
+                sm:-translate-x-20
+                sm:-translate-y-0
+                sm:scale-[.95]
+                sm:origin-bottom
 
                 /* DESKTOP */
                 lg:absolute
@@ -154,7 +148,30 @@ const TipificationHero = ({
                 xl:h-[100%]
                 xl:scale-[1.08]
               "
-            />
+            >
+              <Image
+                src={imageSrc}
+                alt={imageAlt}
+                width={1288}
+                height={2615}
+                sizes="(max-width: 639px) 360px, (max-width: 1023px) 420px, 600px"
+                preload
+                unoptimized
+                decoding="async"
+                className="
+                  block
+                  h-auto
+                  w-full
+                  max-w-full
+                  object-contain
+                  object-bottom
+
+                  lg:h-full
+                  lg:w-auto
+                  lg:max-w-none
+                "
+              />
+            </div>
           </div>
         </div>
       </div>
