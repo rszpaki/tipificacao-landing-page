@@ -148,7 +148,7 @@ const ComparisonCard = ({
       </div>
 
       {/* Título */}
-      <h3 className="mt-6 text-[28px] font-medium leading-[1.1] tracking-tight sm:text-[24px]">
+      <h3 className="mt-6 text-[24px] font-medium leading-[1.1] tracking-tight sm:text-[24px]">
         {title}
       </h3>
 
@@ -191,7 +191,7 @@ const ComparisonCard = ({
 };
 
 const OperationalBenefits = ({
-  heading = "Uma nova forma de classificar cada carcaça",
+  heading = "Indústria atualizada",
   description = "A avaliação deixa de depender apenas da experiência do operador e passa a contar com análise da IA.",
   withoutAI = defaultWithoutAI,
   withAI = defaultWithAI,
@@ -207,7 +207,7 @@ const OperationalBenefits = ({
       <div className="container mx-auto">
         {/* Cabeçalho */}
         <div className="mx-auto mb-14 flex max-w-3xl flex-col items-center text-center">
-          <h2 className="text-balance text-[38px] font-medium leading-[1.08] tracking-tight lg:text-[48px]">
+          <h2 className="text-balance text-[32px] font-medium leading-[1.08] tracking-tight lg:text-[48px]">
             {heading}
           </h2>
 
