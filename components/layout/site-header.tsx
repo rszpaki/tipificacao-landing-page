@@ -41,6 +41,7 @@ const SiteHeader = ({
   );
 
   const isDark = mounted && resolvedTheme === "dark";
+
   const themeToggleLabel = isDark
     ? "Ativar tema claro"
     : "Ativar tema escuro";
@@ -99,7 +100,6 @@ const SiteHeader = ({
             disabled={!mounted}
             aria-label={themeToggleLabel}
             aria-pressed={isDark}
-            title={themeToggleLabel}
             className="
               relative
               h-10

@@ -27,9 +27,9 @@ type ClassificationWorkflowProps = FeatureIconListProps;
 type Props = Partial<ClassificationWorkflowProps>;
 
 const defaultProps: ClassificationWorkflowProps = {
-  heading: "Classificação com apoio da IA",
+  heading: "Mais tecnologia na operação",
   description:
-    "Tecnologia na operação. Dados registrados no Frigosoft.",
+    "A tipificação com IA entra no processo de forma simples, ajudando o operador e mantendo cada decisão registrada.",
   features: [
     {
       icon: <Smartphone className="size-5" aria-hidden="true" />,
