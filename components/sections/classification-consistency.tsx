@@ -29,9 +29,9 @@ type ClassificationConsistencyProps = FeatureSingleFocusProps;
 type Props = Partial<ClassificationConsistencyProps>;
 
 const defaultProps: ClassificationConsistencyProps = {
-  heading: "Análise da IA. Decisão final do operador.",
+  heading: "Mais segurança na classificação. Mais informação para a gestão.",
   description:
-    "O sistema registra a sugestão gerada pela IA e a classificação do operador, mantendo os dados disponíveis no fluxo do Frigosoft.",
+    "A IA ajuda na classificação das carcaças, e o Frigosoft mantém as decisões registradas para facilitar o acompanhamento da produção.",
   image: {
     src: "/images/atak-tipificacao-com-ia.png",
     alt: "Operador utilizando a tipificação de carcaças com inteligência artificial",
@@ -169,7 +169,7 @@ const ClassificationConsistency = (props: Props) => {
               lg:order-2
               lg:items-start
               lg:justify-start
-              lg:pt-20
+              lg:pt-0
               lg:pb-24
               lg:text-left
             "

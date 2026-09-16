@@ -191,8 +191,8 @@ const ComparisonCard = ({
 };
 
 const OperationalBenefits = ({
-  heading = "O que muda na rotina de tipificação",
-  description = "Menos subjetividade. Mais consistência na classificação.",
+  heading = "Uma nova forma de classificar cada carcaça",
+  description = "A avaliação deixa de depender apenas da experiência do operador e passa a contar com análise da IA.",
   withoutAI = defaultWithoutAI,
   withAI = defaultWithAI,
   className,
