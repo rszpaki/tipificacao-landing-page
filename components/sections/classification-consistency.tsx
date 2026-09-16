@@ -29,7 +29,7 @@ type ClassificationConsistencyProps = FeatureSingleFocusProps;
 type Props = Partial<ClassificationConsistencyProps>;
 
 const defaultProps: ClassificationConsistencyProps = {
-  heading: "Mais segurança na classificação. Mais informação para a gestão.",
+  heading: "Mais informação para a gestão.",
   description:
     "A IA ajuda na classificação das carcaças, e o Frigosoft mantém as decisões registradas para facilitar o acompanhamento da produção.",
   image: {
@@ -186,7 +186,7 @@ const ClassificationConsistency = (props: Props) => {
               lg:text-left
             "
           >
-            <h2 className="max-w-xl text-balance text-[38px] font-medium leading-[1.08] tracking-tight lg:text-[48px]">
+            <h2 className="max-w-xl text-balance text-[32px] font-medium leading-[1.08] tracking-tight lg:text-[48px]">
               {heading}
             </h2>
 

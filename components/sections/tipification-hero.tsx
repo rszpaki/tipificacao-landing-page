@@ -62,7 +62,7 @@ const TipificationHero = ({
               min-w-0
               flex-col
               items-center
-              gap-8
+              gap-5
               pb-8
               text-center
 
@@ -73,7 +73,7 @@ const TipificationHero = ({
               lg:text-left
             "
           >
-            <h1 className="max-w-2xl text-[44px] font-medium leading-[1.04] tracking-tight sm:text-balance md:text-[56px] md:leading-[1.05] lg:text-wrap lg:text-[58px] xl:text-[64px]">
+            <h1 className="max-w-2xl text-[32px] font-medium leading-[1.2] tracking-tight sm:text-balance md:text-[56px] md:leading-[1.05] lg:text-wrap lg:text-[58px] xl:text-[64px]">
               {heading}
             </h1>
 
@@ -121,10 +121,10 @@ const TipificationHero = ({
                 /* MOBILE */
                 w-full
                 max-w-full
-                -translate-x-24
-                -translate-y-6
-                scale-[1.15]
-                origin-bottom-center
+                -translate-x-20
+                -translate-y-0
+                scale-[1.35]
+                origin-bottom
 
                 /* TABLET */
                 sm:-translate-x-20

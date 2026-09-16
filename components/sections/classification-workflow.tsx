@@ -82,7 +82,7 @@ const ClassificationWorkflow = (props: Props) => {
         {/* Cabeçalho */}
         {heading && (
           <div className="mx-auto mb-16 flex max-w-3xl flex-col items-center text-center">
-            <h2 className="text-balance text-[38px] font-medium leading-[1.08] tracking-tight lg:text-[48px]">
+            <h2 className="text-balance text-[32px] font-medium leading-[1.08] tracking-tight lg:text-[48px]">
               {heading}
             </h2>
 
@@ -157,7 +157,7 @@ const ClassificationWorkflow = (props: Props) => {
               </div>
 
               {/* Título */}
-              <h3 className="mb-3 text-xl font-semibold">
+              <h3 className="mb-3 text-xl font-medium">
                 {feature.title}
               </h3>
 

@@ -169,9 +169,9 @@ const getEmbedSubmissionOutcome = (
 };
 
 const DemoRequestSection = ({
-  heading = "Veja a tipificação de carcaças com IA na prática",
+  heading = "Veja a solução na prática",
   benefits = [
-    "Preencha seus dados. Nossa equipe entrará em contato para entender sua operação e demonstrar como a IA pode transformar sua rotina.",
+    "Preencha seus dados. Nossa equipe entrará em contato para entender sua operação e demonstrar como a IA pode transformar a rotina da tipificação.",
   ],
   companies = [],
   className,
@@ -602,7 +602,7 @@ const DemoRequestSection = ({
           {/* Conteúdo */}
           <div className="mx-auto flex w-full max-w-md flex-col lg:mx-0 lg:max-w-none">
             <div className="flex w-full flex-col items-center gap-7 lg:items-start">
-              <h2 className="w-full text-balance text-center text-[38px] font-medium leading-[1.08] tracking-tight lg:max-w-[30rem] lg:text-left lg:text-[48px]">
+              <h2 className="w-full text-balance text-center text-[32px] font-medium leading-[1.08] tracking-tight lg:max-w-[30rem] lg:text-left lg:text-[48px]">
                 {heading}
               </h2>
             </div>
