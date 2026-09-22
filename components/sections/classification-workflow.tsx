@@ -27,9 +27,9 @@ type ClassificationWorkflowProps = FeatureIconListProps;
 type Props = Partial<ClassificationWorkflowProps>;
 
 const defaultProps: ClassificationWorkflowProps = {
-  heading: "Mais tecnologia na operação",
+  heading: "Simples na linha. Completo no processo",
   description:
-    "A tipificação com IA entra no processo de forma simples, ajudando o operador e mantendo cada decisão registrada.",
+    "Da captura da imagem ao registro da classificação, tudo acontece dentro do fluxo da operação.",
   features: [
     {
       icon: <Smartphone className="size-5" aria-hidden="true" />,

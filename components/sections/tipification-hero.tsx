@@ -16,7 +16,7 @@ interface HeroProps {
 const defaultProps = {
   heading: "Tipificação de carcaças com inteligência artificial",
   description:
-    "A IA analisa cobertura de gordura e conformação, apresenta uma sugestão de classificação ao operador e integra os dados ao Frigosoft.",
+    "A IA faz a análise da gordura e conformação em segundos. O operador decide se mantém a classificação. O frigosoft registra tudo.",
   buttonText: "Solicitar demonstração",
   buttonUrl: "#demonstracao",
   imageSrc: "/images/hero/atak-tipificacao-com-ia-hero.png",

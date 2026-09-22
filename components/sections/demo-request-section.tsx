@@ -169,9 +169,9 @@ const getEmbedSubmissionOutcome = (
 };
 
 const DemoRequestSection = ({
-  heading = "Veja a solução na prática",
+  heading = "Veja funcionando na sua operação",
   benefits = [
-    "Preencha seus dados. Nossa equipe entrará em contato para entender sua operação e demonstrar como a IA pode transformar a rotina da tipificação.",
+    "Conheça a tipificação com IA aplicada à rotina do frigorífico e integrada ao Frigosoft.",
   ],
   companies = [],
   className,

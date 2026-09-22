@@ -21,11 +21,11 @@ const defaultWithoutAI: ComparisonItem = {
   eyebrow: "Processo tradicional",
   title: "Sem tipificação por IA",
   items: [
-    "Avaliação baseada na percepção visual.",
-    "Dependência da experiência de cada operador.",
-    "Conferências e ajustes consomem mais tempo.",
-    "Classificação registrada de forma manual.",
-    "Menos referência para comparar decisões.",
+    "Avaliação subjetiva do operador.",
+    "Dependência da experiência externa.",
+    "Conferências durante o processo.",
+    "Registro manual da classificação.",
+    "Decisões sem base em dados.",
   ],
 };
 
@@ -33,11 +33,11 @@ const defaultWithAI: ComparisonItem = {
   eyebrow: "Processo seguro",
   title: "Com tipificação por IA",
   items: [
-    "Captura da carcaça pelo smartphone.",
-    "Análise de gordura e conformação pela IA.",
-    "Sugestão de classificação pela IA.",
-    "Decisão final mantida pelo operador.",
-    "Informação registrada no fluxo do Frigosoft.",
+    "O smartphone captura da imagem.",
+    "A IA faz a análise em segundos.",
+    "Uma sugestão é feita pela IA.",
+    "A decisão final é do operador.",
+    "Tudo fica registrado no Frigosoft.",
   ],
 };
 
@@ -191,8 +191,8 @@ const ComparisonCard = ({
 };
 
 const OperationalBenefits = ({
-  heading = "Indústria atualizada",
-  description = "A avaliação deixa de depender apenas da experiência do operador e passa a contar com análise da IA.",
+  heading = "Da percepção ao dado",
+  description = "A IA traz uma nova referência para a classificação, sem tirar do operador a decisão final.",
   withoutAI = defaultWithoutAI,
   withAI = defaultWithAI,
   className,
