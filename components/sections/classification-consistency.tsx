@@ -31,7 +31,7 @@ type Props = Partial<ClassificationConsistencyProps>;
 const defaultProps: ClassificationConsistencyProps = {
   heading: "Mais informação para decidir melhor",
   description:
-    "Com as informações registradas no Frigosoft, a operação ganha mais referência e a gestão ganha mais visibilidade.",
+    "Com as informações no Frigosoft, a operação ganha mais referência e a gestão ganha mais visibilidade.",
   image: {
     src: "/images/atak-tipificacao-com-ia.png",
     alt: "Operador utilizando a tipificação de carcaças com inteligência artificial",

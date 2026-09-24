@@ -88,13 +88,13 @@ const ComparisonCard = ({
               "md:hover:bg-card",
               "md:hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)]",
 
-              // Dark mobile
-              "dark:bg-card",
+              // Dark mobile: mesma cor do hover
+              "dark:bg-[#212121]",
               "dark:text-surface-foreground",
               "dark:ring-white/[0.07]",
               "dark:shadow-none",
 
-              // Dark desktop
+              // Dark tablet/desktop
               "dark:md:bg-transparent",
 
               // Dark hover
