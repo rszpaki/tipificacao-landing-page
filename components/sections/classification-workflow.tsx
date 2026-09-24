@@ -123,7 +123,7 @@ const ClassificationWorkflow = (props: Props) => {
                 md:hover:bg-card
                 md:hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)]
 
-                dark:bg-card
+                dark:bg-[#212121]
                 dark:text-surface-foreground
                 dark:ring-white/[0.07]
                 dark:shadow-none
