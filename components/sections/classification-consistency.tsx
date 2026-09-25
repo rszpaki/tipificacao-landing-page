@@ -31,7 +31,7 @@ type Props = Partial<ClassificationConsistencyProps>;
 const defaultProps: ClassificationConsistencyProps = {
   heading: "Mais informação para decidir melhor",
   description:
-    "Com as informações no Frigosoft, a operação ganha mais referência e a gestão ganha mais visibilidade.",
+    "Com as informações registradas no Frigosoft, a operação ganha mais referência e a gestão ganha mais visibilidade.",
   image: {
     src: "/images/atak-tipificacao-com-ia.png",
     alt: "Operador utilizando a tipificação de carcaças com inteligência artificial",
@@ -44,6 +44,8 @@ const defaultProps: ClassificationConsistencyProps = {
   },
 };
 
+const DESKTOP_BREAK_AFTER = "Frigosoft,";
+
 const ClassificationConsistency = (props: Props) => {
   const {
     heading,
@@ -55,6 +57,27 @@ const ClassificationConsistency = (props: Props) => {
     ...defaultProps,
     ...props,
   };
+
+  const breakIndex = description.indexOf(DESKTOP_BREAK_AFTER);
+
+  const descriptionContent =
+    breakIndex >= 0 ? (
+      <>
+        {description.slice(
+          0,
+          breakIndex + DESKTOP_BREAK_AFTER.length
+        )}
+
+        {/* Quebra somente no desktop */}
+        <br className="hidden lg:block" />
+
+        {description.slice(
+          breakIndex + DESKTOP_BREAK_AFTER.length
+        )}
+      </>
+    ) : (
+      description
+    );
 
   return (
     <section
@@ -95,10 +118,6 @@ const ClassificationConsistency = (props: Props) => {
               lg:min-h-0
             "
           >
-            {/*
-              O wrapper controla tamanho e posicionamento.
-              Os valores abaixo preservam suas configurações atuais.
-            */}
             <div
               className="
                 pointer-events-none
@@ -190,8 +209,8 @@ const ClassificationConsistency = (props: Props) => {
               {heading}
             </h2>
 
-            <p className="max-w-xl whitespace-pre-line text-lg leading-relaxed text-muted-foreground">
-              {description}
+            <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
+              {descriptionContent}
             </p>
 
             {buttons?.primary?.url && (
