@@ -110,10 +110,6 @@ const TipificationHero = ({
               lg:justify-end
             "
           >
-            {/*
-              Este wrapper controla SOMENTE o tamanho e a posição visual.
-              Os valores abaixo são exatamente os seus valores atuais.
-            */}
             <div
               className="
                 relative

@@ -1,41 +1,10 @@
 "use client";
 
-import {
-  useEffect,
-  useState,
-  useSyncExternalStore,
-} from "react";
+import { useSyncExternalStore } from "react";
 import { MoonStar, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { cn } from "@/lib/utils";
-
-/* ================================================================
-   CONTROLES DO FADE MOBILE
-   ================================================================ */
-
-/*
- * ALTURA DO FADE
- *
- * Quanto maior, mais longa fica a transição.
- *
- * Exemplos:
- * 100px = curto
- * 140px = equilibrado
- * 180px = mais longo
- */
-const MOBILE_FADE_HEIGHT = "140px";
-
-/*
- * VELOCIDADE PARA O FADE SUMIR QUANDO O FOOTER APARECE
- *
- * 300 = rápido
- * 500 = equilibrado
- * 700 = mais suave
- */
-const MOBILE_FADE_TRANSITION_MS = 500;
-
-/* ================================================================ */
 
 interface SiteHeaderProps {
   className?: string;
@@ -64,8 +33,6 @@ const SiteHeader = ({
   className,
 }: SiteHeaderProps) => {
   const { resolvedTheme, setTheme } = useTheme();
-
-  const [footerVisible, setFooterVisible] = useState(false);
 
   const mounted = useSyncExternalStore(
     subscribeToClientEnvironment,
@@ -100,35 +67,11 @@ const SiteHeader = ({
     });
   };
 
-  /*
-   * Quando o footer entra na viewport,
-   * o fade mobile desaparece.
-   */
-  useEffect(() => {
-    const footer = document.querySelector("footer");
-
-    if (!footer) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setFooterVisible(entry.isIntersecting);
-      },
-      {
-        threshold: 0.02,
-      }
-    );
-
-    observer.observe(footer);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
   return (
     <>
       {/* =========================================================
           HEADER FIXO
+
           Mobile + Desktop
           ========================================================= */}
       <header
@@ -301,51 +244,6 @@ const SiteHeader = ({
       <div
         aria-hidden="true"
         className="h-[89px]"
-      />
-
-      {/* =========================================================
-          FADE INFERIOR
-
-          SOMENTE MOBILE.
-
-          md:hidden faz o efeito desaparecer completamente
-          a partir de 768px.
-
-          CONTROLES:
-          - altura: MOBILE_FADE_HEIGHT
-          - velocidade: MOBILE_FADE_TRANSITION_MS
-          ========================================================= */}
-      <div
-        aria-hidden="true"
-        className={cn(
-          `
-            pointer-events-none
-            fixed
-            inset-x-0
-            bottom-0
-            z-40
-
-            bg-gradient-to-t
-            from-background
-            via-background/80
-            via-[45%]
-            to-transparent
-
-            transition-opacity
-            ease-out
-
-            motion-reduce:transition-none
-
-            md:hidden
-          `,
-          footerVisible
-            ? "opacity-0"
-            : "opacity-100"
-        )}
-        style={{
-          height: MOBILE_FADE_HEIGHT,
-          transitionDuration: `${MOBILE_FADE_TRANSITION_MS}ms`,
-        }}
       />
     </>
   );
